@@ -1,0 +1,26 @@
+{# templates/listaArticulos.html.twig #}
+{% extends 'base.html.twig' %}
+{% block main %}
+    <h2>Artículos</h2>
+    <ul class="listaArticulos" > 
+    {% for articulo in articulos %}
+    <li class='bloqueArticulo'>
+    <img src="{{ asset('images/image-' ~ articulo.id ~ '.png') }}" />
+    	<h3>
+	{#<a href="{{ path ('verArticulo', {'id': articulo.id})}}">#}
+    {{articulo.titulo}}
+	{#</a>#}
+	</h3>
+    <p>{{articulo.sipnosis}}</p>
+    <p>
+	{#<a href="{{ path ('verArticulo', {'id': articulo.id})}}">#}
+	Leer más</p>
+	{#</a>#}
+
+    <p>Publicada en: {{articulo.fechaPublicacion|date("Y-m-d H:i:s")}}.</p>
+    </li>
+    {% else %}
+    <li>No hay articulos</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
