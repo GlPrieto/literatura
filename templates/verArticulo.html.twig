@@ -1,0 +1,33 @@
+{# templates/verArticulo.html.twig #}
+{% extends 'base.html.twig' %}
+{#El bloque de título debería sobreescribirse con el titulo del artículo#}
+{% block title %}
+{% if titulo != null %} {{titulo}} - {% endif %}
+{{ parent() }}
+{% endblock %}
+
+{% block main %}
+<div class='bloqueArticulo'>
+    <img src="{{ asset('images/image.jpg') }}" />
+    {#
+	<p class="small">Categoría: {{articulo.categorias}}.</p>
+    	<p class="small">Idioma: {{articulo.idioma}}.</p>
+	#}
+    <p class="small">Publicada en: {{articulo.fechaPublicacion|date("d-m-Y")}}.</p>
+    <p>{{articulo.redaccion}}</p>
+	{#VistaPropietario#}
+<p>
+    <a href ="{{path ('app_articulo_editar',{'id': articulo.id})}}">
+    Editar artículo
+    </a>
+    </p>
+{#VistaPropietario#}
+    <p>
+    <a href ="{{path ('app_articulo_borrar',{'id': articulo.id})}}">
+    Borrar artículo
+    </a>
+    </p>
+    
+</div>
+
+{% endblock %}

@@ -7,7 +7,15 @@
         {% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/style.css') }}">{% endblock %}
     </head>
     <body>
-        {% block body %}<header><h1><a href="{{ path('index') }}">Gestor de articulos literarios</a></h1></header>
+        {% block body %}
+<header>
+
+<a class="inicio" href="{{ path('index') }}">Gestor de articulos literarios</a>
+
+<a class="enlace" href="{{ path ('app_nuevo_articulo')}}">Añadir artículo</a>
+<p class="enlace">Lugar login</p>
+
+</header>
         <div id="container">
             <div id="main">
             {% block main %}{% endblock %}

@@ -4,23 +4,24 @@
     <h2>Artículos</h2>
     <ul class="listaArticulos" > 
     {% for articulo in articulos %}
-    <li class='bloqueArticulo'>
-    <img src="{{ asset('images/image-' ~ articulo.id ~ '.png') }}" />
-    	<h3>
-	{#<a href="{{ path ('verArticulo', {'id': articulo.id})}}">#}
-    {{articulo.titulo}}
-	{#</a>#}
-	</h3>
-    <p>{{articulo.sipnosis}}</p>
-    <p>
-	{#<a href="{{ path ('verArticulo', {'id': articulo.id})}}">#}
-	Leer más</p>
-	{#</a>#}
+        <li class='bloqueArticulo'>
+            <img src="{{ asset('images/image.jpg') }}" />
+    	    <h3>
+	    <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+            {{articulo.titulo}}
+	    </a>
+	        </h3>
+            <p class="small">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}.</p>
+            <p>{{articulo.sipnosis}}</p>
+            <p>
+	    <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+	        Leer más
+	    </a>
+            </p>
 
-    <p>Publicada en: {{articulo.fechaPublicacion|date("Y-m-d H:i:s")}}.</p>
-    </li>
+        </li>
     {% else %}
-    <li>No hay articulos</li>
+        <li>No hay articulos</li>
     {% endfor %}
     </ul>
 {% endblock %}
