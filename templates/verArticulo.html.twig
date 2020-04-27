@@ -7,27 +7,40 @@
 {% endblock %}
 
 {% block main %}
+<h2>{{articulo.titulo}}</h2>
 <div class='bloqueArticulo'>
     <img src="{{ asset('images/image.jpg') }}" />
-    {#
-	<p class="small">Categoría: {{articulo.categorias}}.</p>
-    	<p class="small">Idioma: {{articulo.idioma}}.</p>
-	#}
-    <p class="small">Publicada en: {{articulo.fechaPublicacion|date("d-m-Y")}}.</p>
+    <table id="atributos">
+    <tr>
+        <td>
+            Categoría: {{articulo.categoria.denominacion}}.
+        </td>
+        <td>
+            Idioma: {{articulo.idioma.denominacion}}.
+        </td>
+    </tr>
+    <tr>
+        <td>
+        Publicada en: {{articulo.fechaPublicacion|date("d-m-Y")}}.
+        </td>
+    </tr>
+    </table>
     <p>{{articulo.redaccion}}</p>
 	{#VistaPropietario#}
-<p>
-    <a href ="{{path ('app_articulo_editar',{'id': articulo.id})}}">
-    Editar artículo
-    </a>
-    </p>
-{#VistaPropietario#}
-    <p>
-    <a href ="{{path ('app_articulo_borrar',{'id': articulo.id})}}">
-    Borrar artículo
-    </a>
-    </p>
-    
+    <table id="edicion">
+    <tr>
+        <td>
+            <a href ="{{path ('app_articulo_editar',{'id': articulo.id})}}">
+                Editar artículo
+            </a>
+        </td>
+        <td>
+            <a href ="{{path ('app_articulo_borrar',{'id': articulo.id})}}">
+                Borrar artículo
+            </a>
+        </td>
+    </tr>
+    </table>   
 </div>
 
 {% endblock %}

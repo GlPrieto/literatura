@@ -29,7 +29,7 @@ class Categoria
     private $descripcion;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Articulo", mappedBy="categorias")
+     * @ORM\OneToMany(targetEntity="App\Entity\Articulo", mappedBy="categoria", orphanRemoval=true)
      */
     private $articulos;
 
@@ -79,7 +79,7 @@ class Categoria
     {
         if (!$this->articulos->contains($articulo)) {
             $this->articulos[] = $articulo;
-            $articulo->addCategoria($this);
+            $articulo->setCategoria($this);
         }
 
         return $this;
@@ -89,7 +89,10 @@ class Categoria
     {
         if ($this->articulos->contains($articulo)) {
             $this->articulos->removeElement($articulo);
-            $articulo->removeCategoria($this);
+            // set the owning side to null (unless already changed)
+            if ($articulo->getCategoria() === $this) {
+                $articulo->setCategoria(null);
+            }
         }
 
         return $this;

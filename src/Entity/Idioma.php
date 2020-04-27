@@ -24,7 +24,7 @@ class Idioma
     private $denominacion;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Articulo", mappedBy="idioma")
+     * @ORM\OneToMany(targetEntity="App\Entity\Articulo", mappedBy="idioma", orphanRemoval=true)
      */
     private $articulos;
 
@@ -62,7 +62,7 @@ class Idioma
     {
         if (!$this->articulos->contains($articulo)) {
             $this->articulos[] = $articulo;
-            $articulo->addIdioma($this);
+            $articulo->setIdioma($this);
         }
 
         return $this;
@@ -72,7 +72,10 @@ class Idioma
     {
         if ($this->articulos->contains($articulo)) {
             $this->articulos->removeElement($articulo);
-            $articulo->removeIdioma($this);
+            // set the owning side to null (unless already changed)
+            if ($articulo->getIdioma() === $this) {
+                $articulo->setIdioma(null);
+            }
         }
 
         return $this;

@@ -1,9 +1,12 @@
 <?php
 	namespace App\Controller;
 	use App\Entity\Articulo;
+	use App\Entity\Idioma;
+	use App\Entity\Categoria;
 	use Symfony\Component\Form\Extension\Core\Type\TextType;
 	use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 	use Symfony\Component\Form\Extension\Core\Type\DateType;
+	use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 	use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 	use Symfony\Component\HttpFoundation\Request;
 	use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -48,7 +51,15 @@
 				->add('titulo', TextType::class)            
 				->add('sipnosis', TextareaType::class)  
 				->add('redaccion', TextareaType::class)
-				->add('fechaPublicacion', DateType::class)               
+				->add('fechaPublicacion', DateType::class)
+				->add('idioma', EntityType::class, [
+					'class' => Idioma::class,
+					'choice_label' => 'denominacion',
+				])    
+				->add('categoria', EntityType::class, [
+					'class' => Categoria::class, 
+					'choice_label' => 'denominacion',
+				])           
 				->add('save', SubmitType::class,
 				array('label' => 'Añadir artículo'))            
 				->getForm();
@@ -84,10 +95,18 @@
             	);
     		}
     		$form = $this->createFormBuilder($articulo)            
-				->add('titulo', TextType::class)            
-				->add('sipnosis', TextareaType::class)  
+				->add('titulo', TextType::class)     
+				->add('sipnosis', TextareaType::class)
+				->add('fechaPublicacion', DateType::class)  
 				->add('redaccion', TextareaType::class)
-				->add('fechaPublicacion', DateType::class)               
+				->add('idioma', EntityType::class, [
+					'class' => Idioma::class,
+					'choice_label' => 'denominacion',
+				])    
+				->add('categoria', EntityType::class, [
+					'class' => Categoria::class, 
+					'choice_label' => 'denominacion',
+				])
 				->add('save', SubmitType::class,
 				array('label' => 'Añadir artículo'))            
 				->getForm();

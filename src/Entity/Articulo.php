@@ -39,20 +39,16 @@ class Articulo
     private $redaccion;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Idioma", inversedBy="articulos")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Idioma", inversedBy="articulos")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $idioma;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Categoria", inversedBy="articulos")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categoria", inversedBy="articulos")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $categorias;
-
-    public function __construct()
-    {
-        $this->idioma = new ArrayCollection();
-        $this->categorias = new ArrayCollection();
-    }
+    private $categoria;
 
     public function getId(): ?int
     {
@@ -107,56 +103,27 @@ class Articulo
         return $this;
     }
 
-    /**
-     * @return Collection|Idioma[]
-     */
-    public function getIdioma(): Collection
+    public function getIdioma(): ?Idioma
     {
         return $this->idioma;
     }
 
-    public function addIdioma(Idioma $idioma): self
+    public function setIdioma(?Idioma $idioma): self
     {
-        if (!$this->idioma->contains($idioma)) {
-            $this->idioma[] = $idioma;
-        }
+        $this->idioma = $idioma;
 
         return $this;
     }
 
-    public function removeIdioma(Idioma $idioma): self
+    public function getCategoria(): ?Categoria
     {
-        if ($this->idioma->contains($idioma)) {
-            $this->idioma->removeElement($idioma);
-        }
+        return $this->categoria;
+    }
+
+    public function setCategoria(?Categoria $categoria): self
+    {
+        $this->categoria = $categoria;
 
         return $this;
     }
-
-    /**
-     * @return Collection|Categoria[]
-     */
-    public function getCategorias(): Collection
-    {
-        return $this->categorias;
-    }
-
-    public function addCategoria(Categoria $categoria): self
-    {
-        if (!$this->categorias->contains($categoria)) {
-            $this->categorias[] = $categoria;
-        }
-
-        return $this;
-    }
-
-    public function removeCategoria(Categoria $categoria): self
-    {
-        if ($this->categorias->contains($categoria)) {
-            $this->categorias->removeElement($categoria);
-        }
-
-        return $this;
-    }
-
 }
