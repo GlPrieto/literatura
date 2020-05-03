@@ -50,6 +50,12 @@ class Articulo
      */
     private $categoria;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Usuario", inversedBy="articulos")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $autor;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,6 +129,18 @@ class Articulo
     public function setCategoria(?Categoria $categoria): self
     {
         $this->categoria = $categoria;
+
+        return $this;
+    }
+
+    public function getAutor(): ?Usuario
+    {
+        return $this->autor;
+    }
+
+    public function setAutor(?Usuario $autor): self
+    {
+        $this->autor = $autor;
 
         return $this;
     }
