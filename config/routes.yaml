@@ -1,26 +1,25 @@
 index:
     path: /
-    controller: App\Controller\controller::index
+    controller: App\Controller\GestorController::index
 
 app_articulo_ver:
     path: /articulo/{id}
-    controller: App\Controller\controller::verArticulo
+    controller: App\Controller\GestorController::verArticulo
     requirements:
       id: '\d+'
 
 app_nuevo_articulo:
     path: /articulo/nuevo
-    controller: App\Controller\controller::nuevoArticulo
+    controller: App\Controller\GestorController::nuevoArticulo
 
 app_articulo_creado:
     path: /articulo/creado
-    controller: App\Controller\controller::articuloCreado
+    controller: App\Controller\GestorController::articuloCreado
 
 app_articulo_editar:
   path: /articulo/editar/{id}
-  controller: App\Controller\controller::editarArticulo
+  controller: App\Controller\GestorController::editarArticulo
 
 app_articulo_borrar:
     path: /articulo/borrar/{id}
-    controller: App\Controller\controller::eliminarArticulo
-
+    controller: App\Controller\GestorController::eliminarArticulo

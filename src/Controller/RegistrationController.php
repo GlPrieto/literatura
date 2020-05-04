@@ -34,16 +34,11 @@ class RegistrationController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
-            $entityManager->flush();
+            $entityManager->flush($user);
+            $request->getSession()->set( 'usuario_es_autor', true );
+            $this->addFlash( 'success', '¡Enhorabuena! Ahora serás reconocido como autor en esta web.' );
 
-            // do anything else you need here, like send an email
-
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
+            return $this->redirectToRoute( 'home' );
         }
 
         return $this->render('registration/register.html.twig', [

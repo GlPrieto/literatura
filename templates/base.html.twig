@@ -13,13 +13,11 @@
 <a class="inicio" href="{{ path('index') }}">Gestor de articulos literarios</a>
 
     {% if app.user %}
-        <a class="enlace" href="{{ path('app_nuevo_articulo')}}">Añadir artículo</a>
-        <div class="mb-3">
-            Usuario:  {{ app.user.username }} <a href="{{ path('app_logout') }}"> Desconectar</a>
-        </div>
-    
+        <li><a class="enlace" href="{{ path('app_nuevo_articulo')}}">Añadir artículo</a></li>
+        <li><a class="enlace" href="{{ path('app_logout') }}"> Desconectar</a></li>
     {% else %}
-    <a class="enlace" href="{{ path('app_login') }}">Iniciar sesión</a>
+        <li><a class="enlace" href="{{ path('app_login') }}">Iniciar sesión</a></li>
+        <li><a class="enlace" href="{{ path('app_register') }}">Registrarse</a></li>
     {% endif %}
 
 </header>

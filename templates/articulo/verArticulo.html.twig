@@ -11,6 +11,9 @@
 <div class='bloqueArticulo'>
     <img src="{{ asset('images/image.jpg') }}" />
     <table id="atributos">
+    <th>
+        <td>{{articulo.autor.firmaUsuario}}</td>
+    </th>
     <tr>
         <td>
             Categoría: {{articulo.categoria.denominacion}}.
@@ -26,21 +29,23 @@
     </tr>
     </table>
     <p>{{articulo.redaccion}}</p>
-	{#VistaPropietario#}
+{% if app.user %}
     <table id="edicion">
-    <tr>
-        <td>
-            <a href ="{{path ('app_articulo_editar',{'id': articulo.id})}}">
-                Editar artículo
-            </a>
-        </td>
-        <td>
-            <a href ="{{path ('app_articulo_borrar',{'id': articulo.id})}}">
-                Borrar artículo
-            </a>
-        </td>
-    </tr>
-    </table>   
+        <tr>
+            <td>
+                <a href ="{{path ('app_articulo_editar',{'id': articulo.id})}}">
+                    Editar artículo
+                </a>
+            </td>
+            <td>
+                <a href ="{{path ('app_articulo_borrar',{'id': articulo.id})}}">
+                    Borrar artículo
+                </a>
+            </td>
+        </tr>
+    </table> 
+{% endif %}
+  
 </div>
 
 {% endblock %}
