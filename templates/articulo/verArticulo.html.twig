@@ -8,26 +8,30 @@
 
 {% block main %}
 <h2>{{articulo.titulo}}</h2>
-<div class='bloqueArticulo'>
-    <img src="{{ asset('images/image.jpg') }}" />
     <table id="atributos">
-    <th>
-        <td>{{articulo.autor.firmaUsuario}}</td>
-    </th>
     <tr>
-        <td>
-            Categoría: {{articulo.categoria.denominacion}}.
+        <th colspan="4">{{articulo.titulo}}</th>
+    </tr>
+    <tr>
+        <td colspan="1"><img src="{{ asset('images/avatars/User-small.jpg') }}" /></td>
+        <td colspan="3">{{articulo.autor.firmaUsuario}}</td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            {{articulo.categoria.denominacion}}
         </td>
-        <td>
-            Idioma: {{articulo.idioma.denominacion}}.
+        <td colspan="2">
+            {{articulo.idioma.denominacion}}
         </td>
     </tr>
     <tr>
         <td>
-        Publicada en: {{articulo.fechaPublicacion|date("d-m-Y")}}.
+        Fecha de publicación: {{articulo.fechaPublicacion|date("d-m-Y")}}.
         </td>
     </tr>
     </table>
+<div class='bloqueArticulo'>
+    <img src="{{ asset('images/image.jpg') }}" />
     <p>{{articulo.redaccion}}</p>
 {% if app.user %}
     <table id="edicion">

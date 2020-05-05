@@ -1,25 +1,25 @@
 {# templates/listaArticulos.html.twig #}
 {% extends 'base.html.twig' %}
-{% block title %}App:articulo:articulos{% endblock %}
+{% block title %}Articulos{% endblock %}
 {% block main %}
-    <h2>Artículos</h2>
     <ul class="listaArticulos" > 
     {% for articulo in articulos %}
         <li class='bloqueArticulo'>
-            <img src="{{ asset('images/image.jpg') }}" />
-    	    <h3>
+        <h3>
 	    <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
             {{articulo.titulo}}
 	    </a>
 	        </h3>
-            <p class="small">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}.</p>
+        <div class="autor">
+        <img src="{{ asset('images/avatars/User-small.jpg') }}"/>
+        {{articulo.autor.firmaUsuario}}
+        </div>
+        <p class="small">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}.</p>
+        <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+            <img src="{{ asset('images/image.jpg') }}" />
+    	    
             <p>{{articulo.sipnosis}}</p>
-            <p>
-	    <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
-	        Leer más
 	    </a>
-            </p>
-
         </li>
     {% else %}
         <li>No hay articulos</li>
