@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% block main %}
-<h2>{{articulo.titulo}}</h2>
     <table id="atributos">
     <tr>
         <th colspan="4">{{articulo.titulo}}</th>
@@ -33,22 +32,26 @@
 <div class='bloqueArticulo'>
     <img src="{{ asset('images/image.jpg') }}" />
     <p>{{articulo.redaccion}}</p>
-{% if app.user %}
+{#Para indicar que solo lo vean aquellos que esten logados, sin especificar roles#}
     <table id="edicion">
         <tr>
+            {% if is_granted('edit', articulo) %}
             <td>
                 <a href ="{{path ('app_articulo_editar',{'id': articulo.id})}}">
                     Editar artículo
                 </a>
             </td>
+            {% endif %}
+            {% if is_granted('delete',articulo) %}
             <td>
                 <a href ="{{path ('app_articulo_borrar',{'id': articulo.id})}}">
                     Borrar artículo
                 </a>
             </td>
         </tr>
+    {% endif %}
     </table> 
-{% endif %}
+
   
 </div>
 

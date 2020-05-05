@@ -14,7 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\User\UserInterface;
-//use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
 class GestorController extends AbstractController {
@@ -98,12 +97,18 @@ class GestorController extends AbstractController {
 
     public function editarArticulo( Request $request, $id ) {
         $entityManager = $this->getDoctrine()->getManager();
+        // obtener un articulo
         $articulo = $entityManager->getRepository( Articulo::class )->find( $id );
         if ( !$articulo ) {
             throw $this->createNotFoundException(
                 'No existe ninguna noticia con id '.$id
             );
         }
+        // check for "edit" access: calls all voters=permisos
+        // The denyAccessUnlessGranted() method (and also the
+        // isGranted() method) calls out to the "voter" system.
+        $this->denyAccessUnlessGranted('edit', $articulo);
+
         $form = $this->createFormBuilder( $articulo )
         ->add( 'titulo', TextType::class )
         ->add( 'sipnosis', TextareaType::class )
@@ -143,6 +148,11 @@ class GestorController extends AbstractController {
         if ( !$articulo ) {
             throw $this->createNotFoundException( 'No existe el articulo con id '.$id );
         }
+        // check for "edit" access: calls all voters=permisos
+        // The denyAccessUnlessGranted() method (and also the
+        // isGranted() method) calls out to the "voter" system.
+        $this->denyAccessUnlessGranted('delete', $articulo);
+
         $entityManager -> remove( $articulo );
         $entityManager -> flush();
         return $this->render( 'articulo/articuloBorrado.html.twig' );

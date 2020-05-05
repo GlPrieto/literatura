@@ -1,6 +1,10 @@
 security:
     encoders:
+        # use your user class name here
         App\Entity\Usuario:
+            # Use native password encoder
+            # This value auto-selects the best possible hashing algorithm
+            # (i.e. Sodium when available).
             algorithm: auto
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
@@ -16,7 +20,6 @@ security:
             security: false
         main:
             anonymous: true
-            provider: app_user_provider
             guard:
                 authenticators:
                     - App\Security\FormularioLoginAuthenticator
