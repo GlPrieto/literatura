@@ -9,17 +9,17 @@
 {% block main %}
     <table id="atributos">
     <tr>
-        <th colspan="4">{{articulo.titulo}}</th>
+        <th>{{articulo.titulo}}</th>
     </tr>
     <tr>
-        <td colspan="1"><img src="{{ asset('images/avatars/User-small.jpg') }}" /></td>
-        <td colspan="3">{{articulo.autor.firmaUsuario}}</td>
+        <td><img src="{{ asset('images/avatars/User-small.jpg') }}" /></td>
+        <td>{{articulo.autor.firmaUsuario}}</td>
     </tr>
     <tr>
-        <td colspan="2">
+        <td>
             {{articulo.categoria.denominacion}}
         </td>
-        <td colspan="2">
+        <td>
             {{articulo.idioma.denominacion}}
         </td>
     </tr>

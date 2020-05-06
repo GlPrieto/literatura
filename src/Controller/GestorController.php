@@ -59,11 +59,11 @@ class GestorController extends AbstractController {
         */
         $articulo = new Articulo();
         $articulo->setAutor( $user );
+        $articulo->setFechaPublicacion(new \DateTime('now'));
         $form = $this->createFormBuilder($articulo)            
             ->add('titulo', TextType::class)            
             ->add('sipnosis', TextareaType::class)  
             ->add('redaccion', TextareaType::class)
-            ->add('fechaPublicacion', DateType::class)
             ->add('idioma', EntityType::class, [
                 'class' => Idioma::class,
                 'choice_label' => 'denominacion',
@@ -112,7 +112,6 @@ class GestorController extends AbstractController {
         $form = $this->createFormBuilder( $articulo )
         ->add( 'titulo', TextType::class )
         ->add( 'sipnosis', TextareaType::class )
-        ->add( 'fechaPublicacion', DateType::class )
         ->add( 'redaccion', TextareaType::class )
         ->add( 'idioma', EntityType::class, [
             'class' => Idioma::class,
