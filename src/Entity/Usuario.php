@@ -7,7 +7,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+/*
+//Para validar que los objetos que
+// se suben como archivos son validos como imagen
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+*/
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsuarioRepository")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
@@ -53,24 +58,14 @@ class Usuario implements UserInterface
     private $firmaUsuario;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $imagenPerfil = [];
+    private $imagenPerfil;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Articulo", mappedBy="autor", orphanRemoval=true)
      */
     private $articulos;
-
-    /**
-     * @ORM\Column(type="string", unique=true, nullable=true)
-     */
-    private $apiToken;
-
-    public function __construct()
-    {
-        $this->articulos = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -186,17 +181,34 @@ class Usuario implements UserInterface
         return $this;
     }
 
-    public function getImagenPerfil(): ?array
+    public function getImagenPerfil()
     {
         return $this->imagenPerfil;
     }
 
-    public function setImagenPerfil(?array $imagenPerfil): self
+    public function setImagenPerfil($imagenPerfil)
     {
         $this->imagenPerfil = $imagenPerfil;
 
         return $this;
     }
+    //Validador imagen
+
+    /*
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('headshot', new Assert\Image([
+            'minWidth' => 200,
+            'maxWidth' => 400,
+            'minHeight' => 200,
+            'maxHeight' => 400,
+            //Para forzar que la imagen sea cuadrada
+            'allowLandscape' => false,
+            'allowPortrait' => false,
+            'allowSquare' => true;
+        ]));
+    }
+    */
 
     /**
      * @return Collection|Articulo[]
@@ -225,18 +237,6 @@ class Usuario implements UserInterface
                 $articulo->setAutor(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getApiToken(): ?string
-    {
-        return $this->apiToken;
-    }
-
-    public function setApiToken(?string $apiToken): self
-    {
-        $this->apiToken = $apiToken;
 
         return $this;
     }
