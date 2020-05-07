@@ -1,9 +1,15 @@
-{# templates/sorteo/nuevoArticulo.html.twig #}
+{# templates/articulo/nuevoArticulo.html.twig #}
 {% extends 'base.html.twig' %}
 {% block title %}Nuevo Articulo{% endblock %}
 {% block main %}
     <h1>Rellene los campos mostrados a continuación</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    {{ form_start(nuevoArticuloForm) }}
+        {{ form_row(nuevoArticuloForm.titulo) }}
+        {{ form_row(nuevoArticuloForm.sipnosis) }}
+        {{ form_row(nuevoArticuloForm.redaccion) }}
+        {{ form_row(nuevoArticuloForm.image) }}
+        {{ form_row(nuevoArticuloForm.idioma) }}
+        {{ form_row(nuevoArticuloForm.categoria) }}
+        <button class="btn">Crear</button>
+    {{ form_end(nuevoArticuloForm) }}
 {% endblock %}

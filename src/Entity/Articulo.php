@@ -51,6 +51,11 @@ class Articulo
     private $categoria;
 
     /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $imagen;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Usuario", inversedBy="articulos")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -132,6 +137,34 @@ class Articulo
 
         return $this;
     }
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen($imagen)
+    {
+        $this->imagen = $imagen;
+
+        return $this;
+    }
+    //Validador imagen
+
+    /*
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('headshot', new Assert\Image([
+            'minWidth' => 200,
+            'maxWidth' => 400,
+            'minHeight' => 200,
+            'maxHeight' => 400,
+            //Para forzar que la imagen sea cuadrada
+            'allowLandscape' => false,
+            'allowPortrait' => false,
+            'allowSquare' => true;
+        ]));
+    }
+    */
 
     public function getAutor(): ?Usuario
     {

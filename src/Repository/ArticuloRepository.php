@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Articulo;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * @method Articulo|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +19,12 @@ class ArticuloRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Articulo::class);
     }
+
+    public function findAll()
+    {
+        return $this->findBy(array(), array('fechaPublicacion' => 'DESC'));
+    }
+
 
     // /**
     //  * @return Articulo[] Returns an array of Articulo objects

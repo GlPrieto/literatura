@@ -1,0 +1,15 @@
+{# templates/articulo/editarArticulo.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}Edición del artículo{% endblock %}
+{% block main %}
+    <h1></h1>
+    {{ form_start(editarArticuloForm) }}
+        {{ form_row(editarArticuloForm.titulo) }}
+        {{ form_row(editarArticuloForm.sipnosis) }}
+        {{ form_row(editarArticuloForm.redaccion) }}
+        {{ form_row(editarArticuloForm.image) }}
+        {{ form_row(editarArticuloForm.idioma) }}
+        {{ form_row(editarArticuloForm.categoria) }}
+        <button class="btn">Actualizar</button>
+    {{ form_end(editarArticuloForm) }}
+{% endblock %}

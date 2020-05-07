@@ -6,15 +6,14 @@ use App\Entity\Articulo;
 use App\Entity\Idioma;
 use App\Entity\Categoria;
 use App\Entity\Usuario;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-//use Symfony\Component\HttpFoundation\File\Exception\FileException;
-//use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\Request;
+use App\Form\NuevoArticuloFormType;
+use App\Form\EditarArticuloFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\String\Slugger\SluggerInterface;
+//use App\Service\SubidaArchivos;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -53,47 +52,50 @@ class GestorController extends AbstractController {
         ) );
     }
 
-    public function nuevoArticulo(Request $request, UserInterface $user) 
+    public function nuevoArticulo(Request $request,
+                                     UserInterface $user, 
+                                    SluggerInterface $slugger 
+    ) 
     {
-        /*
-        $autor = $this->authorRepository->findOneByUsername($this->getUser()->getUserName());
-        $articulo->setAutor($autor);
-        */
         $articulo = new Articulo();
         $articulo->setAutor( $user );
         $articulo->setFechaPublicacion(new \DateTime('now'));
-        $form = $this->createFormBuilder($articulo)            
-            ->add('titulo', TextType::class)            
-            ->add('sipnosis', TextareaType::class)  
-            ->add('redaccion', TextareaType::class)
-            ->add('idioma', EntityType::class, [
-                'class' => Idioma::class,
-                'choice_label' => 'denominacion',
-            ])    
-            ->add('categoria', EntityType::class, [
-                'class' => Categoria::class, 
-                'choice_label' => 'denominacion',
-            ])           
-            ->add('save', SubmitType::class,
-            array('label' => 'Añadir artículo'))            
-            ->getForm();
-                
+        $form = $this->createForm( NuevoArticuloFormType::class, $articulo);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            // De esta manera podemos rellenar la variable
-            $nuevoArticulo = $form->getData();
+        
+        if ( $form->isSubmitted() && $form->isValid() ) {
+            /** @var UploadedFile $imagen */
+            $imagen= $form->get('image')->getData();
+            //$imagen= $form['image']->getData();
+
+            // Concición necesaria para procesar solo cuando se sube
+            if ( $imagen ) {
+                $nombreOriginalImagen = pathinfo($imagen->getClientOriginalName(), PATHINFO_FILENAME);
+                 //-> upload($imagen);
+                $nombreGuardado = $slugger->slug($nombreOriginalImagen);
+                $nuevoNombreI = $nombreGuardado.'-'.uniqid().'.'.$imagen->guessExtension();
+                try {
+                    $imagen->move(
+                        $this->getParameter('directorioImagenes'),//getTargetDirectory(), 
+                        $nuevoNombreI
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during archivo upload
+                }
+                $articulo->setImagen( $nuevoNombreI );
+            }
             // Obtenemos el gestor de entidades de Doctrine
             $entityManager = $this->getDoctrine()->getManager();
             // Le decimos a doctrine que nos gustaría almacenar
             // el objeto de la variable en la base de datos
-            $entityManager->persist($nuevoArticulo);
+            $entityManager->persist($articulo);
             // Ejecuta las consultas necesarias (INSERT en este caso)
-            $entityManager->flush();
+            $entityManager->flush($articulo);
             //Redirigimos a una página de confirmación.
             return $this->redirectToRoute('app_articulo_creado');
             }
         return $this->render('articulo/nuevoArticulo.html.twig', array(
-        'form' => $form->createView(),        
+        'nuevoArticuloForm' => $form->createView(),        
         ));
     }
 
@@ -103,38 +105,34 @@ class GestorController extends AbstractController {
         $articulo = $entityManager->getRepository( Articulo::class )->find( $id );
         if ( !$articulo ) {
             throw $this->createNotFoundException(
-                'No existe ninguna noticia con id '.$id
+                'No existe ningún artículo con id '.$id
             );
         }
         // check for "edit" access: calls all voters=permisos
         // The denyAccessUnlessGranted() method (and also the
         // isGranted() method) calls out to the "voter" system.
         $this->denyAccessUnlessGranted('edit', $articulo);
+        $form = $this->createForm( EditarArticuloFormType::class, $articulo);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var ArchivoSubido $imageFile */
+            $imagen= $form['image']->getData();
 
-        $form = $this->createFormBuilder( $articulo )
-        ->add( 'titulo', TextType::class )
-        ->add( 'sipnosis', TextareaType::class )
-        ->add( 'redaccion', TextareaType::class )
-        ->add( 'idioma', EntityType::class, [
-            'class' => Idioma::class,
-            'choice_label' => 'denominacion',
-        ] )
-        ->add( 'categoria', EntityType::class, [
-            'class' => Categoria::class,
-            'choice_label' => 'denominacion',
-        ] )
-        ->add( 'save', SubmitType::class,
-        array( 'label' => 'Añadir artículo' ) )
-        ->getForm();
-        $form->handleRequest( $request );
+            // Concición necesaria. El archivo debe ser procesado solo cuando se carga
+            if ( $imagen ) {
+                $nombreOriginalImagen = $subidaArchivo -> upload($imagen);
+                $articulo->setImagen( $nombreOriginalImagen );
+            }
+            // Obtenemos el gestor de entidades de Doctrine
+            $entityManager = $this->getDoctrine()->getManager();
 
-        if ( $form->isSubmitted() && $form->isValid() ) {
-            $articulo = $form->getData();
-            $entityManager->flush();
+            // Ejecuta las consultas necesarias (UPDATE en este caso)
+            $entityManager->flush($articulo);
             return $this->redirectToRoute( 'app_articulo_ver', array( 'id'=>$id ) );
         }
-        return $this->render( 'articulo/nuevoArticulo.html.twig', array(
-            'form' => $form->createView(),
+        return $this->render( 'articulo/editarArticulo.html.twig', array(
+            'editarArticuloForm' => $form->createView(),
         ) );
     }
 

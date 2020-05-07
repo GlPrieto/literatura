@@ -1,4 +1,4 @@
-{# templates/listaArticulos.html.twig #}
+{# templates/articulo/listaArticulos.html.twig #}
 {% extends 'base.html.twig' %}
 {% block title %}Articulos{% endblock %}
 {% block main %}
@@ -11,13 +11,20 @@
 	    </a>
 	        </h3>
         <div class="autor">
+        {% if articulo.autor.imagenPerfil == NULL %}
         <img src="{{ asset('images/avatars/User-small.jpg') }}"/>
+        {% else %}
+            <img src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
+        {% endif %}
         {{articulo.autor.firmaUsuario}}
         </div>
         <p class="small">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}.</p>
         <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+        {% if articulo.imagen == NULL %}
             <img src="{{ asset('images/image.jpg') }}" />
-    	    
+        {% else %}
+            <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+        {% endif %}
             <p>{{articulo.sipnosis}}</p>
 	    </a>
         </li>

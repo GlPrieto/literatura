@@ -5,4 +5,4 @@
 use App\Service\SubidaArchivos;
 
 $container->autowire(SubidaArchivos::class)
-    ->setArgument('$targetDirectory', '%brochures_directory%');
+    ->setArgument('$directorioDestino', '%directorioImagenes%');

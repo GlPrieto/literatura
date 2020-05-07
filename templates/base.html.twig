@@ -13,6 +13,7 @@
 <a class="inicio" href="{{ path('index') }}">Gestor de articulos literarios</a>
 
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <li>{{ app.user.firmaUsuario }}</li>
         <li><a class="enlace" href="{{ path('app_nuevo_articulo')}}">Añadir artículo</a></li>
         <li><a class="enlace" href="{{ path('app_logout') }}"> Desconectar</a></li>
     {% else %}

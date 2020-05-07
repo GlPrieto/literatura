@@ -1,4 +1,4 @@
-{# templates/verArticulo.html.twig #}
+{# templates/articulo/verArticulo.html.twig #}
 {% extends 'base.html.twig' %}
 {#El bloque de título debería sobreescribirse con el titulo del artículo#}
 {% block title %}
@@ -13,7 +13,7 @@
     </tr>
     <tr>
         <td><img src="{{ asset('images/avatars/User-small.jpg') }}" /></td>
-        <td><img src="{{ asset('public/uploads/images/' ~ articulo.autor.imagenPerfil) }}"></a>
+        <td><img src="{{ asset('public/uploads/images/' ~ articulo.autor.imagenPerfil) }}" alt="Foto de perfil"></a>
 </td>
         <td>{{articulo.autor.firmaUsuario}}</td>
     </tr>
