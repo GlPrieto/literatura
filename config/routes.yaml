@@ -8,6 +8,12 @@ app_articulo_ver:
     requirements:
       id: '\d+'
 
+app_articulo_categoria:
+    path: /articuloCategoria/{idCat}
+    controller: App\Controller\GestorController::articulosPorCategoria
+    requirements:
+      idCat: '\d+'
+
 app_nuevo_articulo:
     path: /articulo/nuevo
     controller: App\Controller\GestorController::nuevoArticulo

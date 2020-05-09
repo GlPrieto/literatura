@@ -1,0 +1,46 @@
+{# templates/articulo/listaArticulos.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}Articulos{% endblock %}
+{% block main %}
+    <nav>
+        <ul>
+        	<li>
+            	<a href="{{ path ('index')}}"> Inicio</a
+            </li>
+            <li>
+                {{categoria.denominacion}}
+            </li>
+        </ul>
+    </nav>
+    <ul class="listaArticulos" > 
+    {% for articulo in articulos %}
+    
+        <li class='bloqueArticulo'>
+        <h3>
+	    <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+            {{articulo.titulo}}
+	    </a>
+	        </h3>
+        <div class="autor">
+        {% if articulo.autor.imagenPerfil == NULL %}
+        <img src="{{ asset('images/avatars/User-small.jpg') }}"/>
+        {% else %}
+            <img src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
+        {% endif %}
+        {{articulo.autor.firmaUsuario}}
+        </div>
+        <p class="small">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}.</p>
+        <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+        {% if articulo.imagen == NULL %}
+            <img src="{{ asset('images/image.jpg') }}" />
+        {% else %}
+            <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+        {% endif %}
+            <p>{{articulo.sipnosis}}</p>
+	    </a>
+        </li>
+    {% else %}
+        <li>No hay articulos</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

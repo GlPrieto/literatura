@@ -30,7 +30,22 @@ class GestorController extends AbstractController {
         //Tomaré en un inicio la plantilla listaArticulos.html.twig como página de inicio.
         $entityManager = $this->getDoctrine()->getManager();
         $articulos = $entityManager->getRepository( Articulo::class )->findAll();
+        $categorias = $entityManager->getRepository( Categoria::class )->findAll();
         return $this->render( 'articulo/listaArticulos.html.twig', array(
+            'categorias' => $categorias,
+            'articulos' => $articulos,
+        ) );
+
+    }
+
+    public function articulosPorCategoria($idCat) {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $articulos = $entityManager->getRepository( Articulo::class )->mostrarArticulosPorCategoria ($idCat);
+        //Debería buscar en la entidad categoria, por el id dado, la denominación
+        $categoria = $entityManager->getRepository( Categoria::class )->find ($idCat);
+        return $this->render( 'articulo/listaArticuloPorCategoria.html.twig', array(
+            'categoria' => $categoria,
             'articulos' => $articulos,
         ) );
 

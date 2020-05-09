@@ -19,7 +19,7 @@ class ArticuloRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Articulo::class);
     }
-
+//Para hacer operaciones con la base de datos se trabajan con los repositorios. Abstracciones. Comunica las entidades/objetos con la base de datos.
     public function findAll()
     {
         return $this->findBy(array(), array('fechaPublicacion' => 'DESC'));
@@ -29,19 +29,18 @@ class ArticuloRepository extends ServiceEntityRepository
     // /**
     //  * @return Articulo[] Returns an array of Articulo objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function mostrarArticulosPorCategoria ($categoria)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('a.categoria = :categoria')
+            ->setParameter('categoria', $categoria)
+            //->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Articulo
