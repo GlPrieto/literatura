@@ -1,19 +1,13 @@
 #main {
     width: 1000px;
     margin: auto;
-    border-left: 1px solid gray;
-    border-right: 1px solid gray;
     background-color: white;
     padding: 4px 20px;
 }
 
 body {
-    background-color: gray;
     margin: 0px;
     font-family: Verdana, sans-serif;
-}
-
-#container {
     background-color: rgb(238, 238, 238);
 }
 
@@ -28,37 +22,19 @@ footer {
     border-top: 2px solid lightsteelblue;
     text-align: center;
     padding: 5px 5px;
-    color: white;
-    font-size: 10px;
+    background-color: gray;
 }
 
 a {
-    color: lightsteelblue;
     text-decoration: none;
 }
 
-a.inicio {
-    text-align: left;
-    font-size: 20px;
-}
-
-a.enlace {
-    font-size: 14px;
-    float: right;
-}
-
-.enlace {
-    font-size: 14px;
-    text-align: right;
-}
-
 .listaArticulos {
-    padding: 0px 20px;
+    padding: 20px;
 }
 
 .bloqueArticulo img {
-    margin-right: 10px;
-    width: 100%;
+    width: 500px;
     height: 200px;
 }
 

@@ -7,54 +7,55 @@
 {% endblock %}
 
 {% block main %}
-    <table id="atributos">
-    <tr>
-        <th>{{articulo.titulo}}</th>
-    </tr>
-    <tr>
-        <td><img src="{{ asset('images/avatars/User-small.jpg') }}" /></td>
-        <td><img src="{{ asset('public/uploads/images/' ~ articulo.autor.imagenPerfil) }}" alt="Foto de perfil"></a>
-</td>
-        <td>{{articulo.autor.firmaUsuario}}</td>
-    </tr>
-    <tr>
-        <td>
-            {{articulo.categoria.denominacion}}
-        </td>
-        <td>
-            {{articulo.idioma.denominacion}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-        Fecha de publicación: {{articulo.fechaPublicacion|date("d-m-Y")}}.
-        </td>
-    </tr>
-    </table>
-<div class='bloqueArticulo'>
-    <img src="{{ asset('images/image.jpg') }}" />
-    <p>{{articulo.redaccion}}</p>
-{#Para indicar que solo lo vean aquellos que esten logados, sin especificar roles#}
-    <table id="edicion">
-        <tr>
-            {% if is_granted('edit', articulo) %}
-            <td>
-                <a href ="{{path ('app_articulo_editar',{'id': articulo.id})}}">
-                    Editar artículo
-                </a>
-            </td>
-            {% endif %}
-            {% if is_granted('delete',articulo) %}
-            <td>
-                <a href ="{{path ('app_articulo_borrar',{'id': articulo.id})}}">
-                    Borrar artículo
-                </a>
-            </td>
-        </tr>
-    {% endif %}
-    </table> 
-
-  
-</div>
-
+    <div class="card">
+        <!-- Card content -->
+        <div class="card-body">
+            <!-- Title -->
+            <h3 class="card-title text-center"><strong>{{articulo.titulo}}</strong></h3>
+            <!--Details-->
+            <ul class="list-unstyled list-inline text-muted font-small text-center">
+                <li class="list-inline-item pr-2">{{articulo.categoria.denominacion}}</li>
+                <li class="list-inline-item pr-2">{{articulo.idioma.denominacion}}</li>
+            </ul>
+            <div class="autor">
+                {% if articulo.autor.imagenPerfil == NULL %}
+                    <img src="{{ asset('images/avatars/User-small.jpg') }}"/>
+                {% else %}
+                    <img src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
+                {% endif %}
+                {{articulo.autor.firmaUsuario}}
+                <div class="mb-1 text-muted">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}</div>
+            </div> 
+            <!-- Card image -->
+            <div class="view overlay bloqueArticulo">
+                {% if articulo.imagen == NULL %}
+                    <img class="card-img-top" src="{{ asset('images/image.jpg') }}" />
+                {% else %}
+                    <img class="card-img-top" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                {% endif %}
+            </div>
+            
+            <!-- Text -->
+            <p class="card-text">{{articulo.redaccion}}</p>
+            {#Para indicar que solo lo vean aquellos que esten logados, sin especificar roles#}
+            <!-- Button -->
+            
+            <ul class="list-unstyled list-inline font-small">
+                {% if is_granted('edit', articulo) %}
+                    <li class="list-inline-item pr-2 btn btn-dark text-white">
+                        <a href ="{{path ('app_articulo_editar',{'id': articulo.id})}}">
+                            Editar artículo
+                        </a>
+                    </li>
+                {% endif %}
+                {% if is_granted('delete',articulo) %}
+                    <li class="list-inline-item pr-2 btn btn-dark text-white">
+                        <a href ="{{path ('app_articulo_borrar',{'id': articulo.id})}}">
+                            Borrar artículo
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
 {% endblock %}

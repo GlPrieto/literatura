@@ -3,44 +3,60 @@
 {% block title %}Articulos{% endblock %}
 {% block main %}
     <nav>
-        <ul>
-        	<li>
-            	<a href="{{ path ('index')}}"> Inicio</a
-            </li>
-            <li>
-                {{categoria.denominacion}}
-            </li>
-        </ul>
+        <!--Nav Categorias-->
+        <div id="navCategorias" class="row m-2">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+            	            <a href="{{ path ('index')}}"> Inicio</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {{categoria.denominacion}}
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!--Nav Categorias-->
     </nav>
     <ul class="listaArticulos" > 
-    {% for articulo in articulos %}
-    
-        <li class='bloqueArticulo'>
-        <h3>
-	    <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
-            {{articulo.titulo}}
-	    </a>
-	        </h3>
-        <div class="autor">
-        {% if articulo.autor.imagenPerfil == NULL %}
-        <img src="{{ asset('images/avatars/User-small.jpg') }}"/>
+        {% for articulo in articulos %}
+            <li class='bloqueArticulo'>
+            <div class="row">
+                <div class="col-md-12 col-md-6">
+                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="mb-0">
+                            <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                                {{articulo.titulo}}
+	                        </a>
+                        </h3>
+                        <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                                <p "card-text mb-auto">{{articulo.sipnosis}}</p>
+	                    </a>
+                        <div class="autor">
+                            {% if articulo.autor.imagenPerfil == NULL %}
+                                <img src="{{ asset('images/avatars/User-small.jpg') }}"/>
+                            {% else %}
+                                <img src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
+                            {% endif %}
+                            {{articulo.autor.firmaUsuario}}
+                        </div>
+                        <div class="mb-1 text-muted">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}</div>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        {% if articulo.imagen == NULL %}
+                            <img src="{{ asset('images/image.jpg') }}" />
+                        {% else %}
+                            <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            </li>
         {% else %}
-            <img src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
-        {% endif %}
-        {{articulo.autor.firmaUsuario}}
-        </div>
-        <p class="small">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}.</p>
-        <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
-        {% if articulo.imagen == NULL %}
-            <img src="{{ asset('images/image.jpg') }}" />
-        {% else %}
-            <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
-        {% endif %}
-            <p>{{articulo.sipnosis}}</p>
-	    </a>
-        </li>
-    {% else %}
-        <li>No hay articulos</li>
-    {% endfor %}
+            <li>No hay articulos</li>
+        {% endfor %}
     </ul>
 {% endblock %}

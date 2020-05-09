@@ -96,9 +96,6 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
-    "laminas/laminas-zendframework-bridge": {
-        "version": "1.0.3"
-    },
     "monolog/monolog": {
         "version": "2.0.2"
     },
@@ -514,17 +511,11 @@
     "symfony/yaml": {
         "version": "v5.0.7"
     },
-    "twbs/bootstrap": {
-        "version": "v4.4.1"
-    },
     "twig/extra-bundle": {
         "version": "v3.0.3"
     },
     "twig/twig": {
         "version": "v3.0.3"
-    },
-    "webimpress/safe-writer": {
-        "version": "2.0.1"
     },
     "webmozart/assert": {
         "version": "1.7.0"
