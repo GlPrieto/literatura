@@ -30,13 +30,13 @@
         <tbody>
           {% for articulo in articulos %}
               <tr>
-                <td><a href ="{{path ('app_articulo_ver', {'id': articulo.id})}}">{{articulo.titulo}}</a></td>
+                <td><a class="enlace" href ="{{path ('app_articulo_ver', {'id': articulo.id})}}">{{articulo.titulo}}</a></td>
                 <td>{{articulo.sipnosis}}</td>
                 <td>{{articulo.fechaPublicacion|date("d-m-Y")}}</td>
                 <td>{{articulo.categoria.denominacion}}</td>
                 <td>{{articulo.idioma.denominacion}}</td>
                 <td> 
-                  <a href ="{{path ('app_borrar_articulo_admin',{'id': articulo.id})}}">
+                  <a class="enlace" href ="{{path ('app_borrar_articulo_admin',{'id': articulo.id})}}">
                     Eliminar
                   </a>
                 </td>

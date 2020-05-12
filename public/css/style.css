@@ -12,49 +12,66 @@
     }
     
     header {
-        background-color: gray;
+        background-color: rgb(78, 78, 78);
         color: white;
         padding: 12px 12px 2px 12px;
-        border-bottom: 5px solid lightsteelblue;
+        border-bottom: 5px solid rgb(172, 193, 221);
     }
     
     footer {
-        border-top: 2px solid lightsteelblue;
+        border-top: 2px solid rgb(172, 193, 221);
         text-align: center;
         padding: 5px 5px;
-        background-color: gray;
+        background-color: rgb(78, 78, 78);
     }
     
-    a {
-        color: lightsteelblue;
+    .inicio {
+        color: rgb(255, 255, 255);
         text-decoration: none;
     }
     
-    .enlaceFooter a {
-        color: lightsteelblue;
+    a.inicio:hover {
+        color: rgb(255, 255, 255);
         text-decoration: none;
     }
     
-    .listaArticulos {
+    .enlace {
+        color: rgb(172, 193, 221);
+        text-decoration: none;
+    }
+    
+    a.enlace:hover {
+        color: rgb(172, 193, 221);
+        text-decoration: none;
+    }
+    
+    .lista-articulos {
         padding: 20px;
     }
     
-    .bloqueArticulo img {
+    .bloque-articulo img {
         float: left;
         margin-right: 10px;
         width: 500px;
         height: 200px;
     }
     
-    .bloqueArticulo {
+    .bloque-articulo {
         clear: both;
         list-style: none;
         margin-bottom: 10px;
         min-height: 200px;
     }
     
-    .bloqueArticulo a {
+    .bloque-articulo a:link,
+    .bloque-articulo a:visited {
         color: rgb(0, 0, 0);
+        text-decoration: none;
+    }
+    
+    .bloque-articulo a:link:active,
+    .bloque-articulo a:visited:active {
+        color: rgb(172, 193, 221);
         text-decoration: none;
     }
     
@@ -65,15 +82,19 @@
         height: 50px;
     }
     
+    .articulo {
+        padding: 50px;
+    }
+    
+    .cover {
+        max-height: 200px;
+    }
+    
     .articulo-redaccion {
-        white-space: pre-wrap;
+        white-space: pre-line;
     }
     
-    .formulario-usuario {
-        padding-left: 350px;
-    }
-    
-    .formulario-gestor {
+    .formulario-formato {
         padding: 30px;
     }
     

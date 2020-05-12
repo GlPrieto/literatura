@@ -7,13 +7,54 @@
 {% endblock %}
 
 {% block main %}
-    <div class="card">
-        <!-- Card content -->
+    <!--Card-->
+    <div class="card articulo">
+        <!--Title-->
+            <h4 class="card-title text-center"><strong>{{articulo.titulo}}</strong></h4>
+        <!--Card image-->
+        <div class="img-fluid">
+            <div class="card-img-top" alt="cover">
+                    {% if articulo.imagen == NULL %}
+                        <img class="card-img-top cover w-100" src="{{ asset('images/image.jpg') }}" />
+                    {% else %}
+                        <img class="card-img-top cover w-100" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                    {% endif %}
+            </div>
+        </div>
+
+        <!--Card content-->
         <div class="card-body">
-            <!-- Title -->
-            <h3 class="card-title text-center"><strong>{{articulo.titulo}}</strong></h3>
-            <!--Details-->
-            <ul class="list-unstyled list-inline text-muted font-small text-center">
+            <div class="text-center">
+                <ul class="card-meta list-unstyled list-inline text-muted">
+                    <li class="list-inline-item pr-2">{{articulo.categoria.denominacion}}</li>
+                    <li class="list-inline-item pr-2">{{articulo.idioma.denominacion}}</li>
+                </ul>
+            </div>
+            <!--Text-->
+            {% if articulo.categoria.denominacion == "Poema" %}
+                <p class="card-text articulo-redaccion text-center">
+            {% else %}
+                <p class="card-text articulo-redaccion">
+            {% endif %}
+                {{articulo.redaccion}}</p>
+            <hr>
+            <div class="card-meta text-center autor">
+                {% if articulo.autor.imagenPerfil == NULL %}
+                    <img src="{{ asset('images/avatars/User-small.jpg') }}"/>
+                {% else %}
+                    <img src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
+                {% endif %}
+                {{articulo.autor.firmaUsuario}}
+                <p class="card-meta text-muted">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}</p>
+            </div>
+        </div>
+    </div>
+    <!--/.Card-->
+    <!-- Card v2 
+    <div class="card text-center">
+        <div class="card-body">
+            <h3 class="card-title"><strong>{{articulo.titulo}}</strong></h3>
+            <ul class="list-unstyled list-inline text-muted font-small">
                 <li class="list-inline-item pr-2">{{articulo.categoria.denominacion}}</li>
                 <li class="list-inline-item pr-2">{{articulo.idioma.denominacion}}</li>
             </ul>
@@ -26,20 +67,18 @@
                 {{articulo.autor.firmaUsuario}}
                 <div class="mb-1 text-muted">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}</div>
             </div> 
-            <!-- Card image -->
-            <div class="view overlay bloqueArticulo">
-                {% if articulo.imagen == NULL %}
-                    <img class="card-img-top" src="{{ asset('images/image.jpg') }}" />
-                {% else %}
-                    <img class="card-img-top" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
-                {% endif %}
+            <div class="img-fluid">
+                <div class="card-img-top" alt="cover">
+                        {% if articulo.imagen == NULL %}
+                            <img class="card-img-top cover w-100" src="{{ asset('images/image.jpg') }}" />
+                        {% else %}
+                            <img class="card-img-top cover w-100" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                        {% endif %}
+                </div>
             </div>
-            
-            <!-- Text -->
             <p class="card-text articulo-redaccion">{{articulo.redaccion}}</p>
-            
-            {#Para indicar que solo lo vean aquellos que esten logados, sin especificar roles#}
-            <!-- Button -->
+            </div>
+            </div> -->
             <ul class="list-unstyled list-inline font-small">
                 {% if is_granted('edit', articulo) %}
                     <li class="list-inline-item pr-2 text-dark">
@@ -56,6 +95,5 @@
                     </li>
                 {% endif %}
             </ul>
-        </div>
-    </div>
+    
 {% endblock %}

@@ -15,22 +15,22 @@
         {% block body %}
         <header>
             <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 b">
-                <a id="principio" title="Inicio" class="my-0 mr-md-auto font-weight-normal text-white" href="{{ path('index') }}">Gestor de articulos literarios</a>
+                <a id="principio" title="Inicio" class="my-0 mr-md-auto font-weight-normal inicio" href="{{ path('index') }}">Gestor de articulos literarios</a>
                 <!--Navbar-->
                 <nav class="my-2 my-md-0 mr-md-3">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('admin') }}">
+                            <a class="enlace" href="{{ path('admin') }}">
                                 {{ app.user.firmaUsuario }}
                             </a>
                         {% else %}
                             {{ app.user.firmaUsuario }}
                         {% endif %}
-                        <a class="p-2 text-white" href="{{ path('app_nuevo_articulo')}}">Añadir artículo</a>
-                        <a class="p-2 text-white" href="{{ path('app_logout') }}"> Desconectar</a>
+                        <a class="p-2 enlace" href="{{ path('app_nuevo_articulo')}}">Añadir artículo</a>
+                        <a class="p-2 enlace" href="{{ path('app_logout') }}"> Desconectar</a>
                     {% else %}
-                        <a class="p-2 text-white" href="{{ path('app_login') }}">Iniciar sesión</a>
-                        <a class="p-2 text-white" href="{{ path('app_register') }}">Registrarse</a>
+                        <a class="p-2 enlace" href="{{ path('app_login') }}">Iniciar sesión</a>
+                        <a class="p-2 enlace" href="{{ path('app_register') }}">Registrarse</a>
                     {% endif %}
                 </nav>
                 <!--/.Navbar-->
@@ -55,8 +55,8 @@
             </script>
         {% endblock %}
         <footer id="footer" class="w-100 text-center text-white">
-            <p>Copyright © 2020 | <span><a class="enlaceFooter my-0 mr-md-auto font-weight-normal" href="{{ path('index') }}">Gestor de articulos literarios</a></span>
-    	    <p>Realizado por: Gloria Prieto Ortega | <a class="text-white" href="#principio">Arriba</a><p>
+            <p>Copyright © 2020 | <span><a class="my-0 mr-md-auto font-weight-normal enlace" href="{{ path('index') }}">Gestor de articulos literarios</a></span>
+    	    <p>Realizado por: Gloria Prieto Ortega | <a class="enlace" href="#principio">Arriba</a><p>
         </footer>
     </body>
 </html>

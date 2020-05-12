@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Administrador{% endblock %}
+{% block title %}Administración de la página{% endblock %}
 
 {% block body %}
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100">
-        <a id="principio" title="Inicio" class="my-0 mr-md-auto font-weight-normal text-white" href="{{ path('home') }}">Gestor de articulos literarios</a>
+        <a id="principio" title="Inicio" class="my-0 mr-md-auto font-weight-normal inicio" href="{{ path('home') }}">Gestor de articulos literarios</a>
         <div class="my-2 my-md-0 mr-md-3 text-white">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a href="{{ path('admin') }}">
+                <a class="enlace" href="{{ path('admin') }}">
                     {{ app.user.firmaUsuario }}
                 </a>
-                <a class="p-2 text-white" href="{{ path('app_logout') }}"> Desconectar</a>
+                <a class="p-2 enlace" href="{{ path('app_logout') }}"> Desconectar</a>
             {% else %}
-                <a class="p-2 text-white" href="{{ path('app_login') }}">Iniciar sesión</a>
+                <a class="p-2 enlace" href="{{ path('app_login') }}">Iniciar sesión</a>
             {% endif %}
         </div>
     </nav>
@@ -33,7 +33,7 @@
                         <li>No hay articulos</li>
                     {% endfor %}
                 <small class="d-block text-right mt-3">
-                    <a href="{{ path ('app_ver_articulos')}}">Todas las subidas</a>
+                    <a class="enlace" href="{{ path ('app_ver_articulos')}}">Todas las subidas</a>
                 </small>
             </div>
             <div class="my-3 p-3 bg-white rounded shadow-sm">
@@ -56,7 +56,7 @@
                     <li>No hay usuarios</li>
                 {% endfor %}
                 <small class="d-block text-right mt-3 border-top border-gray">
-                    <a href="{{ path ('app_ver_usuarios')}}">Todos los usuarios</a>
+                    <a class="enlace" href="{{ path ('app_ver_usuarios')}}">Todos los usuarios</a>
                 </small>
             </div>
             <div class="my-3 p-3 bg-white rounded shadow-sm">
@@ -71,7 +71,7 @@
                     <li>No hay Categorias</li>
                 {% endfor %}
                 <small class="d-block text-right mt-3">
-                    <a href="{{ path ('app_nueva_categoria')}}">Añadir categoria</a>
+                    <a class="enlace" href="{{ path ('app_nueva_categoria')}}">Añadir categoria</a>
                 </small>
             </div>
             <div class="my-3 p-3 bg-white rounded shadow-sm">
@@ -86,7 +86,7 @@
                     <li>No hay idiomas</li>
                 {% endfor %}
                 <small class="d-block text-right mt-3">
-                    <a href="{{ path ('app_nuevo_idioma')}}">Añadir idioma</a>
+                    <a class="enlace" href="{{ path ('app_nuevo_idioma')}}">Añadir idioma</a>
                 </small>
             </div>
         {% endblock %}
