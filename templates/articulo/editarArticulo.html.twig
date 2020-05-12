@@ -2,14 +2,17 @@
 {% extends 'base.html.twig' %}
 {% block title %}Edición del artículo{% endblock %}
 {% block main %}
-    <h1></h1>
-    {{ form_start(editarArticuloForm) }}
-        {{ form_row(editarArticuloForm.titulo) }}
-        {{ form_row(editarArticuloForm.sipnosis) }}
-        {{ form_row(editarArticuloForm.redaccion) }}
-        {{ form_row(editarArticuloForm.image) }}
-        {{ form_row(editarArticuloForm.idioma) }}
-        {{ form_row(editarArticuloForm.categoria) }}
-        <button class="btn">Actualizar</button>
-    {{ form_end(editarArticuloForm) }}
+    <div class="formulario-gestor">
+        <h1 class="text-center">Edición</h1>
+        <hr>
+        {{ form_start(editarArticuloForm) }}
+            {{ form_row(editarArticuloForm.titulo) }}
+            {{ form_row(editarArticuloForm.sipnosis) }}
+            {{ form_row(editarArticuloForm.redaccion) }}
+            {{ form_row(editarArticuloForm.image) }}
+            {{ form_row(editarArticuloForm.idioma) }}
+            {{ form_row(editarArticuloForm.categoria) }}
+            <button class="btn btn-md btn-dark btn-block">Actualizar</button>
+        {{ form_end(editarArticuloForm) }}
+    </div>
 {% endblock %}

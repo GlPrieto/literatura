@@ -3,41 +3,66 @@
 {% block title %}Iniciar sesión{% endblock %}
 
 {% block main %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <div class="formulario-usuario row m-2 d-flex">
+        <form class="form-signin text-center w-50" method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            La sesión está iniciada con el usuario {{ app.user.username }} <a href="{{ path('app_logout') }}"> Desconectar</a>
-        </div>
-    
-    {% else %}
-    <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
+            {% if app.user %}
+                <div class="mb-3">
+                    La sesión está iniciada con el usuario {{ app.user.username }} <a href="{{ path('app_logout') }}"> Desconectar</a>
+                </div>
+            
+            {% else %}
+            <h1 class="mb-3 font-weight-normal text-center">Iniciar sesión</h1>
+            <hr>
+            <div class="row m-2">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="correo"></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">@</div>
+                            </div>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email"
+                                aria-describedby="emailHelp" required autofocus>
+                        </div>
+                    </div>
+                    <div class="invalid-feedback" style="width: 100%;">
+                        Es obligatorio introducir el email.
+                    </div>
+                </div>
+            </div>
+            <div class="row m-2">
+                <div class="col-12">
+                    <div class="form-group">
+                        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+                    </div>
+                </div>
+            </div>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
+            <input type="hidden" name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
+            >
+            {#
+                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                See https://symfony.com/doc/current/security/remember_me.html
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Iniciar sesión
-    </button>
-    {% endif %}
-
-</form>
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Remember me
+                    </label>
+                </div>
+            #}
+            <div class="row m-2">
+                <div class="col-12">
+                    <button class="btn btn-md btn-dark btn-block" type="submit">
+                        Iniciar sesión
+                    </button>
+                </div>
+            </div>
+            {% endif %}
+        </form>
+    </div>
 {% endblock %}

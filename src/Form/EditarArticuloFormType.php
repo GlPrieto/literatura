@@ -23,32 +23,49 @@ class EditarArticuloFormType extends AbstractType {
         ->add( 'titulo', TextType::class,
         [
             'label' => 'Título: ',
-            'attr' => ['class' => 'form-control'],
+            'attr' => ['title' => 'Título',],
             'constraints' => [
                 new NotBlank( [
-                    'message' => 'Introduzca un título',
+                    'message' => 'Introduzca un titulo',
                 ] ),
                 new Length( [
-                    'min' => 2,
+                    'min' => 6,
+                    'minMessage' => 'Su artículo debe tener un mínimo de {{ limit }} letras',
                 ] ),
             ],
         ] )
         ->add( 'sipnosis', TextareaType::class,
         [
             'label' => 'Descripción: ',
-            'attr' => ['class' => 'form-control'],
+            'attr' => [
+                'title' => 'Breve descripción del artículo',
+            ],
+            'constraints' => [
+                new NotBlank( [
+                    'message' => 'Este campo debe estar relleno para publicar',
+                ] ),
+                new Length( [
+                    'min' => 20,
+                    'minMessage' => 'Su artículo debe tener un mínimo de {{ limit }} letras',
+                ] ),
+            ],
             'required' => false
 
         ] )
         ->add( 'redaccion', TextareaType::class,
         [
             'label' => 'Redacción: ',
-            'constraints' => [
+            'attr' => [
+                'rows' => '20',
+                'cols' => '10',
+                'title' => 'Redacción del artículo',
+            ],            'constraints' => [
                 new NotBlank( [
-                    'message' => 'Introduzca texto',
+                    'message' => 'Este campo debe estar relleno para publicar',
                 ] ),
                 new Length( [
-                    'min' => 100
+                    'min' => 100,
+                    'minMessage' => 'Su artículo debe tener un mínimo de {{ limit }} letras',
                 ] ),
             ],
         ] )
@@ -56,6 +73,7 @@ class EditarArticuloFormType extends AbstractType {
         ->add( 'image', FileType::class, [
             'data_class'=> null,
             'label' => 'Imagen: ',
+            'attr' => ['title' => 'Imagen'],
             // Este atributo no está asociado con ningún atributo
             'mapped' => false,
             // Opcional.
@@ -75,13 +93,13 @@ class EditarArticuloFormType extends AbstractType {
         ->add( 'idioma', EntityType::class, [
             'class' => Idioma::class,
             'label' => 'Idioma: ',
-            'attr' => ['class' => 'form-control'],
+            'attr' => ['title' => 'Idioma'],
             'choice_label' => 'denominacion',
         ] )
         ->add( 'categoria', EntityType::class, [
             'class' => Categoria::class,
             'label' => 'Categoría: ',
-            'attr' => ['class' => 'form-control'],
+            'attr' => ['title' => 'Categoría'],
             'choice_label' => 'denominacion',
         ] )
         ;

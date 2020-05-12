@@ -40,7 +40,24 @@ class ArticuloRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    
+
+/*
+    public function mostrarElMasRecientePorCategoria ()
+    {
+        //SELECT * FROM `articulo` WHERE (`id`, `fecha_publicacion`) IN (SELECT ANY_VALUE (`id`), MAX(`fecha_publicacion`) FROM `articulo` GROUP BY `categoria_id`)
+        //Siendo 'a' una referencia a la tabla artículo:
+        return $this->getEntityManager()
+            ->createQuery(
+            'SELECT a
+            FROM App\Entity\Articulo a
+            WHERE (a.id, a.fecha_publicacion) IN 
+            (SELECT a.id, MAX(a.fecha_publicacion)
+            FROM App\Entity\Articulo a
+            GROUP BY a.categoria_id)'
+        )->getResult();
+            
+    }
+  */  
 
     /*
     public function findOneBySomeField($value): ?Articulo

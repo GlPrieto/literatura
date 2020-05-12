@@ -12,9 +12,9 @@
             <ul class="navbar-nav mr-auto">
                 {% for categoria in categorias %}
                         <li class="nav-item">
-	                        <a class="nav-link" href="{{ path ('app_articulo_categoria', {'idCat': categoria.id})}}">
+                            <a class="nav-link" href="{{ path ('app_articulo_categoria', {'idCat': categoria.id})}}">
                                 {{categoria.denominacion}}
-    	                    </a>
+                            </a>
                         </li>
                 {% else %}
                     <li>No hay categorias</li>
@@ -23,72 +23,50 @@
         </div>
     </nav>
     <!--Nav Categorias-->
-    <div class="row m-2">
-        <div class="col-12">
-        <!--Carousel Wrapper-->
-            <div id="carouselInicio" class="carousel slide carousel-fade" data-ride="carousel">
-                {% for articulo in articulos %}
-                    <!--Indicators-->
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselInicio" data-slide-to="1">1</li>
-                    </ol>
-                    <!--/.Indicators-->
-                    <!--Slides-->
-                    <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item">
-                            <div class="view">
-                                {% if articulo.imagen == NULL %}
-                                    <img class="d-block w-100" src="{{ asset('images/image.jpg') }}"
-                                    alt="Responsive image">
-                                    <div class="mask rgba-black-light"></div>
-                                {% else %}
-                                    <img class="d-block w-100" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}"
-                                    alt="Responsive image">
-                                    <div class="mask rgba-black-light"></div>
-                                {% endif %}
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <!--/.Slides-->
-                    <!--Controls-->
-                    <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                    <!--/.Controls-->
-                {% endfor %}
+    <!--Carousel Wrapper-->
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            {% for articulo in articulos %}
+            <div class="carousel-item">
+                {% if articulo.imagen == NULL %}
+                    <img src="{{ asset('images/image.jpg') }}" />
+                {% else %}
+                    <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                {% endif %}
             </div>
-            <!--/.Carousel Wrapper-->
+            {% endfor %}
         </div>
     </div>
+    <!--/.Carousel Wrapper-->
     <ul class="listaArticulos" > 
         {% for articulo in articulos %}
             <li class="bloqueArticulo">
                 <div class="card">
                     <div class="card-header">
                         <h3>
-	                        <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                            <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                 {{articulo.titulo}}
-	                        </a>
-	                    </h3>
+                            </a>
+                        </h3>
                     </div>
                     <div class="card-body">
+                        <div class="d-none d-lg-block">
+                            <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                                {% if articulo.imagen == NULL %}
+                                    <img src="{{ asset('images/image.jpg') }}" />
+                                {% else %}
+                                    <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                                {% endif %}
+                            </a>
+                        </div>
                         <blockquote class="blockquote mb-0">
                             <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
-                                <div class="d-none d-lg-block">
-                                    {% if articulo.imagen == NULL %}
-                                        <img src="{{ asset('images/image.jpg') }}" />
-                                    {% else %}
-                                        <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
-                                    {% endif %}
-                                </div>
                                 <p>{{articulo.sipnosis}}</p>
-	                        </a>
+                            </a>
+                            <ul class="list-unstyled list-inline text-muted small">
+                                <li class="list-inline-item pr-2">{{articulo.categoria.denominacion}}</li>
+                                <li class="list-inline-item pr-2">{{articulo.idioma.denominacion}}</li>
+                            </ul>                            
                             <div class="blockquote-footer">
                                 <div class="autor">
                                     {% if articulo.autor.imagenPerfil == NULL %}

@@ -3,16 +3,18 @@
 {% block title %}Formulario de registro{% endblock %}
 
 {% block main %}
-    <h1>Registro</h1>
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.nombre) }}
-        {{ form_row(registrationForm.apellidos) }}
-        {{ form_row(registrationForm.firmaUsuario) }}
-        {{ form_row(registrationForm.image) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-        <button class="btn">Registrarse</button>
-    {{ form_end(registrationForm) }}
+    <h1 class="text-center">Registro</h1>
+    <hr>
+    <div class="formulario-usuario row m-2 d-flex">
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.nombre) }}
+            {{ form_row(registrationForm.apellidos) }}
+            {{ form_row(registrationForm.firmaUsuario) }}
+            {{ form_row(registrationForm.image) }}
+            {{ form_row(registrationForm.plainPassword) }}
+            {{ form_row(registrationForm.agreeTerms) }}
+            <button class="btn btn-md btn-dark btn-block">Registrarse</button>
+        {{ form_end(registrationForm) }}
+    </div>
 {% endblock %}

@@ -54,18 +54,8 @@ class ComandoCrearUsuario extends Command
              InputArgument::REQUIRED, 
              'El nombre con el que le verán los demás usuarios'
              )
-            ->addArgument('nombre',
-             InputArgument::OPTIONAL, 
-             'El nombre del nuevo usuario'
-             )
-             ->addArgument('apellidos',
-             InputArgument::OPTIONAL, 
-             'Los apellidos del nuevo usuario'
-             )
-             ->addArgument('imagenPerfil',
-             InputArgument::OPTIONAL, 
-             'La foto o imagen de perfil'
-            );
+            ->addOption('admin', null, InputOption::VALUE_NONE, 'Crea usuario como admin')
+            ;
     }
     protected function execute(InputInterface $input, OutputInterface $output):int
     {
@@ -74,9 +64,7 @@ class ComandoCrearUsuario extends Command
         $firmaUsuario = $input->getArgument('firmaUsuario');
         $email = $input->getArgument('email');
         $plainPass = $input->getArgument('password');
-        $nombre = $input->getArgument('nombre');
-        $apellidos = $input->getArgument('apellidos');
-        $imagenPerfil = $input->getArgument('imagenPerfil');
+        $isAdmin = $input->getOption('admin');
 
         $usuario = $this->repoUsuario->findOneByEmail($email);
         if(!empty($usuario)) {
@@ -88,9 +76,7 @@ class ComandoCrearUsuario extends Command
         $usuario = new Usuario();
         $usuario->setFirmaUsuario($firmaUsuario);
         $usuario->setEmail($email);
-        $usuario->setNombre($nombre);
-        $usuario->setApellidos($apellidos);
-        $usuario->setImagenPerfil($imagenPerfil);
+        $usuario->setRoles([$isAdmin ? 'ROLE_ADMIN' : 'ROLE_USER']);
         $contraseña = $this->passEncoderUsuario->encodePassword($usuario,$plainPass);
         $usuario->setPassword($contraseña);
         $this->em->persist($usuario);

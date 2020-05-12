@@ -36,20 +36,20 @@
             </div>
             
             <!-- Text -->
-            <p class="card-text">{{articulo.redaccion}}</p>
+            <p class="card-text articulo-redaccion">{{articulo.redaccion}}</p>
+            
             {#Para indicar que solo lo vean aquellos que esten logados, sin especificar roles#}
             <!-- Button -->
-            
             <ul class="list-unstyled list-inline font-small">
                 {% if is_granted('edit', articulo) %}
-                    <li class="list-inline-item pr-2 btn btn-dark text-white">
+                    <li class="list-inline-item pr-2 text-dark">
                         <a href ="{{path ('app_articulo_editar',{'id': articulo.id})}}">
                             Editar artículo
                         </a>
                     </li>
                 {% endif %}
                 {% if is_granted('delete',articulo) %}
-                    <li class="list-inline-item pr-2 btn btn-dark text-white">
+                    <li class="list-inline-item pr-2 text-dark">
                         <a href ="{{path ('app_articulo_borrar',{'id': articulo.id})}}">
                             Borrar artículo
                         </a>

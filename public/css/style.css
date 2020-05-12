@@ -1,81 +1,87 @@
-#main {
-    width: 1000px;
-    margin: auto;
-    background-color: white;
-    padding: 4px 20px;
-}
-
-body {
-    margin: 0px;
-    font-family: Verdana, sans-serif;
-    background-color: rgb(238, 238, 238);
-}
-
-header {
-    background-color: gray;
-    color: white;
-    padding: 12px 12px 2px 12px;
-    border-bottom: 5px solid lightsteelblue;
-}
-
-footer {
-    border-top: 2px solid lightsteelblue;
-    text-align: center;
-    padding: 5px 5px;
-    background-color: gray;
-}
-
-a {
-    text-decoration: none;
-}
-
-.listaArticulos {
-    padding: 20px;
-}
-
-.bloqueArticulo img {
-    width: 500px;
-    height: 200px;
-}
-
-.bloqueArticulo {
-    clear: both;
-    list-style: none;
-    margin-bottom: 10px;
-    min-height: 200px;
-}
-
-.bloqueArticulo a {
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-}
-
-.autor img {
-    border-radius: 50px;
-    margin-right: 10px;
-    width: 50px;
-    height: 50px;
-}
-
-.small {
-    font-size: 10px;
-}
-
-table {
-    width: 100%;
-}
-
-td {
-    padding: 5px;
-    text-align: left;
-}
-
-th {
-    padding: 5px;
-    text-align: center;
-}
-
-#edicion {
-    text-align: center;
-    width: 100%;
-}
+    #main {
+        width: 1000px;
+        margin: auto;
+        background-color: white;
+        padding: 4px 20px;
+    }
+    
+    body {
+        margin: 0px;
+        font-family: Verdana, sans-serif;
+        background-color: rgb(238, 238, 238);
+    }
+    
+    header {
+        background-color: gray;
+        color: white;
+        padding: 12px 12px 2px 12px;
+        border-bottom: 5px solid lightsteelblue;
+    }
+    
+    footer {
+        border-top: 2px solid lightsteelblue;
+        text-align: center;
+        padding: 5px 5px;
+        background-color: gray;
+    }
+    
+    a {
+        color: lightsteelblue;
+        text-decoration: none;
+    }
+    
+    .enlaceFooter a {
+        color: lightsteelblue;
+        text-decoration: none;
+    }
+    
+    .listaArticulos {
+        padding: 20px;
+    }
+    
+    .bloqueArticulo img {
+        float: left;
+        margin-right: 10px;
+        width: 500px;
+        height: 200px;
+    }
+    
+    .bloqueArticulo {
+        clear: both;
+        list-style: none;
+        margin-bottom: 10px;
+        min-height: 200px;
+    }
+    
+    .bloqueArticulo a {
+        color: rgb(0, 0, 0);
+        text-decoration: none;
+    }
+    
+    .autor img {
+        border-radius: 50px;
+        margin-right: 10px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .articulo-redaccion {
+        white-space: pre-wrap;
+    }
+    
+    .formulario-usuario {
+        padding-left: 350px;
+    }
+    
+    .formulario-gestor {
+        padding: 30px;
+    }
+    
+    .small {
+        font-size: 10px;
+    }
+    
+    #edicion {
+        text-align: center;
+        width: 100%;
+    }

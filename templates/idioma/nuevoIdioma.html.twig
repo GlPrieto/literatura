@@ -1,0 +1,27 @@
+{# templates/idioma/nuevoIdioma.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}Nuevo idioma{% endblock %}
+{% block main %}
+    <div class="row m-2">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path ('admin')}}"> Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Nuevo idioma
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="formulario-gestor">
+    <h1 class="text-center">Rellene los campos mostrados a continuación</h1>
+    <hr>
+        {{ form_start(nuevoIdiomaForm) }}
+            {{ form_row(nuevoIdiomaForm.denominacion) }}
+            <button class="btn btn-md btn-dark btn-block">Crear</button>
+        {{ form_end(nuevoIdiomaForm) }}
+    </div>
+{% endblock %}

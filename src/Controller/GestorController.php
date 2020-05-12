@@ -30,10 +30,12 @@ class GestorController extends AbstractController {
         //Tomaré en un inicio la plantilla listaArticulos.html.twig como página de inicio.
         $entityManager = $this->getDoctrine()->getManager();
         $articulos = $entityManager->getRepository( Articulo::class )->findAll();
+        //$articulosCarousel = $entityManager->getRepository( Articulo::class )->mostrarElMasRecientePorCategoria();
         $categorias = $entityManager->getRepository( Categoria::class )->findAll();
         return $this->render( 'articulo/listaArticulos.html.twig', array(
             'categorias' => $categorias,
             'articulos' => $articulos,
+            //'articulosCarousel' => $articulosCarousel,
         ) );
 
     }
@@ -48,9 +50,22 @@ class GestorController extends AbstractController {
             'categoria' => $categoria,
             'articulos' => $articulos,
         ) );
+    }
+    
+/*
+    public function verPerfilAutor($id, UserInterface $user) {
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $articulo = $entityManager->getRepository( Articulo::class )->find( $id );
+        $articulo = getAutor($user);
+        $articulos = $entityManager->getRepository( Articulo::class )->findAll();
+        return $this->render( 'articulo/verPerfil.html.twig', array(
+            'autor' => $articulo,
+            'articulos' => $articulos,
+        ) );
 
     }
-
+*/
     public function verArticulo( $id ) {
         $titulo = null;
         $entityManager = $this->getDoctrine()->getManager();
@@ -70,7 +85,7 @@ class GestorController extends AbstractController {
     public function nuevoArticulo(Request $request,
                                      UserInterface $user, 
                                     SluggerInterface $slugger 
-    ) 
+    )
     {
         $articulo = new Articulo();
         $articulo->setAutor( $user );

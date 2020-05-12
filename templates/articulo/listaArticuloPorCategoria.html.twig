@@ -2,58 +2,60 @@
 {% extends 'base.html.twig' %}
 {% block title %}Articulos{% endblock %}
 {% block main %}
-    <nav>
         <!--Nav Categorias-->
-        <div id="navCategorias" class="row m-2">
-            <div class="col-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-            	            <a href="{{ path ('index')}}"> Inicio</a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                            {{categoria.denominacion}}
-                        </li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-        <!--Nav Categorias-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path ('index')}}"> Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#categoria">{{categoria.denominacion}}</a>
+            </li>
+        </ul>
     </nav>
     <ul class="listaArticulos" > 
         {% for articulo in articulos %}
-            <li class='bloqueArticulo'>
-            <div class="row">
-                <div class="col-md-12 col-md-6">
-                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                        <div class="col p-4 d-flex flex-column position-static">
-                        <h3 class="mb-0">
+            <li class="bloqueArticulo">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>
                             <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                 {{articulo.titulo}}
-	                        </a>
+                            </a>
                         </h3>
-                        <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
-                                <p "card-text mb-auto">{{articulo.sipnosis}}</p>
-	                    </a>
-                        <div class="autor">
-                            {% if articulo.autor.imagenPerfil == NULL %}
-                                <img src="{{ asset('images/avatars/User-small.jpg') }}"/>
-                            {% else %}
-                                <img src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
-                            {% endif %}
-                            {{articulo.autor.firmaUsuario}}
-                        </div>
-                        <div class="mb-1 text-muted">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}</div>
                     </div>
-                    <div class="col-auto d-none d-lg-block">
-                        {% if articulo.imagen == NULL %}
-                            <img src="{{ asset('images/image.jpg') }}" />
-                        {% else %}
-                            <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
-                        {% endif %}
+                    <div class="card-body">
+                        <div class="d-none d-lg-block">
+                            <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                                {% if articulo.imagen == NULL %}
+                                    <img src="{{ asset('images/image.jpg') }}" />
+                                {% else %}
+                                    <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                                {% endif %}
+                            </a>
+                        </div>
+                        <blockquote class="blockquote mb-0">
+                            <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                                <p>{{articulo.sipnosis}}</p>
+                            </a>
+                            <ul class="list-unstyled list-inline text-muted small">
+                                <li class="list-inline-item pr-2">{{articulo.categoria.denominacion}}</li>
+                                <li class="list-inline-item pr-2">{{articulo.idioma.denominacion}}</li>
+                            </ul>                               
+                            <div class="blockquote-footer">
+                                <div class="autor">
+                                    {% if articulo.autor.imagenPerfil == NULL %}
+                                        <img src="{{ asset('images/avatars/User-small.jpg') }}"/>
+                                    {% else %}
+                                        <img src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
+                                    {% endif %}
+                                        {{articulo.autor.firmaUsuario}}
+                                </div> 
+                                <div class="fPublicacion"class="small">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}.</div>
+                            </div>
+                        </blockquote>
                     </div>
                 </div>
-            </div>
             </li>
         {% else %}
             <li>No hay articulos</li>

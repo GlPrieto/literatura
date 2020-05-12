@@ -2,14 +2,17 @@
 {% extends 'base.html.twig' %}
 {% block title %}Nuevo Articulo{% endblock %}
 {% block main %}
-    <h1>Rellene los campos mostrados a continuación</h1>
-    {{ form_start(nuevoArticuloForm) }}
-        {{ form_row(nuevoArticuloForm.titulo) }}
-        {{ form_row(nuevoArticuloForm.sipnosis) }}
-        {{ form_row(nuevoArticuloForm.redaccion) }}
-        {{ form_row(nuevoArticuloForm.image) }}
-        {{ form_row(nuevoArticuloForm.idioma) }}
-        {{ form_row(nuevoArticuloForm.categoria) }}
-        <button class="btn">Crear</button>
-    {{ form_end(nuevoArticuloForm) }}
+    <div class="formulario-gestor">
+        <h1 class="text-center">Rellene los campos mostrados a continuación</h1>
+        <hr>
+        {{ form_start(nuevoArticuloForm) }}
+            {{ form_row(nuevoArticuloForm.titulo) }}
+            {{ form_row(nuevoArticuloForm.sipnosis) }}
+            {{ form_row(nuevoArticuloForm.redaccion) }}
+            {{ form_row(nuevoArticuloForm.image) }}
+            {{ form_row(nuevoArticuloForm.idioma) }}
+            {{ form_row(nuevoArticuloForm.categoria) }}
+            <button class="btn btn-md btn-dark btn-block">Actualizar</button>
+        {{ form_end(nuevoArticuloForm) }}
+    </div>
 {% endblock %}

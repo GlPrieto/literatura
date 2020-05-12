@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administrador{% endblock %}
+
+{% block body %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100">
+        <a id="principio" title="Inicio" class="my-0 mr-md-auto font-weight-normal text-white" href="{{ path('home') }}">Gestor de articulos literarios</a>
+        <div class="my-2 my-md-0 mr-md-3 text-white">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('admin') }}">
+                    {{ app.user.firmaUsuario }}
+                </a>
+                <a class="p-2 text-white" href="{{ path('app_logout') }}"> Desconectar</a>
+            {% else %}
+                <a class="p-2 text-white" href="{{ path('app_login') }}">Iniciar sesión</a>
+            {% endif %}
+        </div>
+    </nav>
+    <div id="container">
+        <div id="main w-100">
+        {% block main %}
+            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <h6 class="border-bottom border-gray pb-2 mb-0">Subidas recientes</h6>
+                    {% for articulo in articulos %}
+                        <div class="media text-muted pt-3"> 
+                            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                <strong class="text-gray-dark">{{articulo.titulo}}</strong>
+                                {{articulo.sipnosis}}
+                            </p>
+                        </div>
+                    {% else %}
+                        <li>No hay articulos</li>
+                    {% endfor %}
+                <small class="d-block text-right mt-3">
+                    <a href="{{ path ('app_ver_articulos')}}">Todas las subidas</a>
+                </small>
+            </div>
+            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <h6 class="border-bottom border-gray pb-2 mb-0">Nuevos usuarios</h6>
+                {% for usuario in usuarios %}
+                    <div class="media text-muted pt-3">
+                        <div class="autor">
+                            {% if usuario.imagenPerfil == NULL %}
+                                <img src="{{ asset('images/avatars/User-small.jpg') }}"/>
+                            {% else %}
+                                <img src="{{ asset('subidas/imagenes/' ~ usuario.imagenPerfil) }}" />
+                            {% endif %}
+                        </div>
+                        <p class="media-body pb-3 mb-0 small lh-125">
+                            <strong class="d-block text-gray-dark">{{usuario.firmaUsuario}}</strong>
+                            {{usuario.email}}
+                        </p>
+                    </div>
+                {% else %}
+                    <li>No hay usuarios</li>
+                {% endfor %}
+                <small class="d-block text-right mt-3 border-top border-gray">
+                    <a href="{{ path ('app_ver_usuarios')}}">Todos los usuarios</a>
+                </small>
+            </div>
+            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <h6 class="border-bottom border-gray pb-2 mb-0">Categorías</h6>
+                {% for categoria in categorias %}
+                    <div class="media text-muted pt-3">
+                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                            <strong class="d-block text-gray-dark">{{categoria.denominacion}}</strong>
+                        </p>
+                    </div>
+                {% else %}
+                    <li>No hay Categorias</li>
+                {% endfor %}
+                <small class="d-block text-right mt-3">
+                    <a href="{{ path ('app_nueva_categoria')}}">Añadir categoria</a>
+                </small>
+            </div>
+            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <h6 class="border-bottom border-gray pb-2 mb-0">Idiomas</h6>
+                {% for idioma in idiomas %}
+                    <div class="media text-muted pt-3">
+                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                            <strong class="d-block text-gray-dark">{{idioma.denominacion}}</strong>
+                        </p>
+                    </div>
+                {% else %}
+                    <li>No hay idiomas</li>
+                {% endfor %}
+                <small class="d-block text-right mt-3">
+                    <a href="{{ path ('app_nuevo_idioma')}}">Añadir idioma</a>
+                </small>
+            </div>
+        {% endblock %}
+{% endblock %}
