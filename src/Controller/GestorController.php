@@ -32,8 +32,10 @@ class GestorController extends AbstractController {
         $articulos = $entityManager->getRepository( Articulo::class )->findAll();
         //$articulosCarousel = $entityManager->getRepository( Articulo::class )->mostrarElMasRecientePorCategoria();
         $categorias = $entityManager->getRepository( Categoria::class )->findAll();
+        $idiomas = $entityManager->getRepository( Idioma::class )->findAll();
         return $this->render( 'articulo/listaArticulos.html.twig', array(
             'categorias' => $categorias,
+            'idiomas' => $idiomas,
             'articulos' => $articulos,
             //'articulosCarousel' => $articulosCarousel,
         ) );
@@ -48,6 +50,18 @@ class GestorController extends AbstractController {
         $categoria = $entityManager->getRepository( Categoria::class )->find ($idCat);
         return $this->render( 'articulo/listaArticuloPorCategoria.html.twig', array(
             'categoria' => $categoria,
+            'articulos' => $articulos,
+        ) );
+    }
+
+    public function articulosPorIdioma($id) {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $articulos = $entityManager->getRepository( Articulo::class )->mostrarArticulosPorIdioma ($id);
+        //Debería buscar en la entidad idioma, por el id dado, la denominación
+        $idioma = $entityManager->getRepository( Idioma::class )->find ($id);
+        return $this->render( 'articulo/listaArticuloPorIdioma.html.twig', array(
+            'idioma' => $idioma,
             'articulos' => $articulos,
         ) );
     }

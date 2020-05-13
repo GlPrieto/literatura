@@ -40,6 +40,26 @@ class ArticuloRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    public function mostrarArticulosPorIdioma ($idioma)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.idioma = :idioma')
+            ->setParameter('idioma', $idioma)
+            //->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    public function mostrarArticulosPorAutor ($autor)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.autor = :autor')
+            ->setParameter('autor', $autor)
+            //->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 /*
     public function mostrarElMasRecientePorCategoria ()

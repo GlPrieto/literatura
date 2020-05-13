@@ -1,0 +1,103 @@
+{# templates/usuario/verUsuario.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}Perfíl{% endblock %}
+
+{% block main %}
+    <!--Nav-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path ('index')}}"> Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#usuario">Perfil</a>
+            </li>
+        </ul>
+    </nav>
+    <!--Nav-->
+    <!-- Card -->
+    <div class="card testimonial-card perfil">
+
+        <!-- Background color -->
+        <div class="card-up lighten-1"></div>
+
+        <!-- Avatar -->
+        <div class="avatar mx-auto white">
+            {% if usuario.imagenPerfil == NULL %}
+                <img src="{{ asset('images/avatars/User-small.jpg') }}" class="rounded-circle"
+            alt="avatar"/>
+            {% else %}
+                <img src="{{ asset('subidas/imagenes/' ~ usuario.imagenPerfil) }}" class="rounded-circle"
+            alt="avatar"/>
+            {% endif %}
+        </div>
+
+        <!-- Content -->
+        <div class="card-body text-center">
+            <!-- Name -->
+            <h4 class="card-title">{{usuario.firmaUsuario}}</h4>
+            <!-- Subtitle -->
+            <div class="datos-personales text-muted">
+                {% if usuario.nombre == NULL and  usuario.apellidos == NULL %}
+                {% else %}
+                    {{usuario.nombre}} {{usuario.apellidos}}
+                {% endif %}
+            </div>
+            <ul class="list-unstyled list-inline font-small">
+                {% if app.user %}
+                    <li class="list-inline-item pr-2 text-dark">
+                        <a class="enlace" href ="{{path ('app_perfil_editar',{'id': usuario.id})}}">
+                            Editar artículo
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+            <hr>
+            <!-- Articles -->
+            <ul class="lista-articulos" > 
+                {% for articulo in articulos %}
+                    <li class="bloque-articulo">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>
+                                    <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                                        {{articulo.titulo}}
+                                    </a>
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-none d-lg-block">
+                                    <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                                        {% if articulo.imagen == NULL %}
+                                            <img src="{{ asset('images/image.jpg') }}" />
+                                        {% else %}
+                                            <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <blockquote class="blockquote mb-0">
+                                    <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                                        <p>{{articulo.sipnosis}}</p>
+                                    </a>
+                                    <ul class="list-unstyled list-inline text-muted small">
+                                        <li class="list-inline-item pr-2">{{articulo.categoria.denominacion}}</li>
+                                        <li class="list-inline-item pr-2">{{articulo.idioma.denominacion}}</li>
+                                    </ul>                            
+                                    <div class="blockquote-footer">
+                                        <div class="autor">
+                                            {{articulo.autor.firmaUsuario}}
+                                        </div> 
+                                        <div class="fPublicacion"class="small">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}.</div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </li>
+                {% else %}
+                    <li>No hay artículos</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <!-- Card -->
+{% endblock %}

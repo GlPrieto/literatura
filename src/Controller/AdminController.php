@@ -31,7 +31,6 @@ class AdminController extends AbstractController
             'idiomas' => $idiomas,
             'articulos' => $articulos,
         ) );
-
     }
 
     public function vistaArticulos()

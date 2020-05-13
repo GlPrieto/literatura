@@ -8,17 +8,17 @@ app_articulo_ver:
     requirements:
       id: '\d+'
 
-app_perfil:
-    path: /perfil/{id}
-    controller: App\Controller\GestorController::verPerfilAutor
-    requirements:
-      id: '\d+'
-
 app_articulo_categoria:
     path: /articuloCategoria/{idCat}
     controller: App\Controller\GestorController::articulosPorCategoria
     requirements:
       idCat: '\d+'
+
+app_articulo_idioma:
+    path: /articuloIdioma/{id}
+    controller: App\Controller\GestorController::articulosPorIdioma
+    requirements:
+      id: '\d+'
 
 app_nuevo_articulo:
     path: /articulo/nuevo
@@ -35,6 +35,19 @@ app_articulo_editar:
 app_articulo_borrar:
     path: /articulo/borrar/{id}
     controller: App\Controller\GestorController::eliminarArticulo
+
+#Usuario
+app_perfil_ver:
+    path: /usuario/{id}
+    controller: App\Controller\UsuarioController::mostrarPerfil
+    requirements:
+      id: '\d+'
+
+app_perfil_editar:
+    path: /usuario/editar/{id}
+    controller: App\Controller\UsuarioController::editarUsuario
+    requirements:
+      id: '\d+'
 
 #Admin
 app_ver_articulos:

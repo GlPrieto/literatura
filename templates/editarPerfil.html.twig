@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Perfíl{% endblock %}
+
+{% block main %}
+    <div class="formulario-formato">
+    <h1 class="text-center">Editar Perfíl</h1>
+    <hr>
+    {{ form_start(editarPerfilForm) }}
+        {{ form_row(editarPerfilForm.email) }}
+        {{ form_row(editarPerfilForm.nombre) }}
+        {{ form_row(editarPerfilForm.apellidos) }}
+        {{ form_row(editarPerfilForm.firmaUsuario) }}
+        {{ form_row(editarPerfilForm.image) }}
+        <button class="btn btn-md btn-dark btn-block">Guardar</button>
+    {{ form_end(editarPerfilForm) }}
+    </div>
+{% endblock %}

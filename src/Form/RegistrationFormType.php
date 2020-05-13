@@ -22,6 +22,7 @@ class RegistrationFormType extends AbstractType {
         TextType::class,
         [
             'label' => 'Email: ',
+            'attr' => ['class' => 'form-control']
 
         ] )
         ->add( 'nombre',
@@ -48,6 +49,7 @@ class RegistrationFormType extends AbstractType {
         ->add( 'image', FileType::class, [
             'data_class'=> null,
             'label' => 'Imagen: ',
+            'attr' => ['class' => 'form-control'],
             // Este atributo no está asociado con ningún atributo
             'mapped' => false,
             // Opcional.
@@ -67,6 +69,7 @@ class RegistrationFormType extends AbstractType {
         ->add( 'agreeTerms', 
         CheckboxType::class, [
             'label' => 'Acepto las normas del sitio',
+            'attr' => ['class' => 'form-control'],
             'mapped' => false,
             'constraints' => [
                 new IsTrue( [
@@ -76,6 +79,7 @@ class RegistrationFormType extends AbstractType {
         ] )
         ->add( 'plainPassword', PasswordType::class, [
             'label' => 'Contraseña: ',
+            'attr' => ['class' => 'form-control'],
             // instead of being set onto the object directly,
             // this is read and encoded in the controller
             'mapped' => false,
