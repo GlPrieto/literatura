@@ -2,26 +2,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}Articulos{% endblock %}
 {% block main %}
-    <!--Nav Categorias-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                {% for categoria in categorias %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path ('app_articulo_categoria', {'idCat': categoria.id})}}">
-                            {{categoria.denominacion}}
-                        </a>
-                    </li>
-                {% else %}
-                    <li>No hay categorias</li>
-                {% endfor %}
-            </ul>
-        </div>
-    </nav>
     <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -51,6 +31,19 @@
                             {% for idioma in idiomas %}
                                 <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_idioma', {'id': idioma.id})}}">
                                     {{idioma.denominacion}}
+                                </a>
+                            {% else %}
+                                <li>No hay idiomas</li>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#autores" role="button" id="dropdownAutores" aria-haspopup="true"
+                        aria-expanded="false">Autores</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownAutores">
+                            {% for autor in autores %}
+                                <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_autor', {'id': autor.id})}}">
+                                    {{autor.firmaUsuario}}
                                 </a>
                             {% else %}
                                 <li>No hay idiomas</li>
@@ -111,21 +104,6 @@
         </div>
     </nav>
     <!--Nav Categorias-->
-    <!--Carousel Wrapper-->
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            {% for articulo in articulos %}
-            <div class="carousel-item">
-                {% if articulo.imagen == NULL %}
-                    <img src="{{ asset('images/image.jpg') }}" />
-                {% else %}
-                    <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
-                {% endif %}
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    <!--/.Carousel Wrapper-->
     <ul class="lista-articulos" > 
         {% for articulo in articulos %}
             <li class="bloque-articulo">
@@ -141,9 +119,9 @@
                         <div class="d-none d-lg-block">
                             <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                 {% if articulo.imagen == NULL %}
-                                    <img src="{{ asset('images/image.jpg') }}" />
+                                    <img class="portada" src="{{ asset('images/image.jpg') }}" />
                                 {% else %}
-                                    <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                                    <img class="portada" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
                                 {% endif %}
                             </a>
                         </div>
@@ -158,9 +136,9 @@
                             <div class="blockquote-footer">
                                 <div class="autor">
                                     {% if articulo.autor.imagenPerfil == NULL %}
-                                        <img src="{{ asset('images/avatars/User-small.jpg') }}"/>
+                                        <img class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}"/>
                                     {% else %}
-                                        <img src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
+                                        <img class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
                                     {% endif %}
                                         {{articulo.autor.firmaUsuario}}
                                 </div> 

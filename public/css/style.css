@@ -47,13 +47,6 @@
         padding: 20px;
     }
     
-    .bloque-articulo img {
-        float: left;
-        margin-right: 10px;
-        width: 500px;
-        height: 200px;
-    }
-    
     .bloque-articulo {
         clear: both;
         list-style: none;
@@ -73,7 +66,7 @@
         text-decoration: none;
     }
     
-    .autor img {
+    .imagen-perfil {
         border-radius: 50px;
         margin-right: 10px;
         width: 50px;
@@ -84,12 +77,31 @@
         padding-top: 30px;
     }
     
+    .avatar {
+        border-radius: 50px;
+        width: 100px;
+        height: 100px;
+    }
+    
     .articulo {
         padding: 50px;
     }
     
-    .cover {
+    .portada,
+    .portada-articulo {
         max-height: 200px;
+        max-width: 500px;
+    }
+    
+    .portada {
+        float: left;
+        margin-right: 10px;
+        width: 500px;
+        height: 200px;
+    }
+    
+    .portada-articulo {
+        float: center;
     }
     
     .articulo-redaccion {

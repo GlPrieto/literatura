@@ -5,9 +5,9 @@
 {% block main %}
     <div class="autor">
         {% if user.imagenPerfil == NULL %}
-            <img class="perfil" src="{{ asset('images/avatars/User-small.jpg') }}"/>
+            <img src="{{ asset('images/avatars/User-small.jpg') }}"/>
         {% else %}
-            <img class="perfil" src="{{ asset('subidas/imagenes/' ~ user.imagenPerfil) }}" />
+            <img src="{{ asset('subidas/imagenes/' ~ user.imagenPerfil) }}" />
         {% endif %}
         {{user.firmaUsuario}}
     </div>
@@ -30,9 +30,9 @@
                         </div>
                         <div class="col-auto d-none d-lg-block">
                             {% if articulo.imagen == NULL %}
-                                <img class="portada" src="{{ asset('images/image.jpg') }}" />
+                                <img src="{{ asset('images/image.jpg') }}" />
                             {% else %}
-                                <img class="portada" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                                <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
                             {% endif %}
                         </div>
                     </div>

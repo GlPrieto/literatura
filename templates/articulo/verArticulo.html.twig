@@ -15,9 +15,9 @@
         <div class="img-fluid">
             <div class="card-img-top" alt="cover">
                     {% if articulo.imagen == NULL %}
-                        <img class="card-img-top cover w-100" src="{{ asset('images/image.jpg') }}" />
+                        <img class="card-img-top portada-articulo" src="{{ asset('images/image.jpg') }}" />
                     {% else %}
-                        <img class="card-img-top cover w-100" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                        <img class="card-img-top portada-articulo" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
                     {% endif %}
             </div>
         </div>
@@ -40,9 +40,9 @@
             <hr>
             <div class="card-meta text-center autor">
                 {% if articulo.autor.imagenPerfil == NULL %}
-                    <img src="{{ asset('images/avatars/User-small.jpg') }}"/>
+                    <img class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}"/>
                 {% else %}
-                    <img src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
+                    <img class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
                 {% endif %}
                 {{articulo.autor.firmaUsuario}}
                 <p class="card-meta text-muted">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}</p>

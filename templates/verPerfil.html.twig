@@ -1,6 +1,6 @@
 {# templates/usuario/verUsuario.html.twig #}
 {% extends 'base.html.twig' %}
-{% block title %}Perfíl{% endblock %}
+{% block title %}Perfil{% endblock %}
 
 {% block main %}
     <!--Nav-->
@@ -17,17 +17,13 @@
     <!--Nav-->
     <!-- Card -->
     <div class="card testimonial-card perfil">
-
-        <!-- Background color -->
-        <div class="card-up lighten-1"></div>
-
         <!-- Avatar -->
         <div class="avatar mx-auto white">
             {% if usuario.imagenPerfil == NULL %}
-                <img src="{{ asset('images/avatars/User-small.jpg') }}" class="rounded-circle"
+                <img class="avatar" src="{{ asset('images/avatars/User-small.jpg') }}" class="rounded-circle"
             alt="avatar"/>
             {% else %}
-                <img src="{{ asset('subidas/imagenes/' ~ usuario.imagenPerfil) }}" class="rounded-circle"
+                <img class="avatar" src="{{ asset('subidas/imagenes/' ~ usuario.imagenPerfil) }}" class="rounded-circle"
             alt="avatar"/>
             {% endif %}
         </div>
@@ -47,7 +43,7 @@
                 {% if app.user %}
                     <li class="list-inline-item pr-2 text-dark">
                         <a class="enlace" href ="{{path ('app_perfil_editar',{'id': usuario.id})}}">
-                            Editar artículo
+                            Editar perfil
                         </a>
                     </li>
                 {% endif %}
@@ -69,9 +65,9 @@
                                 <div class="d-none d-lg-block">
                                     <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                         {% if articulo.imagen == NULL %}
-                                            <img src="{{ asset('images/image.jpg') }}" />
+                                            <img class="portada" src="{{ asset('images/image.jpg') }}" />
                                         {% else %}
-                                            <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                                            <img class="portada" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
                                         {% endif %}
                                     </a>
                                 </div>

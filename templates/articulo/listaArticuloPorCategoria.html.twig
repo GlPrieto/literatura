@@ -3,6 +3,7 @@
 {% block title %}Articulos{% endblock %}
 {% block main %}
         <!--Nav Categorias-->
+        
     <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -13,7 +14,7 @@
             </li>
         </ul>
     </nav>
-    <ul class="lista-articulos" > 
+<ul class="lista-articulos" > 
         {% for articulo in articulos %}
             <li class="bloque-articulo">
                 <div class="card">
@@ -28,9 +29,9 @@
                         <div class="d-none d-lg-block">
                             <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                 {% if articulo.imagen == NULL %}
-                                    <img src="{{ asset('images/image.jpg') }}" />
+                                    <img class="portada" src="{{ asset('images/image.jpg') }}" />
                                 {% else %}
-                                    <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                                    <img class="portada" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
                                 {% endif %}
                             </a>
                         </div>
@@ -41,13 +42,13 @@
                             <ul class="list-unstyled list-inline text-muted small">
                                 <li class="list-inline-item pr-2">{{articulo.categoria.denominacion}}</li>
                                 <li class="list-inline-item pr-2">{{articulo.idioma.denominacion}}</li>
-                            </ul>                               
+                            </ul>                            
                             <div class="blockquote-footer">
                                 <div class="autor">
                                     {% if articulo.autor.imagenPerfil == NULL %}
-                                        <img src="{{ asset('images/avatars/User-small.jpg') }}"/>
+                                        <img class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}"/>
                                     {% else %}
-                                        <img src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
+                                        <img class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
                                     {% endif %}
                                         {{articulo.autor.firmaUsuario}}
                                 </div> 

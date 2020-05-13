@@ -33,10 +33,12 @@ class GestorController extends AbstractController {
         //$articulosCarousel = $entityManager->getRepository( Articulo::class )->mostrarElMasRecientePorCategoria();
         $categorias = $entityManager->getRepository( Categoria::class )->findAll();
         $idiomas = $entityManager->getRepository( Idioma::class )->findAll();
+        $autores = $entityManager->getRepository( Usuario::class )->findAll();
         return $this->render( 'articulo/listaArticulos.html.twig', array(
             'categorias' => $categorias,
             'idiomas' => $idiomas,
             'articulos' => $articulos,
+            'autores' => $autores,
             //'articulosCarousel' => $articulosCarousel,
         ) );
 
@@ -62,6 +64,18 @@ class GestorController extends AbstractController {
         $idioma = $entityManager->getRepository( Idioma::class )->find ($id);
         return $this->render( 'articulo/listaArticuloPorIdioma.html.twig', array(
             'idioma' => $idioma,
+            'articulos' => $articulos,
+        ) );
+    }
+
+    public function articulosPorAutor($id) {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $articulos = $entityManager->getRepository( Articulo::class )->mostrarArticulosPorAutor ($id);
+        //Debería buscar en la entidad idioma, por el id dado, la denominación
+        $autor = $entityManager->getRepository( Usuario::class )->find ($id);
+        return $this->render( 'articulo/listaArticuloPorAutor.html.twig', array(
+            'autor' => $autor,
             'articulos' => $articulos,
         ) );
     }
@@ -143,7 +157,7 @@ class GestorController extends AbstractController {
         ));
     }
 
-    public function editarArticulo( Request $request, $id ) {
+    public function editarArticulo( Request $request, $id, SluggerInterface $slugger) {
         $entityManager = $this->getDoctrine()->getManager();
         // obtener un articulo
         $articulo = $entityManager->getRepository( Articulo::class )->find( $id );
@@ -165,8 +179,19 @@ class GestorController extends AbstractController {
 
             // Concición necesaria. El archivo debe ser procesado solo cuando se carga
             if ( $imagen ) {
-                $nombreOriginalImagen = $subidaArchivo -> upload($imagen);
-                $articulo->setImagen( $nombreOriginalImagen );
+                $nombreOriginalImagen = pathinfo($imagen->getClientOriginalName(), PATHINFO_FILENAME);
+                 //-> upload($imagen);
+                $nombreGuardado = $slugger->slug($nombreOriginalImagen);
+                $nuevoNombreI = $nombreGuardado.'-'.uniqid().'.'.$imagen->guessExtension();
+                try {
+                    $imagen->move(
+                        $this->getParameter('directorioImagenes'),//getTargetDirectory(), 
+                        $nuevoNombreI
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during archivo upload
+                }
+                $articulo->setImagen( $nuevoNombreI );
             }
             // Obtenemos el gestor de entidades de Doctrine
             $entityManager = $this->getDoctrine()->getManager();

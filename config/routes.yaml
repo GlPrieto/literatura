@@ -20,6 +20,12 @@ app_articulo_idioma:
     requirements:
       id: '\d+'
 
+app_articulo_autor:
+    path: /articuloAutor/{id}
+    controller: App\Controller\GestorController::articulosPorAutor
+    requirements:
+      id: '\d+'
+
 app_nuevo_articulo:
     path: /articulo/nuevo
     controller: App\Controller\GestorController::nuevoArticulo
