@@ -3,7 +3,7 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Gestor de articulos literarios{% endblock %}</title>
+        <title>{% block title %}Extractos - Gestor de articulos literarios{% endblock %}</title>
         <link rel="icon" href="{{ asset('images/favicon.ico') }}" />
         {% block stylesheets %}
             <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/carousel/">
@@ -15,7 +15,7 @@
         {% block body %}
         <header>
             <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 b">
-                <a id="principio" title="Inicio" class="my-0 mr-md-auto font-weight-normal inicio" href="{{ path('index') }}">Gestor de articulos literarios</a>
+                <a id="inicio" title="Inicio" class="my-0 mr-md-auto font-weight-normal inicio" href="{{ path('index') }}">Extractos - Gestor de articulos literarios</a>
                 <!--Navbar-->
                 <nav class="my-2 my-md-0 mr-md-3">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -51,8 +51,8 @@
             <script href="{{ asset('js/funciones.js') }}"></script>
         {% endblock %}
         <footer id="footer" class="w-100 text-center text-white">
-            <p>Copyright © 2020 | <span><a class="my-0 mr-md-auto font-weight-normal enlace" href="{{ path('index') }}">Gestor de articulos literarios</a></span>
-    	    <p>Realizado por: Gloria Prieto Ortega | <a class="enlace" href="#principio">Arriba</a><p>
+            <p>Copyright © 2020 | <span><a class="my-0 mr-md-auto font-weight-normal enlace" href="{{ path('index') }}">Extractos - Gestor de articulos literarios</a></span>
+    	    <p>Realizado por: Gloria Prieto Ortega | <a class="enlace" href="#inicio">Arriba</a><p>
         </footer>
     </body>
 </html>
