@@ -61,9 +61,9 @@ class ComandoCrearUsuario extends Command
     {
         $output ->writeln('<fg=white;bg=cyan> Creador de usuario</>');
         
-        $firmaUsuario = $input->getArgument('firmaUsuario');
         $email = $input->getArgument('email');
         $plainPass = $input->getArgument('password');
+        $firmaUsuario = $input->getArgument('firmaUsuario');
         $isAdmin = $input->getOption('admin');
 
         $usuario = $this->repoUsuario->findOneByEmail($email);
@@ -71,17 +71,18 @@ class ComandoCrearUsuario extends Command
             $output->writeln('<error>El email introducido se corresponde con un usuario existente</error>');
             return 0;
         }
-
+         
         // create the user and encode its password
         $usuario = new Usuario();
-        $usuario->setFirmaUsuario($firmaUsuario);
         $usuario->setEmail($email);
-        $usuario->setRoles([$isAdmin ? 'ROLE_ADMIN' : 'ROLE_USER']);
         $contraseña = $this->passEncoderUsuario->encodePassword($usuario,$plainPass);
         $usuario->setPassword($contraseña);
+        $usuario->setFirmaUsuario($firmaUsuario);
+        $usuario->setRoles([$isAdmin ? 'ROLE_ADMIN' : 'ROLE_USER']);
         $this->em->persist($usuario);
         $this->em->flush();
 
         $output->writeln('<fg=white;bg=green>El usuario fue creado</>');
+        return 1;
     }
 }
