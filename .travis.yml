@@ -1,9 +1,6 @@
 # Project language
 language: php
 
-# Allows use container-based infrastructure
-sudo: false
-
 # Start mysql service
 services:
   - mysql
