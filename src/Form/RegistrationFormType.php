@@ -69,7 +69,6 @@ class RegistrationFormType extends AbstractType {
         ->add( 'agreeTerms', 
         CheckboxType::class, [
             'label' => 'Acepto las normas del sitio',
-            'attr' => ['class' => 'form-control'],
             'mapped' => false,
             'constraints' => [
                 new IsTrue( [
