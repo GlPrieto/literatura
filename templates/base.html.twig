@@ -6,7 +6,6 @@
         <title>{% block title %}Extractos - Gestor de articulos literarios{% endblock %}</title>
         <link rel="icon" href="{{ asset('images/favicon.ico') }}" />
         {% block stylesheets %}
-            <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/carousel/">
             <link rel="stylesheet" href="{{ asset('css/style.css') }}">
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         {% endblock %}
@@ -15,7 +14,10 @@
         {% block body %}
         <header>
             <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 b">
-                <a id="inicio" title="Inicio" class="my-0 mr-md-auto font-weight-normal inicio" href="{{ path('index') }}">Extractos - Gestor de articulos literarios</a>
+                <a id="inicio" title="Inicio" class="my-0 mr-md-auto font-weight-normal inicio" href="{{ path('index') }}">
+                <img class="logo" src="{{ asset('images/logo1.png') }}"/>
+                Gestor de articulos literarios</a>
+                
                 <!--Navbar-->
                 <nav class="my-2 my-md-0 mr-md-3">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -39,9 +41,9 @@
             </div>
         </header>
         <div id="container">
-            <div id="main w-100">
+            <main>
             {% block main %}{% endblock %}
-            </div>
+            </main>
         </div>
         {% endblock %}
         {% block javascripts %}
@@ -50,8 +52,8 @@
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
             <script href="{{ asset('js/funciones.js') }}"></script>
         {% endblock %}
-        <footer id="footer" class="w-100 text-center text-white">
-            <p>Copyright © 2020 | <span><a class="my-0 mr-md-auto font-weight-normal enlace" href="{{ path('index') }}">Extractos - Gestor de articulos literarios</a></span>
+        <footer id="footer" class="page-footer text-center text-white">
+            <p>Copyright © 2020 | <span><a class="my-0 mr-md-auto font-weight-normal enlace" href="{{ path('index') }}">Gestor de articulos literarios</a></span>
     	    <p>Realizado por: Gloria Prieto Ortega | <a class="enlace" href="#inicio">Arriba</a><p>
         </footer>
     </body>

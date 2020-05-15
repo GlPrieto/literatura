@@ -1,0 +1,4 @@
+#New file doctrine.yalm in config/packages/dev
+doctrine:
+    dbal:
+        url: "%env(resolve:DATABASE_URL)%"

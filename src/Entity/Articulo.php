@@ -52,6 +52,7 @@ class Articulo
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * 
      */
     private $imagen;
 
@@ -148,23 +149,6 @@ class Articulo
 
         return $this;
     }
-    //Validador imagen
-
-    /*
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {
-        $metadata->addPropertyConstraint('headshot', new Assert\Image([
-            'minWidth' => 200,
-            'maxWidth' => 400,
-            'minHeight' => 200,
-            'maxHeight' => 400,
-            //Para forzar que la imagen sea cuadrada
-            'allowLandscape' => false,
-            'allowPortrait' => false,
-            'allowSquare' => true;
-        ]));
-    }
-    */
 
     public function getAutor(): ?Usuario
     {
