@@ -31,7 +31,7 @@ class UsuarioController extends AbstractController {
                 'No existe ningún usuario con id '.$id
             );
         }
-        return $this->render( 'verPerfil.html.twig', array(
+        return $this->render( 'usuario/verPerfil.html.twig', array(
             'usuario' => $usuario,
             'articulos' => $articulos,
         ) );
@@ -79,7 +79,7 @@ class UsuarioController extends AbstractController {
             $entityManager->flush($usuario);
             return $this->redirectToRoute( 'app_perfil_ver', array( 'id'=>$id ) );
         }
-        return $this->render( 'editarPerfil.html.twig', array(
+        return $this->render( 'usuario/editarPerfil.html.twig', array(
             'editarPerfilForm' => $form->createView(),
         ) );
     }

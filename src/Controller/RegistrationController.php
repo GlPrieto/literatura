@@ -67,7 +67,14 @@ class RegistrationController extends AbstractController {
             $entityManager->flush( $user );
             $request->getSession()->set( 'usuario_es_autor', true );
             $this->addFlash( 'success', '¡Enhorabuena! Ahora serás reconocido como autor en esta web.' );
-
+            // after validating the user and saving them to the database
+            // authenticate the user and use onAuthenticationSuccess on the authenticator
+            return $guardHandler->authenticateUserAndHandleSuccess(
+            $user,          // the User object you just created
+            $request,
+            $authenticator, // authenticator whose onAuthenticationSuccess you want to use
+            'main'          // the name of your firewall in security.yaml
+        );
             return $this->redirectToRoute( 'home' );
         }
 

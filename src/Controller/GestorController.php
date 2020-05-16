@@ -150,7 +150,7 @@ class GestorController extends AbstractController {
             // Ejecuta las consultas necesarias (INSERT en este caso)
             $entityManager->flush($articulo);
             //Redirigimos a una página de confirmación.
-            return $this->redirectToRoute('app_articulo_creado');
+            return $this->redirectToRoute('index');
             }
         return $this->render('articulo/nuevoArticulo.html.twig', array(
         'nuevoArticuloForm' => $form->createView(),        
@@ -203,11 +203,6 @@ class GestorController extends AbstractController {
         return $this->render( 'articulo/editarArticulo.html.twig', array(
             'editarArticuloForm' => $form->createView(),
         ) );
-    }
-
-    public function articuloCreado() {
-        return $this->render( 'articulo/articuloCreado.html.twig' );
-
     }
 
     public function eliminarArticulo( $id ) {
