@@ -8,99 +8,47 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <!--Español-->
-            <div id="Español" class="sidebar-sticky d-block">
-                <ul class="nav md-tabs">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#categorias" role="button" id="dropdownCategorias" aria-haspopup="true"
-                        aria-expanded="false">Categorias</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownCategorias">
-                            {% for categoria in categorias %}
-                                <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_categoria', {'idCat': categoria.id})}}">
-                                    {{categoria.denominacion}}
-                                </a>
-                            {% else %}
-                                <li>No hay categorias</li>
-                            {% endfor %}
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#idiomas" role="button" id="dropdownIdiomas" aria-haspopup="true"
-                        aria-expanded="false">Idiomas</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownIdiomas">
-                            {% for idioma in idiomas %}
-                                <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_idioma', {'id': idioma.id})}}">
-                                    {{idioma.denominacion}}
-                                </a>
-                            {% else %}
-                                <li>No hay idiomas</li>
-                            {% endfor %}
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#autores" role="button" id="dropdownAutores" aria-haspopup="true"
-                        aria-expanded="false">Autores</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownAutores">
-                            {% for autor in autores %}
-                                <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_autor', {'id': autor.id})}}">
-                                    {{autor.firmaUsuario}}
-                                </a>
-                            {% else %}
-                                <li>No hay idiomas</li>
-                            {% endfor %}
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#cambio-idioma" role="button" id="dropdown-cambio-idioma" aria-haspopup="true"
-                        aria-expanded="false">Cambio de idioma</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown-cambio-idioma">
-                            <a class="dropdown-item btn btn-md btn-light btn-block" onClick="traduceEspañol()">
-                                Español</a>
-                            <a class="dropdown-item btn btn-md btn-light btn-block" onClick="traduceToEnglish()">English</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <!--English-->
-            <div id="English" class="sidebar-sticky d-none">
-                <ul class="nav md-tabs">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#categorias" role="button" id="dropdownCategorias" aria-haspopup="true"
-                        aria-expanded="false">Kinds</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownCategorias">
-                            {% for categoria in categorias %}
-                                <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_categoria', {'idCat': categoria.id})}}">
-                                    {{categoria.denominacion}}
-                                </a>
-                            {% else %}
-                                <li>Kinds does not exist</li>
-                            {% endfor %}
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#idiomas" role="button" id="dropdownIdiomas" aria-haspopup="true"
-                        aria-expanded="false">Languages</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownIdiomas">
-                            {% for categoria in categorias %}
-                                <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_categoria', {'idCat': categoria.id})}}">
-                                    {{categoria.denominacion}}
-                                </a>
-                            {% else %}
-                                <li>Language does not exist</li>
-                            {% endfor %}
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#cambio-idioma" role="button" id="dropdown-cambio-idioma" aria-haspopup="true"
-                        aria-expanded="false">Change language</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown-cambio-idioma">
-                            <a class="dropdown-item btn btn-md btn-light btn-block" onClick="traduceEspañol()">
-                                Español</a>
-                            <a class="dropdown-item btn btn-md btn-light btn-block" onClick="traduceToEnglish()">English</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <ul class="nav md-tabs">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#categorias" role="button" id="dropdownCategorias" aria-haspopup="true"
+                    aria-expanded="false">Categorias</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownCategorias">
+                        {% for categoria in categorias %}
+                            <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_categoria', {'idCat': categoria.id})}}">
+                                {{categoria.denominacion}}
+                            </a>
+                        {% else %}
+                            <li>No hay categorias</li>
+                        {% endfor %}
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#idiomas" role="button" id="dropdownIdiomas" aria-haspopup="true"
+                    aria-expanded="false">Idiomas</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownIdiomas">
+                        {% for idioma in idiomas %}
+                            <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_idioma', {'id': idioma.id})}}">
+                                {{idioma.denominacion}}
+                            </a>
+                        {% else %}
+                            <li>No hay idiomas</li>
+                        {% endfor %}
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#autores" role="button" id="dropdownAutores" aria-haspopup="true"
+                    aria-expanded="false">Autores</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownAutores">
+                        {% for autor in autores %}
+                            <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_autor', {'id': autor.id})}}">
+                                {{autor.firmaUsuario}}
+                            </a>
+                        {% else %}
+                            <li>No hay autores</li>
+                        {% endfor %}
+                    </div>
+                </li>
+            </ul>
         </div>
     </nav>
     <!--Nav Categorias-->
