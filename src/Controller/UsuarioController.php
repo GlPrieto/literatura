@@ -58,7 +58,7 @@ class UsuarioController extends AbstractController {
             $imagen= $form->get('image')->getData();
             //aplicarle base64 encode, decode -> guardarlo en una base de datos
             $imagenBase64 = base64_encode($imagen);
-            $articulo->setImagenBase64( $imagenBase64 );
+            $usuario->setImagenBase64( $imagenBase64 );
 
             // Concición necesaria. El archivo debe ser procesado solo cuando se carga
             if ( $imagen ) {
