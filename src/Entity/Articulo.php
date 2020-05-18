@@ -57,6 +57,12 @@ class Articulo
     private $imagen;
 
     /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * 
+     */
+    private $imagenBase64;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Usuario", inversedBy="articulos")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -146,6 +152,18 @@ class Articulo
     public function setImagen($imagen)
     {
         $this->imagen = $imagen;
+
+        return $this;
+    }
+
+    public function getImagenBase64()
+    {
+        return $this->imagenBase64;
+    }
+
+    public function setImagenBase64($imagenBase64)
+    {
+        $this->imagenBase64 = $imagenBase64;
 
         return $this;
     }

@@ -54,7 +54,11 @@ class UsuarioController extends AbstractController {
         
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var ArchivoSubido $imageFile */
-            $imagen= $form['image']->getData();
+            /** @var UploadedFile $imagen */
+            $imagen= $form->get('image')->getData();
+            //aplicarle base64 encode, decode -> guardarlo en una base de datos
+            $imagenBase64 = base64_encode($imagen);
+            $articulo->setImagenBase64( $imagenBase64 );
 
             // Concición necesaria. El archivo debe ser procesado solo cuando se carga
             if ( $imagen ) {

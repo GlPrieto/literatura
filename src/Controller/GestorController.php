@@ -11,8 +11,8 @@ use App\Form\EditarArticuloFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\String\Slugger\SluggerInterface;
-//use App\Service\SubidaArchivos;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -124,7 +124,9 @@ class GestorController extends AbstractController {
         if ( $form->isSubmitted() && $form->isValid() ) {
             /** @var UploadedFile $imagen */
             $imagen= $form->get('image')->getData();
-            //$imagen= $form['image']->getData();
+            //aplicarle base64 encode, decode -> guardarlo en una base de datos
+            $imagenBase64 = base64_encode($imagen);
+            $articulo->setImagenBase64( $imagenBase64 );
 
             // Concición necesaria para procesar solo cuando se sube
             if ( $imagen ) {
@@ -134,9 +136,7 @@ class GestorController extends AbstractController {
                 $nuevoNombreI = $nombreGuardado.'-'.uniqid().'.'.$imagen->guessExtension();
                 try {
                     $imagen->move(
-                        $this->getParameter('directorioImagenes'),//getTargetDirectory(), 
-                        $nuevoNombreI
-                    );
+                        $this->getParameter('directorioImagenes'), $nuevoNombreI);
                 } catch (FileException $e) {
                     // ... handle exception if something happens during archivo upload
                 }
@@ -174,25 +174,12 @@ class GestorController extends AbstractController {
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var ArchivoSubido $imageFile */
+            /** @var UploadedFile $imagen */
             $imagen= $form['image']->getData();
 
-            // Concición necesaria. El archivo debe ser procesado solo cuando se carga
-            if ( $imagen ) {
-                $nombreOriginalImagen = pathinfo($imagen->getClientOriginalName(), PATHINFO_FILENAME);
-                 //-> upload($imagen);
-                $nombreGuardado = $slugger->slug($nombreOriginalImagen);
-                $nuevoNombreI = $nombreGuardado.'-'.uniqid().'.'.$imagen->guessExtension();
-                try {
-                    $imagen->move(
-                        $this->getParameter('directorioImagenes'),//getTargetDirectory(), 
-                        $nuevoNombreI
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during archivo upload
-                }
-                $articulo->setImagen( $nuevoNombreI );
-            }
+           $articulo->setImagen(
+            new File($this->getParameter('directorioImagenes').'/'.$articulo->getImagen())
+        );
             // Obtenemos el gestor de entidades de Doctrine
             $entityManager = $this->getDoctrine()->getManager();
 

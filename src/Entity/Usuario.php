@@ -63,6 +63,12 @@ class Usuario implements UserInterface
     private $imagenPerfil;
 
     /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * 
+     */
+    private $imagenBase64;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Articulo", mappedBy="autor", orphanRemoval=true)
      */
     private $articulos;
@@ -192,23 +198,18 @@ class Usuario implements UserInterface
 
         return $this;
     }
-    //Validador imagen
-
-    /*
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    
+    public function getImagenBase64()
     {
-        $metadata->addPropertyConstraint('headshot', new Assert\Image([
-            'minWidth' => 200,
-            'maxWidth' => 400,
-            'minHeight' => 200,
-            'maxHeight' => 400,
-            //Para forzar que la imagen sea cuadrada
-            'allowLandscape' => false,
-            'allowPortrait' => false,
-            'allowSquare' => true;
-        ]));
+        return $this->imagenBase64;
     }
-    */
+
+    public function setImagenBase64($imagenBase64)
+    {
+        $this->imagenBase64 = $imagenBase64;
+
+        return $this;
+    }
 
     /**
      * @return Collection|Articulo[]
