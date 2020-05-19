@@ -83,6 +83,17 @@ class GestorController extends AbstractController {
             'articulos' => $articulos,
         ) );
     }
+
+    public function articulosPorCategoriaFechaMasReciente ($idCat) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $articulos = $entityManager->getRepository( Articulo::class )->mostrarArticulosPorCategoriaFechaMasReciente ($idCat);
+        //Debería buscar en la entidad categoria, por el id dado, la denominación
+        $categoria = $entityManager->getRepository( Categoria::class )->find ($idCat);
+        return $this->render( 'articulo/listaArticuloPorCategoria.html.twig', array(
+            'categoria' => $categoria,
+            'articulos' => $articulos,
+        ) );
+    }
     
     public function verArticulo( $id ) {
         $titulo = null;
@@ -152,24 +163,6 @@ class GestorController extends AbstractController {
         
         if ( $form->isSubmitted() && $form->isValid() ) {
             /** @var UploadedFile $imagen */
-            /*$imagen= $form->get('image')->getData();
-            
-
-            // Concición necesaria para procesar solo cuando se sube
-            if ( $imagen ) {
-                $nombreOriginalImagen = pathinfo($imagen->getClientOriginalName(), PATHINFO_FILENAME);
-                 //-> upload($imagen);
-                $nombreGuardado = $slugger->slug($nombreOriginalImagen);
-                $nuevoNombreI = $nombreGuardado.'-'.uniqid().'.'.$imagen->guessExtension();
-                try {
-                    $imagen->move(
-                        $this->getParameter('directorioImagenes'), $nuevoNombreI);
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during archivo upload
-                }
-                $articulo->setImagen( $nuevoNombreI );
-                }
-                */
             $imagen = $form['image']->getData();
             //aplicarle base64 encode, decode -> guardarlo en una base de datos
             $imagenBase64 = base64_encode($imagen);
