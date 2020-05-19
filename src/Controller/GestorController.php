@@ -34,7 +34,7 @@ class GestorController extends AbstractController {
         //Tomaré en un inicio la plantilla listaArticulos.html.twig como página de inicio.
         $entityManager = $this->getDoctrine()->getManager();
         $articulos = $entityManager->getRepository( Articulo::class )->findAll();
-        //$articulosCarousel = $entityManager->getRepository( Articulo::class )->mostrarElMasRecientePorCategoria();
+        //$articulosPorCatActual = $entityManager->getRepository( Articulo::class )->mostrarArticulosPorCategoriaFechaMasReciente();
         $categorias = $entityManager->getRepository( Categoria::class )->findAll();
         $idiomas = $entityManager->getRepository( Idioma::class )->findAll();
         $autores = $entityManager->getRepository( Usuario::class )->findAll();
@@ -43,7 +43,7 @@ class GestorController extends AbstractController {
             'idiomas' => $idiomas,
             'articulos' => $articulos,
             'autores' => $autores,
-            //'articulosCarousel' => $articulosCarousel,
+            //'articulosPorCatActual' => $articulosPorCatActual,
         ) );
 
     }
@@ -83,7 +83,7 @@ class GestorController extends AbstractController {
             'articulos' => $articulos,
         ) );
     }
-
+    /*
     public function articulosPorCategoriaFechaMasReciente ($idCat) {
         $entityManager = $this->getDoctrine()->getManager();
         $articulos = $entityManager->getRepository( Articulo::class )->mostrarArticulosPorCategoriaFechaMasReciente ($idCat);
@@ -94,7 +94,7 @@ class GestorController extends AbstractController {
             'articulos' => $articulos,
         ) );
     }
-    
+    */
     public function verArticulo( $id ) {
         $titulo = null;
         $entityManager = $this->getDoctrine()->getManager();
@@ -165,7 +165,7 @@ class GestorController extends AbstractController {
             /** @var UploadedFile $imagen */
             $imagen = $form['image']->getData();
             //aplicarle base64 encode, decode -> guardarlo en una base de datos
-            $imagenBase64 = base64_encode($imagen);
+            $imagenBase64 = base64_encode(file_get_contents($imagen));
             $articulo->setImagenBase64( $imagenBase64 );
             if ($imagen) {
                 $nombreImagen = $subidaArchivo->upload($imagen);
@@ -187,7 +187,8 @@ class GestorController extends AbstractController {
         ));
     }
 
-    public function editarArticulo( Request $request, $id, SluggerInterface $slugger) {
+    public function editarArticulo( Request $request, $id, SluggerInterface $slugger,
+    SubidaArchivos $subidaArchivo) {
         $entityManager = $this->getDoctrine()->getManager();
         // obtener un articulo
         $articulo = $entityManager->getRepository( Articulo::class )->find( $id );
@@ -206,18 +207,23 @@ class GestorController extends AbstractController {
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $imagen */
             $imagen= $form['image']->getData();
-            $imagenBase64 = base64_encode($imagen);
+
+            //Copiado de nuevo articulo
+            //aplicarle base64 encode, decode -> guardarlo en una base de datos
+            $imagenBase64 = base64_encode(file_get_contents($imagen));
             $articulo->setImagenBase64( $imagenBase64 );
-            $articulo->setImagen(
-            new File($this->getParameter('directorioImagenes').'/'.$articulo->getImagen())
-        );
+            if ($imagen) {
+                $nombreImagen = $subidaArchivo->upload($imagen);
+                $articulo->setImagen($nombreImagen);
+            }    
+            //
              // Obtenemos el gestor de entidades de Doctrine
              $entityManager = $this->getDoctrine()->getManager();
              // Le decimos a doctrine que nos gustaría almacenar
              // el objeto de la variable en la base de datos
              $entityManager->persist($articulo);
              // Ejecuta las consultas necesarias (INSERT en este caso)
-             $entityManager->flush();
+             $entityManager->flush($articulo);
              //Redirigimos a una página de confirmación.
             return $this->redirectToRoute( 'app_articulo_ver', array( 'id'=>$id ) );
         }
