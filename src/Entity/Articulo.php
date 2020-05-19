@@ -57,7 +57,7 @@ class Articulo
     private $imagen;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * 
      */
     private $imagenBase64;

@@ -8,6 +8,7 @@ use App\Entity\Categoria;
 use App\Entity\Usuario;
 use App\Form\NuevoArticuloFormType;
 use App\Form\EditarArticuloFormType;
+use App\Service\SubidaArchivos;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -16,6 +17,9 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Routing\Annotation\Route;
+//Generar PDF
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class GestorController extends AbstractController {
     /**
@@ -80,20 +84,6 @@ class GestorController extends AbstractController {
         ) );
     }
     
-/*
-    public function verPerfilAutor($id, UserInterface $user) {
-        
-        $entityManager = $this->getDoctrine()->getManager();
-        $articulo = $entityManager->getRepository( Articulo::class )->find( $id );
-        $articulo = getAutor($user);
-        $articulos = $entityManager->getRepository( Articulo::class )->findAll();
-        return $this->render( 'articulo/verPerfil.html.twig', array(
-            'autor' => $articulo,
-            'articulos' => $articulos,
-        ) );
-
-    }
-*/
     public function verArticulo( $id ) {
         $titulo = null;
         $entityManager = $this->getDoctrine()->getManager();
@@ -110,9 +100,48 @@ class GestorController extends AbstractController {
         ) );
     }
 
+    public function verArticuloPDF( $id ) {
+        $titulo = null;
+        $entityManager = $this->getDoctrine()->getManager();
+        $articulo = $entityManager->getRepository( Articulo::class )->find( $id );
+        // Si no existe lanzamos una excepción.
+        if ( !$articulo ) {
+            throw $this->createNotFoundException(
+                'No existe ningún artículo con id '.$id
+            );
+        }
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('articulo/verArticuloPDF.html.twig', [
+            'titulo' => $titulo,
+            'articulo' => $articulo,
+        ]);
+        
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
+    }
+
     public function nuevoArticulo(Request $request,
                                      UserInterface $user, 
-                                    SluggerInterface $slugger 
+                                    SluggerInterface $slugger ,
+                                    SubidaArchivos $subidaArchivo
     )
     {
         $articulo = new Articulo();
@@ -123,10 +152,8 @@ class GestorController extends AbstractController {
         
         if ( $form->isSubmitted() && $form->isValid() ) {
             /** @var UploadedFile $imagen */
-            $imagen= $form->get('image')->getData();
-            //aplicarle base64 encode, decode -> guardarlo en una base de datos
-            $imagenBase64 = base64_encode($imagen);
-            $articulo->setImagenBase64( $imagenBase64 );
+            /*$imagen= $form->get('image')->getData();
+            
 
             // Concición necesaria para procesar solo cuando se sube
             if ( $imagen ) {
@@ -141,7 +168,17 @@ class GestorController extends AbstractController {
                     // ... handle exception if something happens during archivo upload
                 }
                 $articulo->setImagen( $nuevoNombreI );
-            }
+                }
+                */
+            $imagen = $form['image']->getData();
+            //aplicarle base64 encode, decode -> guardarlo en una base de datos
+            $imagenBase64 = base64_encode($imagen);
+            $articulo->setImagenBase64( $imagenBase64 );
+            if ($imagen) {
+                $nombreImagen = $subidaArchivo->upload($imagen);
+                $articulo->setImagen($nombreImagen);
+            }    
+            
             // Obtenemos el gestor de entidades de Doctrine
             $entityManager = $this->getDoctrine()->getManager();
             // Le decimos a doctrine que nos gustaría almacenar
@@ -151,7 +188,7 @@ class GestorController extends AbstractController {
             $entityManager->flush($articulo);
             //Redirigimos a una página de confirmación.
             return $this->redirectToRoute('index');
-            }
+        }
         return $this->render('articulo/nuevoArticulo.html.twig', array(
         'nuevoArticuloForm' => $form->createView(),        
         ));
@@ -176,15 +213,19 @@ class GestorController extends AbstractController {
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $imagen */
             $imagen= $form['image']->getData();
-
-           $articulo->setImagen(
+            $imagenBase64 = base64_encode($imagen);
+            $articulo->setImagenBase64( $imagenBase64 );
+            $articulo->setImagen(
             new File($this->getParameter('directorioImagenes').'/'.$articulo->getImagen())
         );
-            // Obtenemos el gestor de entidades de Doctrine
-            $entityManager = $this->getDoctrine()->getManager();
-
-            // Ejecuta las consultas necesarias (UPDATE en este caso)
-            $entityManager->flush($articulo);
+             // Obtenemos el gestor de entidades de Doctrine
+             $entityManager = $this->getDoctrine()->getManager();
+             // Le decimos a doctrine que nos gustaría almacenar
+             // el objeto de la variable en la base de datos
+             $entityManager->persist($articulo);
+             // Ejecuta las consultas necesarias (INSERT en este caso)
+             $entityManager->flush();
+             //Redirigimos a una página de confirmación.
             return $this->redirectToRoute( 'app_articulo_ver', array( 'id'=>$id ) );
         }
         return $this->render( 'articulo/editarArticulo.html.twig', array(

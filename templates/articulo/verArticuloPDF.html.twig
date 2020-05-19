@@ -1,0 +1,46 @@
+{# templates/articulo/verArticulo.html.twig #}
+{% extends 'base.html.twig' %}
+{#El bloque de título debería sobreescribirse con el titulo del artículo#}
+{% block title %}
+{% if titulo != null %} {{titulo}} - {% endif %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <header>
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 b">
+            <a id="inicio" title="Inicio" class="my-0 mr-md-auto font-weight-normal inicio" href="{{ path('index') }}">
+            Gestor de articulos literarios</a>
+        </div>
+    </header>
+    <div id="container">
+        <main>
+        {% block main %}
+            <!--Card-->
+            <div class="card articulo">
+                <!--Title-->
+                <h4 class="card-title text-center"><strong>{{articulo.titulo}}</strong></h4>
+                <!--Card content-->
+                <div class="card-body">
+                        <ul class="card-meta list-unstyled list-inline text-muted text-center">
+                            <li class="list-inline-item pr-2">{{articulo.categoria.denominacion}}</li>
+                            <li class="list-inline-item pr-2">{{articulo.idioma.denominacion}}</li>
+                        </ul>
+                    <!--Text-->
+                    {% if articulo.categoria.denominacion == "Poema" %}
+                        <p class="card-text articulo-redaccion text-center">
+                    {% else %}
+                        <p class="card-text articulo-redaccion">
+                    {% endif %}
+                        {{articulo.redaccion}}</p>
+                    <hr>
+                    <div class="card-meta text-center autor">
+                        {{articulo.autor.firmaUsuario}}
+                        <p class="card-meta text-muted">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}</p>
+                    </div>
+                </div>
+            </div>   
+        {% endblock %}
+        </main>
+    </div>
+{% endblock %}

@@ -87,21 +87,17 @@
         padding: 50px;
     }
     
-    .portada,
-    .portada-articulo {
-        max-height: 500px;
-        max-width: 800px;
-    }
-    
     .portada {
         float: left;
         margin-right: 10px;
-        width: 500px;
-        height: 200px;
+        max-height: 200px;
+        max-width: 500px;
     }
     
     .portada-articulo {
         display: inline;
+        max-height: 500px;
+        max-width: 800px;
     }
     
     .articulo-redaccion {

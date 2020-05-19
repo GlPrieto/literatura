@@ -8,6 +8,12 @@ app_articulo_ver:
     requirements:
       id: '\d+'
 
+app_articulo_pdf:
+    path: /articulopdf/{id}
+    controller: App\Controller\GestorController::verArticuloPDF
+    requirements:
+      id: '\d+'
+
 app_articulo_categoria:
     path: /articuloCategoria/{idCat}
     controller: App\Controller\GestorController::articulosPorCategoria

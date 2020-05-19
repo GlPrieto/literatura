@@ -28,6 +28,9 @@
                     <li class="list-inline-item pr-2">{{articulo.idioma.denominacion}}</li>
                 </ul>
             </div>
+            <a class="enlace" href ="{{path ('app_articulo_pdf',{'id': articulo.id})}}">
+                                Ver en pdf
+            </a>
             <!--Text-->
             {% if articulo.categoria.denominacion == "Poema" %}
                 <p class="card-text articulo-redaccion text-center">
