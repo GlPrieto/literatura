@@ -19,6 +19,12 @@ class CategoriaRepository extends ServiceEntityRepository
         parent::__construct($registry, Categoria::class);
     }
 
+    //Editando la salida para que la muestre por orden alfabético
+    public function findAll()
+    {
+        return $this->findBy(array(), array('denominacion' => 'ASC'));
+    }
+
     // /**
     //  * @return Categoria[] Returns an array of Categoria objects
     //  */

@@ -1,8 +1,8 @@
-{# templates/articulo/listaArticulos.html.twig #}
+{# templates/articulo/listaArticulosAutor.html.twig #}
 {% extends 'base.html.twig' %}
 {% block title %}Articulos{% endblock %}
 {% block main %}
-        <!--Nav Categorias-->
+        <!--Nav Categorías-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -28,7 +28,7 @@
                         <div class="d-none d-lg-block">
                             <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                 {% if articulo.imagen == NULL %}
-                                    <img class="portada" src="{{ asset('images/image.jpg') }}" />
+                                    <img class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" />
                                 {% else %}
                                     <img class="portada" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
                                 {% endif %}
@@ -58,7 +58,7 @@
                 </div>
             </li>
         {% else %}
-            <li>No hay articulos</li>
+            <li>No hay artículos</li>
         {% endfor %}
     </ul>
 {% endblock %}

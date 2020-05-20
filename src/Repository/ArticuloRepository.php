@@ -36,7 +36,7 @@ class ArticuloRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->andWhere('a.categoria = :categoria')
             ->setParameter('categoria', $id_categoria)
-            //->setMaxResults(10)
+            ->orderBy('a.fechaPublicacion', 'DESC')
             ->getQuery()
             ->getResult()
         ;
@@ -46,7 +46,7 @@ class ArticuloRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->andWhere('a.idioma = :idioma')
             ->setParameter('idioma', $id_idioma)
-            //->setMaxResults(10)
+            ->orderBy('a.fechaPublicacion', 'DESC')
             ->getQuery()
             ->getResult()
         ;
@@ -56,11 +56,12 @@ class ArticuloRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->andWhere('a.autor = :autor')
             ->setParameter('autor', $id_autor)
-            //->setMaxResults(10)
+            ->orderBy('a.fechaPublicacion', 'DESC')
             ->getQuery()
             ->getResult()
         ;
     }
+    
 
     public function mostrarArticulosPorCategoriaFechaMasReciente ()
     {
@@ -79,4 +80,4 @@ class ArticuloRepository extends ServiceEntityRepository
         return $query->getResult();   
 
     }  
-}
+} 

@@ -1,6 +1,6 @@
 {# templates/articulo/listaArticulos.html.twig #}
 {% extends 'base.html.twig' %}
-{% block title %}Articulos{% endblock %}
+{% block title %}Artículos{% endblock %}
 {% block main %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,14 +11,14 @@
             <ul class="nav md-tabs">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#categorias" role="button" id="dropdownCategorias" aria-haspopup="true"
-                    aria-expanded="false">Categorias</a>
+                    aria-expanded="false">Categorías</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownCategorias">
                         {% for categoria in categorias %}
                             <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_categoria', {'idCat': categoria.id})}}">
                                 {{categoria.denominacion}}
                             </a>
                         {% else %}
-                            <li>No hay categorias</li>
+                            <li>No hay categorías</li>
                         {% endfor %}
                     </div>
                 </li>
@@ -51,7 +51,8 @@
             </ul>
         </div>
     </nav>
-    <!--Nav Categorias-->
+    <!--Nav Categorías-->
+
     <ul class="lista-articulos" > 
         {% for articulo in articulos %}
             <li class="bloque-articulo">
@@ -67,7 +68,7 @@
                         <div class="d-none d-lg-block">
                             <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                 {% if articulo.imagen == NULL %}
-                                    <img class="portada" src="{{ asset('images/image.jpg') }}" />
+                                    <img class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" />
                                 {% else %}
                                     <img class="portada" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
                                 {% endif %}
@@ -97,7 +98,7 @@
                 </div>
             </li>
         {% else %}
-            <li>No hay articulos</li>
+            <li>No hay artículos</li>
         {% endfor %}
     </ul>
 {% endblock %}

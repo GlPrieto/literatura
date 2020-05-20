@@ -1,118 +1,124 @@
-    header,
-    footer,
-    body {
-        display: block;
-    }
-    
-    body {
-        margin: 0px;
-        font-family: Verdana, sans-serif;
-        background-color: rgb(238, 238, 238);
-    }
-    
-    header {
-        background-color: rgb(78, 78, 78);
-        color: white;
-        padding: 12px 12px 2px 12px;
-        border-bottom: 5px solid rgb(172, 193, 221);
-    }
-    
-    footer {
-        border-top: 2px solid rgb(172, 193, 221);
-        text-align: center;
-        padding: 5px 5px;
-        background-color: rgb(78, 78, 78);
-        width: 100%;
-    }
-    
-    .inicio {
-        color: rgb(255, 255, 255);
-        text-decoration: none;
-    }
-    
-    a.inicio:hover {
-        color: rgb(255, 255, 255);
-        text-decoration: none;
-    }
-    
-    .enlace,
-    a.enlace:hover,
-    a.filtro-articulos,
-    a.filtro-articulos:hover {
-        color: rgb(172, 193, 221);
-        text-decoration: none;
-    }
-    
-    .lista-articulos {
-        padding: 20px;
-    }
-    
-    .bloque-articulo {
-        clear: both;
-        list-style: none;
-        margin-bottom: 10px;
-        min-height: 200px;
-    }
-    
-    .bloque-articulo a:link,
-    .bloque-articulo a:visited {
-        color: rgb(0, 0, 0);
-        text-decoration: none;
-    }
-    
-    .bloque-articulo a:link:active,
-    .bloque-articulo a:visited:active {
-        color: rgb(172, 193, 221);
-        text-decoration: none;
-    }
-    
-    .imagen-perfil {
-        border-radius: 50px;
-        margin-right: 10px;
-        width: 50px;
-        height: 50px;
-    }
-    
-    .perfil {
-        padding-top: 30px;
-    }
-    
-    .avatar {
-        border-radius: 50px;
-        width: 100px;
-        height: 100px;
-    }
-    
-    .articulo {
-        padding: 50px;
-    }
-    
-    .portada {
-        float: left;
-        margin-right: 10px;
-        max-height: 200px;
-        max-width: 500px;
-    }
-    
-    .portada-articulo {
-        display: inline;
-        max-height: 500px;
-        max-width: 800px;
-    }
-    
-    .articulo-redaccion {
-        white-space: pre-line;
-    }
-    
-    .formulario-formato {
-        padding: 30px;
-    }
-    
-    .small {
-        font-size: 10px;
-    }
-    
-    #edicion {
-        text-align: center;
-        width: 100%;
-    }
+header,
+footer,
+body {
+    display: block;
+}
+
+body {
+    margin: 0px;
+    font-family: Verdana, sans-serif;
+    background-color: rgb(248, 249, 250);
+}
+
+header {
+    background-color: rgb(78, 78, 78);
+    color: white;
+    padding: 12px 12px 2px 12px;
+    border-bottom: 5px solid rgb(172, 193, 221);
+}
+
+footer {
+    border-top: 2px solid rgb(172, 193, 221);
+    text-align: center;
+    padding: 5px 5px;
+    background-color: rgb(78, 78, 78);
+    width: 100%;
+}
+
+.inicio {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+a.inicio:hover {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.enlace,
+a.enlace:hover,
+a.filtro-articulos,
+a.filtro-articulos:hover {
+    color: rgb(172, 193, 221);
+    text-decoration: none;
+}
+
+.lista-articulos {
+    padding: 20px;
+}
+
+.bloque-articulo {
+    clear: both;
+    list-style: none;
+    margin-bottom: 10px;
+    min-height: 200px;
+}
+
+.bloque-articulo a:link,
+.bloque-articulo a:visited {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.bloque-articulo a:link:active,
+.bloque-articulo a:visited:active {
+    color: rgb(172, 193, 221);
+    text-decoration: none;
+}
+
+.imagen-perfil {
+    border-radius: 50px;
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+.perfil {
+    padding-top: 30px;
+}
+
+.avatar {
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+}
+
+.articulo {
+    padding: 50px;
+}
+
+.portada {
+    float: left;
+    margin-right: 10px;
+    max-height: 200px;
+    max-width: 500px;
+}
+
+.portada-articulo {
+    display: inline;
+    max-height: 500px;
+    max-width: 800px;
+}
+
+.articulo-redaccion {
+    white-space: pre-line;
+    text-align: justify;
+}
+
+.formulario-formato {
+    padding: 30px;
+}
+
+.small {
+    font-size: 10px;
+}
+
+#edicion {
+    text-align: center;
+    width: 100%;
+}
+
+.cabecera-tabla {
+    color: rgb(78, 78, 78);
+    background-color: rgb(248, 249, 250);
+}

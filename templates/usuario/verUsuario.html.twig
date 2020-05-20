@@ -1,6 +1,6 @@
 {# templates/usuario/verUsuario.html.twig #}
 {% extends 'base.html.twig' %}
-{#El bloque de título debería sobreescribirse con el titulo del artículo#}
+{#El bloque de título debería sobreescribirse con el título del artículo#}
 {% block title %}
 {% if titulo != null %} {{titulo}} - {% endif %}
 {{ parent() }}
@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-auto d-none d-lg-block">
                             {% if articulo.imagen == NULL %}
-                                <img src="{{ asset('images/image.jpg') }}" />
+                                <img class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" />
                             {% else %}
                                 <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
                             {% endif %}

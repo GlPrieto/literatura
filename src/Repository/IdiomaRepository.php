@@ -19,6 +19,11 @@ class IdiomaRepository extends ServiceEntityRepository
         parent::__construct($registry, Idioma::class);
     }
 
+    //Editando la salida para que la muestre por orden alfabético
+    public function findAll()
+    {
+        return $this->findBy(array(), array('denominacion' => 'ASC'));
+    }
     // /**
     //  * @return Idioma[] Returns an array of Idioma objects
     //  */

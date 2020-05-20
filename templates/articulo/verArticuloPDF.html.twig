@@ -1,6 +1,6 @@
 {# templates/articulo/verArticulo.html.twig #}
 {% extends 'base.html.twig' %}
-{#El bloque de título debería sobreescribirse con el titulo del artículo#}
+{#El bloque de título debería sobreescribirse con el título del artículo#}
 {% block title %}
 {% if titulo != null %} {{titulo}} - {% endif %}
 {{ parent() }}
@@ -10,7 +10,7 @@
     <header>
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 b">
             <a id="inicio" title="Inicio" class="my-0 mr-md-auto font-weight-normal inicio" href="{{ path('index') }}">
-            Gestor de articulos literarios</a>
+            Gestor de artículos literarios</a>
         </div>
     </header>
     <div id="container">

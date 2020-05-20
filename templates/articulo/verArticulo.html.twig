@@ -1,6 +1,6 @@
 {# templates/articulo/verArticulo.html.twig #}
 {% extends 'base.html.twig' %}
-{#El bloque de título debería sobreescribirse con el titulo del artículo#}
+{#El bloque de título debería sobreescribirse con el título del artículo#}
 {% block title %}
 {% if titulo != null %} {{titulo}} - {% endif %}
 {{ parent() }}
@@ -14,7 +14,7 @@
         <!--Card image-->
         <div class="rounded mx-auto d-block" alt="cover">
                 {% if articulo.imagen == NULL %}
-                    <img class="portada-articulo" src="{{ asset('images/image.jpg') }}" />
+                    <img class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" />
                 {% else %}
                     <img class="portada-articulo" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
                 {% endif %}
@@ -29,7 +29,7 @@
                 </ul>
             </div>
             <a class="enlace" href ="{{path ('app_articulo_pdf',{'id': articulo.id})}}">
-                                Ver en pdf
+                                Ver artículo en pdf
             </a>
             <!--Text-->
             {% if articulo.categoria.denominacion == "Poema" %}

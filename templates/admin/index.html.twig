@@ -5,7 +5,7 @@
 {% block body %}
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100">
-        <a id="principio" title="Inicio" class="my-0 mr-md-auto font-weight-normal inicio" href="{{ path('home') }}">Gestor de articulos literarios</a>
+        <a id="principio" title="Inicio" class="my-0 mr-md-auto font-weight-normal inicio" href="{{ path('home') }}">Gestor de artículos literarios</a>
         <div class="my-2 my-md-0 mr-md-3 text-white">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a class="enlace" href="{{ path('admin') }}">
@@ -30,7 +30,7 @@
                                 </p>
                             </div>
                         {% else %}
-                            <li>No hay articulos</li>
+                            <li>No hay artículos</li>
                         {% endfor %}
                     <small class="d-block text-right mt-3">
                         <a class="enlace" href="{{ path ('app_ver_articulos')}}">Todas las subidas</a>
@@ -68,10 +68,10 @@
                             </p>
                         </div>
                     {% else %}
-                        <li>No hay Categorias</li>
+                        <li>No hay categorías</li>
                     {% endfor %}
                     <small class="d-block text-right mt-3">
-                        <a class="enlace" href="{{ path ('app_nueva_categoria')}}">Añadir categoria</a>
+                        <a class="enlace" href="{{ path ('app_nueva_categoria')}}">Añadir categoría</a>
                     </small>
                 </div>
                 <div class="my-3 p-3 bg-white rounded shadow-sm">

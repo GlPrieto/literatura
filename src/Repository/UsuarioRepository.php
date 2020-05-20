@@ -22,6 +22,11 @@ class UsuarioRepository extends ServiceEntityRepository implements PasswordUpgra
         parent::__construct($registry, Usuario::class);
     }
 
+    //Editando la salida para que la muestre por orden alfabético
+    public function findAll()
+    {
+        return $this->findBy(array(), array('firmaUsuario' => 'ASC'));
+    }
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
