@@ -54,33 +54,27 @@ class UsuarioController extends AbstractController {
         
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var ArchivoSubido $imageFile */
-            /** @var UploadedFile $imagen */
-            $imagen= $form->get('image')->getData();
+            $imagen= $form['image']->getData();
+
+            //Copiado de nuevo articulo
             //aplicarle base64 encode, decode -> guardarlo en una base de datos
-            $imagenBase64 = base64_encode($imagen);
+            $imagenBase64 = base64_encode(file_get_contents($imagen));
             $usuario->setImagenBase64( $imagenBase64 );
-
-            // Concición necesaria. El archivo debe ser procesado solo cuando se carga
-            if ( $imagen ) {
-                $nombreOriginalImagen = pathinfo($imagen->getClientOriginalName(), PATHINFO_FILENAME);
-                 //-> upload($imagen);
-                $nombreGuardado = $slugger->slug($nombreOriginalImagen);
-                $nuevoNombreI = $nombreGuardado.'-'.uniqid().'.'.$imagen->guessExtension();
-                try {
-                    $imagen->move(
-                        $this->getParameter('directorioImagenes'),//getTargetDirectory(), 
-                        $nuevoNombreI
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during archivo upload
-                }
-                $usuario->setImagenPerfil( $nuevoNombreI );
-            }
-            // Obtenemos el gestor de entidades de Doctrine
-            $entityManager = $this->getDoctrine()->getManager();
-
-            // Ejecuta las consultas necesarias (UPDATE en este caso)
-            $entityManager->flush($usuario);
+            if ($imagen) {
+                $nombreImagen = $subidaArchivo->upload($imagen);
+                $usuario->setImagen($nombreImagen);
+            }    
+            //
+             // Obtenemos el gestor de entidades de Doctrine
+             $entityManager = $this->getDoctrine()->getManager();
+             // Le decimos a doctrine que nos gustaría almacenar
+             // el objeto de la variable en la base de datos
+             $entityManager->persist($usuario);
+             // Ejecuta las consultas necesarias (INSERT en este caso)
+             $entityManager->flush($usuario);
+             //Redirigimos a una página de confirmación.
+            $imagen= $form->get('image')->getData();
+            
             return $this->redirectToRoute( 'app_perfil_ver', array( 'id'=>$id ) );
         }
         return $this->render( 'usuario/editarPerfil.html.twig', array(

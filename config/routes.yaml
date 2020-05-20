@@ -2,6 +2,10 @@ index:
     path: /
     controller: App\Controller\GestorController::index
 
+consultas:
+    path: /consultas
+    controller: App\Controller\GestorController::consultas
+
 app_articulo_ver:
     path: /articulo/{id}
     controller: App\Controller\GestorController::verArticulo

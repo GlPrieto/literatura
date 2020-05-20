@@ -62,15 +62,21 @@ class ArticuloRepository extends ServiceEntityRepository
         ;
     }
 
-    /*
-    public function findOneBySomeField($value): ?Articulo
+    public function mostrarArticulosPorCategoriaFechaMasReciente ()
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+        //SELECT *, MAX(fecha_publicacion) FROM articulo GROUP BY categoria_id;
+        //Siendo 'a' una referencia a la tabla artículo:
+        
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT a
+            FROM App\Entity\Articulo a
+            INNER JOIN (
+                SELECT id, MAX(fecha_publicacion) FROM App\Entity\Articulo GROUP BY categoria_id
+                ) tmp //nombrando a la tabla con un alias provisional
+                ON a.id = tmp.id;'
+        );
+        return $query->getResult();   
+
+    }  
 }

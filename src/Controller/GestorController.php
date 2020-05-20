@@ -27,14 +27,9 @@ class GestorController extends AbstractController {
     */
 
     public function index() {
-        /*return $this->render( 'gestor/index.html.twig', [
-            'controller_name' => 'GestorController',
-        ] );
-        */
         //Tomaré en un inicio la plantilla listaArticulos.html.twig como página de inicio.
         $entityManager = $this->getDoctrine()->getManager();
         $articulos = $entityManager->getRepository( Articulo::class )->findAll();
-        //$articulosPorCatActual = $entityManager->getRepository( Articulo::class )->mostrarArticulosPorCategoriaFechaMasReciente();
         $categorias = $entityManager->getRepository( Categoria::class )->findAll();
         $idiomas = $entityManager->getRepository( Idioma::class )->findAll();
         $autores = $entityManager->getRepository( Usuario::class )->findAll();
@@ -43,7 +38,18 @@ class GestorController extends AbstractController {
             'idiomas' => $idiomas,
             'articulos' => $articulos,
             'autores' => $autores,
-            //'articulosPorCatActual' => $articulosPorCatActual,
+        ) );
+
+    }
+    public function consultas() {
+        $entityManager = $this->getDoctrine()->getManager();
+        $articulos = $entityManager->getRepository( Articulo::class )->findAll();
+        $articulosPorCatActual = $entityManager->getRepository( Articulo::class )->mostrarArticulosPorCategoriaFechaMasReciente();
+        $categorias = $entityManager->getRepository( Categoria::class )->findAll();
+        return $this->render( 'consultas.html.twig', array(
+            'categorias' => $categorias,
+            'articulos' => $articulos,
+            'articulosPorCatActual' => $articulosPorCatActual,
         ) );
 
     }
@@ -83,18 +89,7 @@ class GestorController extends AbstractController {
             'articulos' => $articulos,
         ) );
     }
-    /*
-    public function articulosPorCategoriaFechaMasReciente ($idCat) {
-        $entityManager = $this->getDoctrine()->getManager();
-        $articulos = $entityManager->getRepository( Articulo::class )->mostrarArticulosPorCategoriaFechaMasReciente ($idCat);
-        //Debería buscar en la entidad categoria, por el id dado, la denominación
-        $categoria = $entityManager->getRepository( Categoria::class )->find ($idCat);
-        return $this->render( 'articulo/listaArticuloPorCategoria.html.twig', array(
-            'categoria' => $categoria,
-            'articulos' => $articulos,
-        ) );
-    }
-    */
+
     public function verArticulo( $id ) {
         $titulo = null;
         $entityManager = $this->getDoctrine()->getManager();
