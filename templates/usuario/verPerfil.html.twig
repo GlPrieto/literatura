@@ -20,10 +20,10 @@
         <!-- Avatar -->
         <div class="avatar mx-auto white">
             {% if usuario.imagenPerfil == NULL %}
-                <img class="avatar" src="{{ asset('images/avatars/User-small.jpg') }}" class="rounded-circle"
+                <img title="Avatar" class="avatar" src="{{ asset('images/avatars/User-small.jpg') }}" class="rounded-circle"
             alt="avatar"/>
             {% else %}
-                <img class="avatar" src="{{ asset('subidas/imagenes/' ~ usuario.imagenPerfil) }}" class="rounded-circle"
+                <img title="Avatar" class="avatar" src="{{ asset('subidas/imagenes/' ~ usuario.imagenPerfil) }}" class="rounded-circle"
             alt="avatar"/>
             {% endif %}
         </div>
@@ -65,9 +65,9 @@
                                 <div class="d-none d-lg-block">
                                     <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                         {% if articulo.imagen == NULL %}
-                                            <img class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" />
+                                            <img title="Portada" class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" alt="portada"/>
                                         {% else %}
-                                            <img class="portada" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                                            <img title="Portada" class="portada" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" alt="portada"/>
                                         {% endif %}
                                     </a>
                                 </div>

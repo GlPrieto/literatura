@@ -8,7 +8,7 @@ use App\Security\FormularioLoginAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-//use App\Service\SubidaArchivos;
+use App\Service\SubidaArchivos;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,8 +25,8 @@ class RegistrationController extends AbstractController {
                             UserPasswordEncoderInterface $passwordEncoder, 
                             GuardAuthenticatorHandler $guardHandler, 
                             FormularioLoginAuthenticator $authenticator, 
-                            SluggerInterface $slugger 
-                            //, SubidaArchivos $subidaArchivos 
+                            SluggerInterface $slugger, 
+                            SubidaArchivos $subidaArchivo 
                             ): Response 
     {
         $user = new Usuario();
@@ -34,24 +34,15 @@ class RegistrationController extends AbstractController {
         $form->handleRequest( $request );
 
         if ( $form->isSubmitted() && $form->isValid() ) {
-            /** @var UploadedFile $imagen */
-            $imagen= $form->get('image')->getData();
-            //$imagen= $form['image']->getData();
-
             // Concición necesaria para procesar solo cuando se sube
-            if ( $imagen ) {
-                $nombreOriginalImagen = pathinfo($imagen->getClientOriginalName(), PATHINFO_FILENAME);
-                 //-> upload($imagen);
-                $nombreGuardado = $slugger->slug($nombreOriginalImagen);
-                $nuevoNombreI = $nombreGuardado.'-'.uniqid().'.'.$imagen->guessExtension();
-                try {
-                    $imagen->move(
-                        $this->getParameter('directorioImagenes'),//getTargetDirectory(), 
-                        $nuevoNombreI
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during archivo upload
-                }
+            /** @var UploadedFile $imagen */
+            $imagen = $form['image']->getData();
+            
+            if ($imagen) {
+                //aplicarle base64 encode, decode -> guardarlo en una base de datos
+                $imagenBase64 = base64_encode(file_get_contents($imagen));
+                $user->setImagenBase64( $imagenBase64 );
+                $nombreImagen = $subidaArchivo->upload($imagen);
                 $user->setImagenPerfil( $nuevoNombreI );
             }
             // encode the plain password

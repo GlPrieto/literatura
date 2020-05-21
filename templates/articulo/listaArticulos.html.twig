@@ -3,52 +3,51 @@
 {% block title %}Artículos{% endblock %}
 {% block main %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" alt="icono"></span>
         </button>
-
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="nav md-tabs">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#categorias" role="button" id="dropdownCategorias" aria-haspopup="true"
-                    aria-expanded="false">Categorías</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownCategorias">
-                        {% for categoria in categorias %}
-                            <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_categoria', {'idCat': categoria.id})}}">
-                                {{categoria.denominacion}}
-                            </a>
-                        {% else %}
-                            <li>No hay categorías</li>
-                        {% endfor %}
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#idiomas" role="button" id="dropdownIdiomas" aria-haspopup="true"
-                    aria-expanded="false">Idiomas</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownIdiomas">
-                        {% for idioma in idiomas %}
-                            <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_idioma', {'id': idioma.id})}}">
-                                {{idioma.denominacion}}
-                            </a>
-                        {% else %}
-                            <li>No hay idiomas</li>
-                        {% endfor %}
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#autores" role="button" id="dropdownAutores" aria-haspopup="true"
-                    aria-expanded="false">Autores</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownAutores">
-                        {% for autor in autores %}
-                            <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_autor', {'id': autor.id})}}">
-                                {{autor.firmaUsuario}}
-                            </a>
-                        {% else %}
-                            <li>No hay autores</li>
-                        {% endfor %}
-                    </div>
-                </li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="nav md-tabs">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#categorias" role="button" id="dropdownCategorias" aria-haspopup="true"
+                        aria-expanded="false">Categorías</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownCategorias">
+                            {% for categoria in categorias %}
+                                <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_categoria', {'idCat': categoria.id})}}">
+                                    {{categoria.denominacion}}
+                                </a>
+                            {% else %}
+                                <li>No hay categorías</li>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#idiomas" role="button" id="dropdownIdiomas" aria-haspopup="true"
+                        aria-expanded="false">Idiomas</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownIdiomas">
+                            {% for idioma in idiomas %}
+                                <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_idioma', {'id': idioma.id})}}">
+                                    {{idioma.denominacion}}
+                                </a>
+                            {% else %}
+                                <li>No hay idiomas</li>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle filtro-articulos" data-toggle="dropdown" href="#autores" role="button" id="dropdownAutores" aria-haspopup="true"
+                        aria-expanded="false">Autores</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownAutores">
+                            {% for autor in autores %}
+                                <a class="dropdown-item btn btn-md btn-light btn-block" href="{{ path ('app_articulo_autor', {'id': autor.id})}}">
+                                    {{autor.firmaUsuario}}
+                                </a>
+                            {% else %}
+                                <li>No hay autores</li>
+                            {% endfor %}
+                        </div>
+                    </li>
+                </ul>
         </div>
     </nav>
     <!--Nav Categorías-->
@@ -68,9 +67,9 @@
                         <div class="d-none d-lg-block">
                             <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                 {% if articulo.imagen == NULL %}
-                                    <img class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" />
+                                    <img title="Portada" class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" alt="portada"/>
                                 {% else %}
-                                    <img class="portada" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                                    <img title="Portada" class="portada" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" alt="portada"/>
                                 {% endif %}
                             </a>
                         </div>
@@ -85,9 +84,9 @@
                             <div class="blockquote-footer">
                                 <div class="autor">
                                     {% if articulo.autor.imagenPerfil == NULL %}
-                                        <img class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}"/>
+                                        <img title="Avatar" class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}" alt="avatar"/>
                                     {% else %}
-                                        <img class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
+                                        <img title="Avatar" class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" alt="avatar"/>
                                     {% endif %}
                                         {{articulo.autor.firmaUsuario}}
                                 </div> 

@@ -29,9 +29,9 @@
                         <div class="d-none d-lg-block">
                             <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                 {% if articulo.imagen == NULL %}
-                                    <img class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" />
+                                    <img title="Portada" class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" alt="portada"/>
                                 {% else %}
-                                    <img class="portada" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                                    <img title="Portada" class="portada" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" alt="portada"/>
                                 {% endif %}
                             </a>
                         </div>
@@ -46,9 +46,9 @@
                             <div class="blockquote-footer">
                                 <div class="autor">
                                     {% if articulo.autor.imagenPerfil == NULL %}
-                                        <img class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}"/>
+                                        <img title="Avatar" class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}" alt="avatar"/>
                                     {% else %}
-                                        <img class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
+                                        <img title="Avatar" class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" alt="avatar"/>
                                     {% endif %}
                                         {{articulo.autor.firmaUsuario}}
                                 </div> 

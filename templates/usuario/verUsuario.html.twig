@@ -34,9 +34,9 @@
                         </div>
                         <div class="col-auto d-none d-lg-block">
                             {% if articulo.imagen == NULL %}
-                                <img class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" />
+                                <img title="Portada" class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" alt="portada"/>
                             {% else %}
-                                <img src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                                <img title="Portada" class="portada" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" alt="portada"/>
                             {% endif %}
                         </div>
                     </div>

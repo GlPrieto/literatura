@@ -159,10 +159,11 @@ class GestorController extends AbstractController {
         if ( $form->isSubmitted() && $form->isValid() ) {
             /** @var UploadedFile $imagen */
             $imagen = $form['image']->getData();
-            //aplicarle base64 encode, decode -> guardarlo en una base de datos
-            $imagenBase64 = base64_encode(file_get_contents($imagen));
-            $articulo->setImagenBase64( $imagenBase64 );
+            
             if ($imagen) {
+                //aplicarle base64 encode, decode -> guardarlo en una base de datos
+                $imagenBase64 = base64_encode(file_get_contents($imagen));
+                $articulo->setImagenBase64( $imagenBase64 );
                 $nombreImagen = $subidaArchivo->upload($imagen);
                 $articulo->setImagen($nombreImagen);
             }    
@@ -203,11 +204,11 @@ class GestorController extends AbstractController {
             /** @var UploadedFile $imagen */
             $imagen= $form['image']->getData();
 
+            if ($imagen) {
             //Copiado de nuevo articulo
             //aplicarle base64 encode, decode -> guardarlo en una base de datos
             $imagenBase64 = base64_encode(file_get_contents($imagen));
             $articulo->setImagenBase64( $imagenBase64 );
-            if ($imagen) {
                 $nombreImagen = $subidaArchivo->upload($imagen);
                 $articulo->setImagen($nombreImagen);
             }    

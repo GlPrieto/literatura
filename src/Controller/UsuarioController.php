@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
-//use App\Service\SubidaArchivos;
+use App\Service\SubidaArchivos;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,7 +37,8 @@ class UsuarioController extends AbstractController {
         ) );
     }
 
-    public function editarUsuario( Request $request, $id, SluggerInterface $slugger ) {
+    public function editarUsuario( Request $request, $id, SluggerInterface $slugger, 
+    SubidaArchivos $subidaArchivo ) {
         $entityManager = $this->getDoctrine()->getManager();
         // obtener un usuario
         $usuario = $entityManager->getRepository( Usuario::class )->find( $id );
@@ -53,17 +54,17 @@ class UsuarioController extends AbstractController {
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var ArchivoSubido $imageFile */
-            $imagen= $form['image']->getData();
-
-            //Copiado de nuevo articulo
-            //aplicarle base64 encode, decode -> guardarlo en una base de datos
-            $imagenBase64 = base64_encode(file_get_contents($imagen));
-            $usuario->setImagenBase64( $imagenBase64 );
+            /** @var UploadedFile $imagen */
+            $imagen = $form['image']->getData();
+            
             if ($imagen) {
+                //aplicarle base64 encode, decode -> guardarlo en una base de datos
+                $imagenBase64 = base64_encode(file_get_contents($imagen));
+                $usuario->setImagenBase64( $imagenBase64 );
                 $nombreImagen = $subidaArchivo->upload($imagen);
-                $usuario->setImagen($nombreImagen);
-            }    
+                $usuario->setImagenPerfil($nombreImagen);
+            }
+
             //
              // Obtenemos el gestor de entidades de Doctrine
              $entityManager = $this->getDoctrine()->getManager();

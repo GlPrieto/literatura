@@ -37,9 +37,15 @@ a.inicio:hover {
 
 .enlace,
 a.enlace:hover,
+a.enlace-oscuro:hover {
+    color: rgb(172, 193, 221);
+    text-decoration: none;
+}
+
+.enlace-oscuro,
 a.filtro-articulos,
 a.filtro-articulos:hover {
-    color: rgb(172, 193, 221);
+    color: rgb(78, 78, 78);
     text-decoration: none;
 }
 

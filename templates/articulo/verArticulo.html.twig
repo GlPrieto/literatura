@@ -14,9 +14,9 @@
         <!--Card image-->
         <div class="rounded mx-auto d-block" alt="cover">
                 {% if articulo.imagen == NULL %}
-                    <img class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" />
+                    <img title="Portada" class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" alt="portada"/>
                 {% else %}
-                    <img class="portada-articulo" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" />
+                    <img title="Portada" class="portada-articulo" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" alt="portada"/>
                 {% endif %}
         </div>
 
@@ -41,9 +41,9 @@
             <hr>
             <div class="card-meta text-center autor">
                 {% if articulo.autor.imagenPerfil == NULL %}
-                    <img class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}"/>
+                    <img title="Avatar" class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}" alt="avatar"/>
                 {% else %}
-                    <img class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" />
+                    <img title="Avatar" class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" alt="avatar"/>
                 {% endif %}
                 {{articulo.autor.firmaUsuario}}
                 <p class="card-meta text-muted">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}</p>

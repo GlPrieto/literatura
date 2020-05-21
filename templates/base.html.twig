@@ -3,6 +3,10 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta name="Description" content="Proyecto web realizado con Symfony
+         como trabajo final para el grado superior de desarrollo de aplicaciones web.
+         Realizado por Gloria Prieto Ortega">
         <title>{% block title %}Gestor de artículos literarios{% endblock %}</title>
         <link rel="icon" href="{{ asset('images/favicon.ico') }}" />
         {% block stylesheets %}
@@ -15,26 +19,26 @@
         <header>
             <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 b">
                 <a id="inicio" title="Inicio" class="my-0 mr-md-auto font-weight-normal inicio" href="{{ path('index') }}">
-                <img class="logo" src="{{ asset('images/logo1.png') }}"/>
+                <img class="logo" src="{{ asset('images/logo1.png') }}" alt="logo"/>
                 Gestor de artículos literarios</a>
                 
                 <!--Navbar-->
                 <nav class="my-2 my-md-0 mr-md-3">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         {% if is_granted('ROLE_ADMIN') %}
-                            <a class="enlace" href="{{ path('admin') }}">
+                            <a title="Página de administrador" class="enlace" href="{{ path('admin') }}">
                                 {{ app.user.firmaUsuario }}
                             </a>
                         {% else %}
-                            <a class="enlace" href="{{ path('app_perfil_ver', {'id': app.user.id}) }}">
+                            <a title="Perfíl de usuario" class="enlace" href="{{ path('app_perfil_ver', {'id': app.user.id}) }}">
                                 {{ app.user.firmaUsuario }}
                             </a>
                         {% endif %}
-                        <a class="p-2 enlace" href="{{ path('app_nuevo_articulo')}}">Añadir artículo</a>
-                        <a class="p-2 enlace" href="{{ path('app_logout') }}"> Desconectar</a>
+                        <a title="Crear artículo" class="p-2 enlace" href="{{ path('app_nuevo_articulo')}}">Añadir artículo</a>
+                        <a title="Desconectar" class="p-2 enlace" href="{{ path('app_logout') }}"> Desconectar</a>
                     {% else %}
-                        <a class="p-2 enlace" href="{{ path('app_login') }}">Iniciar sesión</a>
-                        <a class="p-2 enlace" href="{{ path('app_register') }}">Registrarse</a>
+                        <a title="Iniciar sesión" class="p-2 enlace" href="{{ path('app_login') }}">Iniciar sesión</a>
+                        <a title="Registrarse" class="p-2 enlace" href="{{ path('app_register') }}">Registrarse</a>
                     {% endif %}
                 </nav>
                 <!--/.Navbar-->
@@ -58,8 +62,8 @@
             -->
         {% endblock %}
         <footer id="footer" class="page-footer text-center text-white">
-            <p>Copyright © 2020 | <span><a class="my-0 mr-md-auto font-weight-normal enlace" href="{{ path('index') }}">Gestor de artículos literarios</a></span>
-    	    <p>Realizado por: Gloria Prieto Ortega | <a class="enlace" href="#inicio">Arriba</a><p>
+            <p>Copyright © 2020 | <span><a title="Inicio" class="my-0 mr-md-auto font-weight-normal enlace" href="{{ path('index') }}">Gestor de artículos literarios</a></span>
+    	    <p>Realizado por: Gloria Prieto Ortega | <a title="Al inicio de la página" class="enlace" href="#inicio">Arriba</a><p>
         </footer>
     </body>
 </html>

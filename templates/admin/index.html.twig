@@ -33,7 +33,7 @@
                             <li>No hay artículos</li>
                         {% endfor %}
                     <small class="d-block text-right mt-3">
-                        <a class="enlace" href="{{ path ('app_ver_articulos')}}">Todas las subidas</a>
+                        <a class="enlace-oscuro" href="{{ path ('app_ver_articulos')}}">Todas las subidas</a>
                     </small>
                 </div>
                 <div class="my-3 p-3 bg-white rounded shadow-sm">
@@ -42,9 +42,9 @@
                         <div class="media text-muted pt-3">
                             <div class="autor">
                                 {% if usuario.imagenPerfil == NULL %}
-                                    <img class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}"/>
+                                    <img title="Avatar" class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}" alt="avatar"/>
                                 {% else %}
-                                    <img class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ usuario.imagenPerfil) }}" />
+                                    <img title="Avatar" class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ usuario.imagenPerfil) }}" alt="avatar"/>
                                 {% endif %}
                             </div>
                             <p class="media-body pb-3 mb-0 small lh-125">
@@ -56,7 +56,7 @@
                         <li>No hay usuarios</li>
                     {% endfor %}
                     <small class="d-block text-right mt-3 border-top border-gray">
-                        <a class="enlace" href="{{ path ('app_ver_usuarios')}}">Todos los usuarios</a>
+                        <a class="enlace-oscuro" href="{{ path ('app_ver_usuarios')}}">Todos los usuarios</a>
                     </small>
                 </div>
                 <div class="my-3 p-3 bg-white rounded shadow-sm">
@@ -71,7 +71,7 @@
                         <li>No hay categorías</li>
                     {% endfor %}
                     <small class="d-block text-right mt-3">
-                        <a class="enlace" href="{{ path ('app_nueva_categoria')}}">Añadir categoría</a>
+                        <a class="enlace-oscuro" href="{{ path ('app_nueva_categoria')}}">Añadir categoría</a>
                     </small>
                 </div>
                 <div class="my-3 p-3 bg-white rounded shadow-sm">
@@ -86,7 +86,7 @@
                         <li>No hay idiomas</li>
                     {% endfor %}
                     <small class="d-block text-right mt-3">
-                        <a class="enlace" href="{{ path ('app_nuevo_idioma')}}">Añadir idioma</a>
+                        <a class="enlace-oscuro" href="{{ path ('app_nuevo_idioma')}}">Añadir idioma</a>
                     </small>
                 </div>
             {% endblock %}
