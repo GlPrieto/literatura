@@ -52,16 +52,16 @@
     </nav>
     <!--Nav Categorías-->
 
-    <ul class="lista-articulos" > 
+    <ul id="contenidoPrincipal" class="lista-articulos">
         {% for articulo in articulos %}
             <li class="bloque-articulo">
                 <div class="card">
                     <div class="card-header">
-                        <h3>
+                        <h1 class="h3">
                             <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                 {{articulo.titulo}}
                             </a>
-                        </h3>
+                        </h1>
                     </div>
                     <div class="card-body">
                         <div class="d-none d-lg-block">

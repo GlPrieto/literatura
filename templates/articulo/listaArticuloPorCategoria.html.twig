@@ -1,6 +1,6 @@
 {# templates/articulo/listaArticulos.html.twig #}
 {% extends 'base.html.twig' %}
-{% block title %}Articulos{% endblock %}
+{% block title %}Articulos por categorías{% endblock %}
 {% block main %}
         <!--Nav Categorías-->
         
@@ -10,20 +10,20 @@
                 <a class="nav-link" href="{{ path ('index')}}"> Inicio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#categoria">{{categoria.denominacion}}</a>
+                <a title="Listado según categoría" class="nav-link" href="#contenidoPrincipal">{{categoria.denominacion}}</a>
             </li>
         </ul>
     </nav>
-    <ul class="lista-articulos" > 
+    <ul id="contenidoPrincipal" class="lista-articulos">
         {% for articulo in articulos %}
             <li class="bloque-articulo">
                 <div class="card">
                     <div class="card-header">
-                        <h3>
+                        <h1 class="h3">
                             <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                 {{articulo.titulo}}
                             </a>
-                        </h3>
+                        </h1>
                     </div>
                     <div class="card-body">
                         <div class="d-none d-lg-block">

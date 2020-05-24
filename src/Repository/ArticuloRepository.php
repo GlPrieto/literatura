@@ -63,10 +63,10 @@ class ArticuloRepository extends ServiceEntityRepository
     }
     
 
-    public function mostrarArticulosPorCategoriaFechaMasReciente ()
+    public function mostrarArticulosPorCategoriaMasReciente ()
     {
-        //SELECT *, MAX(fecha_publicacion) FROM articulo GROUP BY categoria_id;
-        //Siendo 'a' una referencia a la tabla artículo:
+        //Buscando el artículo más reciente por categoria: 
+        /*Siendo 'a' una referencia a la tabla artículo:
         
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
@@ -76,6 +76,14 @@ class ArticuloRepository extends ServiceEntityRepository
                 SELECT id, MAX(fecha_publicacion) FROM App\Entity\Articulo GROUP BY categoria_id
                 ) tmp //nombrando a la tabla con un alias provisional
                 ON a.id = tmp.id;'
+        );
+        return $query->getResult();   
+        */
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT a
+            FROM App\Entity\Articulo a
+            WHERE a.id IN (SELECT MAX(b.id) FROM App\Entity\Articulo b GROUP BY b.categoria)'
         );
         return $query->getResult();   
 

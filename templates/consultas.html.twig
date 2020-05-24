@@ -1,5 +1,43 @@
-{% for articulo in articulosPorCatActual %}
-<ul>
-    <li>{{articulo.id}}. {{articulo.titulo}}</li>
-</ul>
-{% endfor %}
+{% extends 'base.html.twig' %}
+{% block main %}
+    {% for articulo in articulosPorCatActual %}
+        <ul>
+            <li>{{articulo.id}}. {{articulo.titulo}}. {{articulo.categoria.denominacion}}</li>
+        </ul>
+    {% endfor %}
+    <h1>Artículos más actuales</h1>
+    <div class="row lista-articulos">
+        {% for articulo in articulosPorCatActual %}
+            <div class="col-12 col-md-2">
+                <div class="card mb-2 bloque-articulo">
+                    <div class="card-header">
+                        <h2 class="h6">
+                            <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                                {{articulo.titulo}}
+                            </a>
+                        </h2>
+                    </div>
+                    <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                        {% if articulo.imagen == NULL %}
+                            <img title="Portada" class="w-100" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" alt="portada"/>
+                        {% else %}
+                            <img title="Portada" class="w-100" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" alt="portada"/>
+                        {% endif %}
+                    </a>
+                    <div class="card-body">
+                        <div class="autor">
+                            {% if articulo.autor.imagenPerfil == NULL %}
+                                <img title="Avatar" class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}" alt="avatar"/>
+                            {% else %}
+                                <img title="Avatar" class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" alt="avatar"/>
+                            {% endif %}
+                                {{articulo.autor.firmaUsuario}}
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>No hay artículos<p>
+        {% endfor %}
+    <div>
+{% endblock %}

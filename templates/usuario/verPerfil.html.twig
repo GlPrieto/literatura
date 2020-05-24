@@ -10,13 +10,13 @@
                 <a class="nav-link" href="{{ path ('index')}}"> Inicio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#usuario">Perfil</a>
+                <a title="Perfil de usuario" class="nav-link" href="#contenidoPrincipal">Perfil</a>
             </li>
         </ul>
     </nav>
     <!--Nav-->
     <!-- Card -->
-    <div class="card testimonial-card perfil">
+    <div id="contenidoPrincipal" class="card testimonial-card perfil">
         <!-- Avatar -->
         <div class="avatar mx-auto white">
             {% if usuario.imagenPerfil == NULL %}
@@ -31,7 +31,7 @@
         <!-- Content -->
         <div class="card-body text-center">
             <!-- Name -->
-            <h4 class="card-title">{{usuario.firmaUsuario}}</h4>
+            <h1 class="card-title h3">{{usuario.firmaUsuario}}</h1>
             <!-- Subtitle -->
             <div class="datos-personales text-muted">
                 {% if usuario.nombre == NULL and  usuario.apellidos == NULL %}
@@ -50,16 +50,19 @@
             </ul>
             <hr>
             <!-- Articles -->
+            <h1 class="text-center">
+                <a title="Lista de artículos" class="enlace-oscuro" href="#articulo">Artículos</a>
+            </h1>
             <ul class="lista-articulos" > 
                 {% for articulo in articulos %}
                     <li class="bloque-articulo">
-                        <div class="card">
+                        <div id="articulo" class="card">
                             <div class="card-header">
-                                <h3>
+                                <h2 class="h3">
                                     <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                         {{articulo.titulo}}
                                     </a>
-                                </h3>
+                                </h2>
                             </div>
                             <div class="card-body">
                                 <div class="d-none d-lg-block">

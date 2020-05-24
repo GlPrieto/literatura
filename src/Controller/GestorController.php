@@ -44,7 +44,7 @@ class GestorController extends AbstractController {
     public function consultas() {
         $entityManager = $this->getDoctrine()->getManager();
         $articulos = $entityManager->getRepository( Articulo::class )->findAll();
-        $articulosPorCatActual = $entityManager->getRepository( Articulo::class )->mostrarArticulosPorCategoriaFechaMasReciente();
+        $articulosPorCatActual = $entityManager->getRepository( Articulo::class )->mostrarArticulosPorCategoriaMasReciente();
         $categorias = $entityManager->getRepository( Categoria::class )->findAll();
         return $this->render( 'consultas.html.twig', array(
             'categorias' => $categorias,

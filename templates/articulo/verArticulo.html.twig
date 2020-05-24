@@ -10,7 +10,11 @@
     <!--Card-->
     <div class="card articulo">
         <!--Title-->
-        <h4 class="card-title text-center"><strong>{{articulo.titulo}}</strong></h4>
+        <h1 class=" card-title text-center h4">
+            <a title="Articulo" class="enlace-oscuro" href="#contenidoPrincipal">
+                    <strong>{{articulo.titulo}}</strong>
+            </a>
+        </h1>
         <!--Card image-->
         <div class="rounded mx-auto d-block" alt="cover">
                 {% if articulo.imagen == NULL %}
@@ -21,14 +25,14 @@
         </div>
 
         <!--Card content-->
-        <div class="card-body">
+        <div id="contenidoPrincipal" class="card-body">
             <div class="text-center">
                 <ul class="card-meta list-unstyled list-inline text-muted">
                     <li class="list-inline-item pr-2">{{articulo.categoria.denominacion}}</li>
                     <li class="list-inline-item pr-2">{{articulo.idioma.denominacion}}</li>
                 </ul>
             </div>
-            <a class="enlace" href ="{{path ('app_articulo_pdf',{'id': articulo.id})}}">
+            <a class="enlace-oscuro" href ="{{path ('app_articulo_pdf',{'id': articulo.id})}}">
                                 Ver artículo en pdf
             </a>
             <!--Text-->

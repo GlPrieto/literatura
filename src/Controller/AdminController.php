@@ -81,7 +81,7 @@ class AdminController extends AbstractController
             throw $this->createNotFoundException( 'No existe el usuario con id '.$id );
         }
         $entityManager -> remove( $usuario );
-        $entityManager -> flush();
+        $entityManager -> flush($usuario);
         return $this->render( 'admin/vistaAdminUsuarios.html.twig' );
 
     }
