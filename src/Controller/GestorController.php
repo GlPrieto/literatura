@@ -9,6 +9,9 @@ use App\Entity\Usuario;
 use App\Form\NuevoArticuloFormType;
 use App\Form\EditarArticuloFormType;
 use App\Service\SubidaArchivos;
+//Generar PDF
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -17,9 +20,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Routing\Annotation\Route;
-//Generar PDF
-use Dompdf\Dompdf;
-use Dompdf\Options;
+
 
 class GestorController extends AbstractController {
     /**

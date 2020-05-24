@@ -5,7 +5,7 @@ index:
 consultas:
     path: /consultas
     controller: App\Controller\GestorController::consultas
-
+#Artículos
 app_articulo_ver:
     path: /articulo/{id}
     controller: App\Controller\GestorController::verArticulo

@@ -25,7 +25,7 @@ class RegistrationFormType extends AbstractType {
         [
             'label' => '*Email: ',
             'attr' => ['class' => 'form-control'],
-            'help' => 'Make sure to add a valid email'
+            'help' => 'Asegurese de introducir un email válido'
 
         ] )
         ->add( 'nombre',
