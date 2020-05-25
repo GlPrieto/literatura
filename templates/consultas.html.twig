@@ -1,43 +1,147 @@
 {% extends 'base.html.twig' %}
-{% block main %}
-    {% for articulo in articulosPorCatActual %}
-        <ul>
-            <li>{{articulo.id}}. {{articulo.titulo}}. {{articulo.categoria.denominacion}}</li>
-        </ul>
-    {% endfor %}
-    <h1>Artículos más actuales</h1>
+    {% block main %}
     <div class="row lista-articulos">
+    <!--Carousel Wrapper-->
+    <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+    <!--Indicators-->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-2" data-slide-to="1"></li>
+    </ol>
+    <!--/.Indicators-->
+    <!--Slides-->
+    <div class="carousel-inner" role="listbox">
+        <div class="carousel-item active">
+        <div class="view">
+            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg"
+            alt="First slide">
+            <div class="mask rgba-black-light"></div>
+        </div>
+        </div>
+        <div class="carousel-item">
+        <!--Mask color-->
+        <div class="view">
+            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(6).jpg"
+            alt="Second slide">
+            <div class="mask rgba-black-strong"></div>
+        </div>
+        </div>
+        <div class="carousel-item">
+        <!--Mask color-->
+        <div class="view">
+            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(9).jpg"
+            alt="Third slide">
+            <div class="mask rgba-black-slight"></div>
+        </div>
+        </div>
+    </div>
+    <!--/.Slides-->
+    <!--Controls-->
+    <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Anterior</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Siguiente</span>
+    </a>
+    <!--/.Controls-->
+    </div>
+    <!--/.Carousel Wrapper-->
+    </div>
+    <h1>Artículos más actuales</h1>
+    <div class="row lista-articulos-nuevos">
         {% for articulo in articulosPorCatActual %}
-            <div class="col-12 col-md-2">
-                <div class="card mb-2 bloque-articulo">
+            <div class="col-12 col-md-4 lista-articulos">
+                <div class="card mb-2 bloque-articulo h-100">
                     <div class="card-header">
-                        <h2 class="h6">
+                        <h1 class="h3">
                             <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                 {{articulo.titulo}}
                             </a>
-                        </h2>
+                        </h1>
                     </div>
-                    <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
-                        {% if articulo.imagen == NULL %}
-                            <img title="Portada" class="w-100" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" alt="portada"/>
-                        {% else %}
-                            <img title="Portada" class="w-100" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" alt="portada"/>
-                        {% endif %}
-                    </a>
                     <div class="card-body">
-                        <div class="autor">
-                            {% if articulo.autor.imagenPerfil == NULL %}
-                                <img title="Avatar" class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}" alt="avatar"/>
-                            {% else %}
-                                <img title="Avatar" class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" alt="avatar"/>
-                            {% endif %}
-                                {{articulo.autor.firmaUsuario}}
-                        </div> 
+                        <div class="d-none d-lg-block">
+                            <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                                {% if articulo.imagen == NULL %}
+                                    <img title="Portada" class="portada-nuevos" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" alt="portada"/>
+                                {% else %}
+                                    <img title="Portada" class="portada-nuevos" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" alt="portada"/>
+                                {% endif %}
+                            </a>
+                        </div>
+                        <blockquote class="blockquote mb-0">
+                            <ul class="list-unstyled list-inline text-muted small">
+                                <li class="list-inline-item pr-2">{{articulo.categoria.denominacion}}</li>
+                                <li class="list-inline-item pr-2">{{articulo.idioma.denominacion}}</li>
+                            </ul>                            
+                            <div class="blockquote-footer">
+                                <div class="autor">
+                                    {% if articulo.autor.imagenPerfil == NULL %}
+                                        <img title="Avatar" class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}" alt="avatar"/>
+                                    {% else %}
+                                        <img title="Avatar" class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" alt="avatar"/>
+                                    {% endif %}
+                                        {{articulo.autor.firmaUsuario}}
+                                </div> 
+                            </div>
+                        </blockquote>
                     </div>
                 </div>
             </div>
         {% else %}
             <p>No hay artículos<p>
         {% endfor %}
-    <div>
+    </div>
+    <!--/.Card-->
+
+    <ul id="contenidoPrincipal" class="lista-articulos">
+        {% for articulo in articulos %}
+            <li class="bloque-articulo">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="h3">
+                            <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                                {{articulo.titulo}}
+                            </a>
+                        </h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-none d-lg-block">
+                            <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                                {% if articulo.imagen == NULL %}
+                                    <img title="Portada" class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" alt="portada"/>
+                                {% else %}
+                                    <img title="Portada" class="portada" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" alt="portada"/>
+                                {% endif %}
+                            </a>
+                        </div>
+                        <blockquote class="blockquote mb-0">
+                            <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                                <p>{{articulo.sipnosis}}</p>
+                            </a>
+                            <ul class="list-unstyled list-inline text-muted small">
+                                <li class="list-inline-item pr-2">{{articulo.categoria.denominacion}}</li>
+                                <li class="list-inline-item pr-2">{{articulo.idioma.denominacion}}</li>
+                            </ul>                            
+                            <div class="blockquote-footer">
+                                <div class="autor">
+                                    {% if articulo.autor.imagenPerfil == NULL %}
+                                        <img title="Avatar" class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}" alt="avatar"/>
+                                    {% else %}
+                                        <img title="Avatar" class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" alt="avatar"/>
+                                    {% endif %}
+                                        {{articulo.autor.firmaUsuario}}
+                                </div> 
+                                <div class="fPublicacion"class="small">Publicado el: {{articulo.fechaPublicacion|date("d-m-Y")}}.</div>
+                            </div>
+                        </blockquote>
+                    </div>
+                </div>
+            </li>
+        {% else %}
+            <li>No hay artículos</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

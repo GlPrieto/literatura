@@ -55,7 +55,7 @@ class UsuarioController extends AbstractController {
                 $imagenBase64 = base64_encode(file_get_contents($imagen));
                 $user->setImagenBase64( $imagenBase64 );
                 $nombreImagen = $subidaArchivo->upload($imagen);
-                $user->setImagenPerfil( $nuevoNombreI );
+                $user->setImagenPerfil( $nombreImagen );
             }
             // encode the plain password
             $user->setPassword(

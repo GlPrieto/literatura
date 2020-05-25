@@ -59,7 +59,7 @@ class AdminController extends AbstractController
         $entityManager -> remove( $articulo );
         $entityManager -> flush();
         $this->addFlash('success', 'post.deleted_successfully');
-        return $this->render( 'admin/vistaAdminArticulos.html.twig' );
+        return $this->redirectToRoute( 'app_ver_articulos' );
 
     }
 
@@ -82,7 +82,7 @@ class AdminController extends AbstractController
         }
         $entityManager -> remove( $usuario );
         $entityManager -> flush($usuario);
-        return $this->render( 'admin/vistaAdminUsuarios.html.twig' );
+        return $this->redirectToRoute( 'app_ver_usuarios' );
 
     }
     public function nuevaCategoria(Request $request) 
