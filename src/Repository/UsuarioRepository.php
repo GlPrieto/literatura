@@ -51,4 +51,13 @@ class UsuarioRepository extends ServiceEntityRepository implements PasswordUpgra
             ->getResult()
         ;
     }
+    public function mostrarTresUsuariosNuevos ()
+    {
+        //Mostrar 3 artículos más recientes: 
+        return $this->getEntityManager()
+        ->createQuery('SELECT u FROM App\Entity\Usuario u ORDER BY u.id DESC')
+        ->setMaxResults(3)
+        ->getResult();  
+
+    }  
 }

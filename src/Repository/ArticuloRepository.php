@@ -87,5 +87,23 @@ class ArticuloRepository extends ServiceEntityRepository
         );
         return $query->getResult();   
 
+    }
+    public function mostrarTresArticulosNuevos ()
+    {
+        /*
+        //Mostrar 3 artículos más recientes: 
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+        //Symfony no entiende la palabra LIMIT. 
+        //Se debe usar un método de doctrine para limitar los resultados a mostrar.
+            'SELECT * FROM articulo ORDER BY id DESC LIMIT 3' 
+        );
+        return $query->getResult();   
+        */
+        return $this->getEntityManager()
+        ->createQuery('SELECT b FROM App\Entity\Articulo b ORDER BY b.id DESC')
+        ->setMaxResults(3)
+        ->getResult();
+
     }  
 } 

@@ -68,7 +68,7 @@
                                 <div class="d-none d-lg-block">
                                     <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                         {% if articulo.imagen == NULL %}
-                                            <img title="Portada" class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" alt="portada"/>
+                                            <img title="Portada" class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.svg') }}" alt="portada"/>
                                         {% else %}
                                             <img title="Portada" class="portada" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" alt="portada"/>
                                         {% endif %}

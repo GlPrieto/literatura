@@ -39,7 +39,7 @@
                 <div class="my-3 p-3 bg-white rounded shadow-sm">
                     <h6 class="border-bottom border-gray pb-2 mb-0">Nuevos usuarios</h6>
                     {% for usuario in usuarios %}
-                        <div class="media text-muted pt-3">
+                        <div class="media text-muted pt-3 border-bottom border-gray">
                             <div class="autor">
                                 {% if usuario.imagenPerfil == NULL %}
                                     <img title="Avatar" class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}" alt="avatar"/>
@@ -55,7 +55,7 @@
                     {% else %}
                         <li>No hay usuarios</li>
                     {% endfor %}
-                    <small class="d-block text-right mt-3 border-top border-gray">
+                    <small class="d-block text-right mt-3">
                         <a class="enlace-oscuro" href="{{ path ('app_ver_usuarios')}}">Todos los usuarios</a>
                     </small>
                 </div>

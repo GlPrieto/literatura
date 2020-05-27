@@ -20,10 +20,12 @@ class AdminController extends AbstractController
     public function index()
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $usuarios = $entityManager->getRepository( Usuario::class )->findBy(array(),array('id'=>'DESC'),1,0);
+        //$usuarios = $entityManager->getRepository( Usuario::class )->findBy(array(),array('id'=>'DESC'),1,0);
+        $usuarios = $entityManager->getRepository( Usuario::class )->mostrarTresUsuariosNuevos();
         $categorias = $entityManager->getRepository( Categoria::class )->findAll();
         $idiomas = $entityManager->getRepository( Idioma::class )->findAll();
-        $articulos = $entityManager->getRepository( Articulo::class )->findBy(array(),array('id'=>'DESC'),1,0);
+        //$articulos = $entityManager->getRepository( Articulo::class )->findBy(array(),array('id'=>'DESC'),1,0);
+        $articulos = $entityManager->getRepository( Articulo::class )->mostrarTresArticulosNuevos();
 
         return $this->render( 'admin/index.html.twig', array(
             'usuarios' => $usuarios,

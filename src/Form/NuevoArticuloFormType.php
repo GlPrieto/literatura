@@ -84,6 +84,7 @@ class NuevoArticuloFormType extends AbstractType {
                     'mimeTypes' => [
                         'image/jpeg',
                         'image/png',
+                        'image/svg',
                     ],
                     'mimeTypesMessage' => 'Por favor, carga un formato de imagen valido',
                 ] )

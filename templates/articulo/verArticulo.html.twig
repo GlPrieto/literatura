@@ -18,7 +18,7 @@
         <!--Card image-->
         <div class="rounded mx-auto d-block" alt="cover">
                 {% if articulo.imagen == NULL %}
-                    <img title="Portada" class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.jpg') }}" alt="portada"/>
+                    <img title="Portada" class="portada" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.svg') }}" alt="portada"/>
                 {% else %}
                     <img title="Portada" class="portada-articulo" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" alt="portada"/>
                 {% endif %}
