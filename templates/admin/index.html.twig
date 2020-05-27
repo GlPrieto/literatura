@@ -42,7 +42,7 @@
                         <div class="media text-muted pt-3 border-bottom border-gray">
                             <div class="autor">
                                 {% if usuario.imagenPerfil == NULL %}
-                                    <img title="Avatar" class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}" alt="avatar"/>
+                                    <img title="Avatar" class="imagen-perfil" src="{{ asset('images/avatars/User-small.svg') }}" alt="avatar"/>
                                 {% else %}
                                     <img title="Avatar" class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ usuario.imagenPerfil) }}" alt="avatar"/>
                                 {% endif %}

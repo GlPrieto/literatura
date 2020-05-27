@@ -46,7 +46,7 @@
                             <div class="blockquote-footer">
                                 <div class="autor">
                                     {% if articulo.autor.imagenPerfil == NULL %}
-                                        <img title="Avatar" class="imagen-perfil" src="{{ asset('images/avatars/User-small.jpg') }}" alt="avatar"/>
+                                        <img title="Avatar" class="imagen-perfil" src="{{ asset('images/avatars/User-small.svg') }}" alt="avatar"/>
                                     {% else %}
                                         <img title="Avatar" class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" alt="avatar"/>
                                     {% endif %}
