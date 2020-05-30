@@ -34,11 +34,13 @@ class GestorController extends AbstractController {
         $categorias = $entityManager->getRepository( Categoria::class )->findAll();
         $idiomas = $entityManager->getRepository( Idioma::class )->findAll();
         $autores = $entityManager->getRepository( Usuario::class )->findAll();
+        $articulosPorCatActual = $entityManager->getRepository( Articulo::class )->mostrarArticulosPorCategoriaMasReciente();
         return $this->render( 'articulo/listaArticulos.html.twig', array(
             'categorias' => $categorias,
             'idiomas' => $idiomas,
             'articulos' => $articulos,
             'autores' => $autores,
+            'articulosPorCatActual' => $articulosPorCatActual,
         ) );
 
     }

@@ -51,11 +51,13 @@ a.filtro-articulos:hover {
 
 .lista-articulos {
     padding: 20px;
+    list-style: none;
 }
 
 .lista-articulos-nuevos {
     padding: 20px;
     height: 15%;
+    list-style: none;
 }
 
 .bloque-articulo {

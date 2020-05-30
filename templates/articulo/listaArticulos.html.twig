@@ -50,18 +50,65 @@
                 </ul>
         </div>
     </nav>
-    <!--Nav Categorías-->
-
+    <div class="lista-articulos">
+        <h1 class="h3 mb-4 font-weight-normal text-center">Nuevos artículos</h1>
+        <div class="row lista-articulos-nuevos">
+            {% for articulo in articulosPorCatActual %}
+                <div class="col-12 col-md-3 lista-articulos">
+                    <div class="card mb-2 bloque-articulo h-100">
+                        <div class="card-header">
+                            <h2 class="h3">
+                                <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                                    {{articulo.titulo}}
+                                </a>
+                            </h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-none d-lg-block">
+                                <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
+                                    {% if articulo.imagen == NULL %}
+                                        <img title="Portada" class="portada-nuevos" src="{{ asset('images/image' ~ articulo.categoria.denominacion ~ '.svg') }}" alt="portada"/>
+                                    {% else %}
+                                        <img title="Portada" class="portada-nuevos" src="{{ asset('subidas/imagenes/' ~ articulo.imagen) }}" alt="portada"/>
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <blockquote class="blockquote mb-0">
+                                <ul class="list-unstyled list-inline text-muted small">
+                                    <li class="list-inline-item pr-2">{{articulo.categoria.denominacion}}</li>
+                                    <li class="list-inline-item pr-2">{{articulo.idioma.denominacion}}</li>
+                                </ul>                            
+                                <div class="blockquote-footer">
+                                    <div class="autor">
+                                        {% if articulo.autor.imagenPerfil == NULL %}
+                                            <img title="Avatar" class="imagen-perfil" src="{{ asset('images/avatars/User-small.svg') }}" alt="avatar"/>
+                                        {% else %}
+                                            <img title="Avatar" class="imagen-perfil" src="{{ asset('subidas/imagenes/' ~ articulo.autor.imagenPerfil) }}" alt="avatar"/>
+                                        {% endif %}
+                                            {{articulo.autor.firmaUsuario}}
+                                    </div> 
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p>No hay artículos<p>
+            {% endfor %}
+        </div>
+    </div>
+    <hr>
+    <h1 class="h3 mb-4 font-weight-normal text-center">Artículos</h1>
     <ul id="contenidoPrincipal" class="lista-articulos">
         {% for articulo in articulos %}
             <li class="bloque-articulo">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="h3">
+                        <h2 class="h3">
                             <a href="{{ path ('app_articulo_ver', {'id': articulo.id})}}">
                                 {{articulo.titulo}}
                             </a>
-                        </h1>
+                        </h2>
                     </div>
                     <div class="card-body">
                         <div class="d-none d-lg-block">
