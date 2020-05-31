@@ -60,7 +60,7 @@ class RegistrationFormType extends AbstractType {
             // Al no estar mapeado:
             'constraints' => [
                 new File( [
-                    'maxSize' => '12k',
+                    'maxSize' => '50k',
                     'mimeTypes' => [
                         'image/jpeg',
                         'image/png',

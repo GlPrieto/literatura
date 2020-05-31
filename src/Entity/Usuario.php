@@ -63,7 +63,7 @@ class Usuario implements UserInterface
     private $imagenPerfil;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * 
      */
     private $imagenBase64;
